@@ -1,0 +1,15 @@
+version: "3"
+services:
+  rpa-iot-web:
+    container_name: rpa-iot-web
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: rpa-iot-web
+    command: angular-http-server --path ./dist -p 4200
+    ports:
+      - 4200:4200
+    environment:
+      - API_URL=http://rpa-iot-api.innoria.com/parse
+      - APP_ID=d91b47af8bd27e39704139d448340365
+    restart: always
