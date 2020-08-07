@@ -1,0 +1,35 @@
+<nb-card>
+  <nb-card-header style="text-align: center; font-size: 2em;"
+    >Your Dataset</nb-card-header
+  >
+  <nb-card-body>
+    <ag-grid-angular
+      *ngIf="isShowData"
+      style="width: auto; height: 350px;"
+      class="ag-theme-alpine"
+      [rowData]="showDataResult"
+      [columnDefs]="columnDefs"
+      [frameworkComponents]="frameworkComponents"
+    >
+    </ag-grid-angular>
+    <button
+      nbButton
+      size="small"
+      (click)="formDialog()"
+      type="submit"
+      value="Submit"
+      status="primary"
+    >
+      New dataset
+    </button>
+  </nb-card-body>
+</nb-card>
+<p style="color: red;" *ngIf="isShowDelete">{{ resultDelete }}</p>
+
+<p style="color: red;" *ngIf="isShowCreateModel">{{ objectIdCreateModel }}</p>
+
+<!-- <button><a routerLink="/pages/createModel" routerLinkActive="active">First Component</a></button> -->
+
+<!-- <button [routerLink]="'/pages/createModel'" [state]="{ id:1 , name:'Angular'}">Routing</button> -->
+
+<!-- <div>{{ showDataResult }}</div> -->
