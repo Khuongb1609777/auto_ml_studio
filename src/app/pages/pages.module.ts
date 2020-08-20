@@ -21,12 +21,18 @@ import { datasetsComponent } from "./datasets/datasets.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { userRegisterComponent } from "./userRegister/userRegister.component";
 import { createModelComponent } from "./createModel/createModel.component";
+import { manageModelComponent } from "./manageModel/manageModel.component";
 import { AgGridModule } from "ag-grid-angular";
-import { ButtonRendererModule } from "./datasets/renderer/button-renderer.module";
-import { ButtonRendererComponent } from "./datasets/renderer/button-renderer.component";
+import { buttonRenderDatasetModule } from "./datasets/renderer/buttonRenderDataset.module";
+import { buttonRenderDatasetComponent } from "./datasets/renderer/buttonRenderDataset.component";
+import { buttonRenderManageModelComponent } from "./manageModel/button-renderer/buttonRenderManageModel.component"
+import { buttonRenderManageModelModule } from "./manageModel/button-renderer/buttonRenderManageModel.module"
 import { HttpClientModule } from "@angular/common/http";
 import { navigate } from "@reach/router";
-import { FormUpLoadComponent } from "./datasets/form-upload.component";
+import { formUploadComponent } from "./datasets/formUpload.component";
+import { FormUpLoadModule } from "./datasets/formUpload.module";
+import { dialogDocsAPIComponent } from "./manageModel/dialogDocsAPI.component";
+import { dialogDocsAPIModule } from "./manageModel/dialogDocsAPI.module";
 
 @NgModule({
   imports: [
@@ -44,18 +50,28 @@ import { FormUpLoadComponent } from "./datasets/form-upload.component";
     NbRadioModule,
     NbLayoutModule,
     NbSelectModule,
+    dialogDocsAPIModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    ButtonRendererModule,
-    AgGridModule.withComponents([]),
+    buttonRenderDatasetModule,
+    buttonRenderManageModelModule,
+    dialogDocsAPIModule,
+    FormUpLoadModule,
+    AgGridModule.withComponents([buttonRenderDatasetComponent, buttonRenderManageModelComponent]),
   ],
   declarations: [
     PagesComponent,
     datasetsComponent,
     userRegisterComponent,
     createModelComponent,
+    manageModelComponent,
   ],
-  entryComponents: [ButtonRendererComponent],
+  entryComponents: [
+    buttonRenderDatasetComponent,
+    dialogDocsAPIComponent,
+    formUploadComponent,
+    buttonRenderManageModelComponent
+  ],
 })
-export class PagesModule {}
+export class PagesModule { }

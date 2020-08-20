@@ -10,6 +10,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://172.16.1.229:1338/parse",
+  apiUrl: "http://localhost:5000/",
   appId: "d91b47af8bd27e39704139d448340365",
 };

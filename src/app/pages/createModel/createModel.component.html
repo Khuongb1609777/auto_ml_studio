@@ -1,75 +1,40 @@
 <!-- <p *ngIf = "isshowFrom">{{ arrColData }}</p> -->
 <div *ngIf="isshowFrom">
   <nb-card>
-    <nb-card-header style="text-align: center; font-size: 2em;">
+    <nb-card-header headerTitle>
       Create Model
     </nb-card-header>
     <nb-card-body>
       <nb-layout>
-        <nb-layout-column
-          class="colored-column-warning"
-          style="text-align: center;"
-        >
+        <nb-layout-column class="colored-column-warning" columnsStyle>
           <nb-select placeholder="Select balel for model">
-            <nb-option
-              *ngFor="let col of arrColData; let i = index"
-              [value]="i"
-              (selectionChange)="getColLabel($event, i, col)"
-              >{{ col }}</nb-option
-            >
+            <nb-option *ngFor="let col of arrColData; let i = index" [value]="i"
+              (selectionChange)="getColLabel($event, i, col)">{{ col }}</nb-option>
           </nb-select>
         </nb-layout-column>
-        <nb-layout-column
-          class="colored-column-danger"
-          style="text-align: center;"
-        >
-          <nb-select
-            multiple
-            placeholder="Select feature for model"
-            [selected]="selectArr"
-          >
+        <nb-layout-column class="colored-column-danger" columnsStype>
+          <nb-select multiple placeholder="Select feature for model" [selected]="selectArr">
             <nb-option value="all" (selectionChange)="selectAll($event)">
               check all
             </nb-option>
-            <nb-option
-              *ngFor="let col of arrColData; let i = index"
-              value="{{ i }}"
-              disabled="{{ colLabel === i }}"
-              (selectionChange)="getColFeature($event, i)"
-              >{{ col }}</nb-option
-            >
+            <nb-option *ngFor="let col of arrColData; let i = index" value="{{ i }}" disabled="{{ colLabel === i }}"
+              (selectionChange)="getColFeature($event, i)">{{ col }}</nb-option>
           </nb-select>
         </nb-layout-column>
-        <nb-layout-column style="text-align: center;">
+        <nb-layout-column columnsStype>
           <nb-select placeholder="Select Algorithm">
-            <nb-option
-              *ngFor="let athm of arrAlgorithm; let i = index"
-              value="athm.algorithmName"
-              (selectionChange)="getAlgorithm($event, i)"
-              >{{ athm.algorithmName }}</nb-option
-            >
+            <nb-option *ngFor="let athm of arrAlgorithm; let i = index" value="athm.algorithmName"
+              (selectionChange)="getAlgorithm($event, i)">{{ athm.algorithmName }}</nb-option>
           </nb-select>
-          <div
-            *ngIf="isshowParam"
-            style="text-align: center; padding-top: 20px;"
-          >
+          <div *ngIf="isshowParam" style="text-align: center; padding-top: 20px;">
             <table style="text-align: center; vertical-align: middle;">
-              <tr
-                *ngFor="let param of params"
-                style="text-align: center; vertical-align: middle;"
-              >
+              <tr *ngFor="let param of params" style="text-align: center; vertical-align: middle;">
                 <td style="text-align: center; vertical-align: middle;">
                   {{ param }}
                 </td>
                 <td style="text-align: center; vertical-align: middle;">
-                  <input
-                    fieldSize="small"
-                    type="text"
-                    nbInput
-                    placeholder="{{ param }}"
-                    [(ngModel)]="inputValue[param]"
-                    (keypress)="inputValue[param] = $event.target.value"
-                  />
+                  <input fieldSize="small" type="text" nbInput placeholder="{{ param }}" [(ngModel)]="inputValue[param]"
+                    (keypress)="inputValue[param] = $event.target.value" />
                 </td>
               </tr>
             </table>
@@ -79,14 +44,7 @@
 
       <div>
         <label>
-          <button
-            nbButton
-            size="small"
-            (click)="createModel()"
-            type="submit"
-            value="Submit"
-            status="primary"
-          >
+          <button nbButton size="small" (click)="createModel()" type="submit" value="Submit" status="primary">
             Create
           </button>
         </label>
@@ -95,4 +53,7 @@
   </nb-card>
 </div>
 
-<div>{{ notification }}</div>
+<div *ngIf="chooseDataFlag">
+  <a (click)="chooseData()">choose datasets</a>
+  before create model
+</div>

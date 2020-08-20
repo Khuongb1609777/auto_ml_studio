@@ -1,0 +1,27 @@
+<nb-card>
+    <nb-card-header>
+        UPLOAD DATASET
+    </nb-card-header>
+    <nb-card-body>
+        <table>
+            <tr style="text-align:center;">
+                <td style="text-align:center;">
+                    <input type="file" id="file" name="file" formControlName="fileUpload" placeholder="Text field"
+                        (change)="fileChange($event)" />
+                </td>
+                <td>
+                    <button nbButton [disabled]="buttonSubmitStatus !== 'unable'" size="tiny" type="button"
+                        status="primary" (click)="upload()">
+                        upload
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td *ngIf="checkType" style="font-size: 12px;color:red;" colspan="2">
+                    {{ notificationFile }}
+                </td>
+            </tr>
+            <tr></tr>
+        </table>
+    </nb-card-body>
+</nb-card>

@@ -5,21 +5,9 @@ import { ICellRendererParams, IAfterGuiAttachedParams } from "ag-grid";
 
 @Component({
   selector: "app-button-renderer",
-  template: `
-    <button
-      type="button"
-      nbButton
-      size="small"
-      outline
-      status="danger"
-      (click)="onClick($event)"
-      style="text-align: center;"
-    >
-      {{ label }}
-    </button>
-  `,
+  templateUrl: "./buttonRenderDataset.component.html",
 })
-export class ButtonRendererComponent implements ICellRendererAngularComp {
+export class buttonRenderDatasetComponent implements ICellRendererAngularComp {
   params;
   label: string;
 
@@ -32,11 +20,15 @@ export class ButtonRendererComponent implements ICellRendererAngularComp {
     return true;
   }
 
-  onClick($event) {
+  ngOnChanges() {
+    console.log('change', this.params)
+  }
+
+  onClick(event) {
     if (this.params.onClick instanceof Function) {
       // put anything into params u want pass into parents component
       const params = {
-        event: $event,
+        event,
         rowData: this.params.node.data,
         // ...something
       };

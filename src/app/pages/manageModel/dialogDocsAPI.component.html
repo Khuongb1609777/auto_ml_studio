@@ -1,0 +1,85 @@
+<div *ngIf="flagSuccess">
+    <nb-card>
+        <nb-card-body>
+            <nb-tabset fullWidth>
+                <nb-tab tabTitle="Model detail">
+                    <nb-card status="success">
+                        <nb-card-header headerTitle>
+                            Model {{ modelId }}
+                        </nb-card-header>
+                        <nb-card-body bodyWidth>
+                            <table tableWidth>
+                                <tr>
+                                    <td>Data:</td>
+                                    <td>{{ dataName }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Algorithm:</td>
+                                    <td>{{ athm }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Columns feature:</td>
+                                    <td>{{ colFeatureName }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Column label:</td>
+                                    <td>{{ colLabelName }}</td>
+                                </tr>
+                            </table>
+                            <div><br /></div>
+                            <strong>DESCRIPTION</strong>
+                            <hr
+                                style="height:2px;width:50px;border-width:0;color:red;background-color:red;text-align:left;margin-left:0" />
+                            <p>{{ descriptionModel }}</p>
+                        </nb-card-body>
+                    </nb-card>
+                </nb-tab>
+                <nb-tab tabTitle="Create API">
+                    <nb-card status="success">
+                        <nb-card-header headerTitle>
+                            Setup postman for model {{ modelId }}
+                        </nb-card-header>
+                        <nb-card-body bodyWidth>
+                            <table tableWidth>
+                                <tr>
+                                    <td>Url</td>
+                                    <td>{{ urlApi }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Method</td>
+                                    <td>GET</td>
+                                </tr>
+                                <tr>
+                                    <td>Headers - Content/type</td>
+                                    <td>multipart/form-data</td>
+                                </tr>
+                                <tr>
+                                    <td>modelId</td>
+                                    <td>{{ modelId }}</td>
+                                </tr>
+                                <tr>
+                                    <td>dataTest</td>
+                                    <td>datatest_name.csv</td>
+                                </tr>
+                                <tr>
+                                    <td>inputColumns</td>
+                                    <td>{{ colFeature }}</td>
+                                </tr>
+                            </table>
+                        </nb-card-body>
+                    </nb-card>
+                </nb-tab>
+            </nb-tabset>
+        </nb-card-body>
+    </nb-card>
+</div>
+<div *ngIf="errorFlag" errorMess>
+    <nb-card status="danger">
+        <nb-card-header style="text-align: center">
+            NOTIFICATION
+        </nb-card-header>
+        <nb-card-body errorMess>
+            {{ errorDetail }}
+        </nb-card-body>
+    </nb-card>
+</div>

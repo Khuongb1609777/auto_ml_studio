@@ -1,0 +1,13 @@
+<nb-card>
+  <nb-card-header tableTitle>Your Model</nb-card-header>
+  <nb-card-body>
+    <ag-grid-angular *ngIf="isShowModels" tableShowModel class="ag-theme-alpine" [rowData]="showDataModels"
+      [columnDefs]="columnDefs" [frameworkComponents]="frameworkComponents">
+    </ag-grid-angular>
+  </nb-card-body>
+</nb-card>
+<p *ngIf="errorFlag" errorGetDetail>{{ errorGetDetail }}</p>
+
+
+<ngb-alert deleteSuccess *ngIf="successMessage" type="success" (close)="successMessage = ''">
+  {{ successMessage }}</ngb-alert>
