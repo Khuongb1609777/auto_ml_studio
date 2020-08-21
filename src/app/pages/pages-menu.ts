@@ -24,12 +24,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
-    title: "createModel",
+    title: "Create Model",
     icon: "edit-outline",
     link: "/pages/createModel",
   },
   {
-    title: "manageModel",
+    title: "Manage Model",
     icon: "book-outline",
     link: "/pages/manageModel",
   },

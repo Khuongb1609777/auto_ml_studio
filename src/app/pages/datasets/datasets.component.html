@@ -1,8 +1,9 @@
 <nb-card>
   <nb-card-header style="text-align: center; font-size: 2em;">Your Dataset</nb-card-header>
   <nb-card-body>
-    <ag-grid-angular *ngIf="isShowData" style="width: 100%; height: 350px;" class="ag-theme-alpine"
-      [rowData]="showDataResult" [columnDefs]="columnDefs" [frameworkComponents]="frameworkComponents">
+    <ag-grid-angular *ngIf="isShowData" [defaultColDef]="defaultColDef" ar-grid-data class="ag-theme-alpine"
+      [rowData]="showDataResult" [columnDefs]="columnDefs" (firstDataRendered)="onFirstDataRendered($event)" id="myGrid"
+      [frameworkComponents]="frameworkComponents">
     </ag-grid-angular>
     <button nbButton size="small" (click)="formDialog()" type="submit" value="Submit" status="primary">
       New dataset

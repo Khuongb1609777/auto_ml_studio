@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private userService: UserData,
     private layoutService: LayoutService,
     private breakpointService: NbMediaBreakpointsService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.userService
       .getUsers()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => (this.user = users.nick));
+      .subscribe((users: any) => (this.user = users.nickk));
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService

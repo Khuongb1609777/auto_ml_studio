@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
+import { HttpClient } from '@angular/common/http';
 import Axios from "axios";
 import { buttonRenderDatasetComponent } from "./renderer/buttonRenderDataset.component";
 import { Router } from "@angular/router";
@@ -10,9 +11,10 @@ import { NbDialogService } from "@nebular/theme";
 import { formUploadComponent } from "./formUpload.component";
 import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
-import { async } from '@angular/core/testing';
 import { environment } from '../../../environments/environment';
 import { COLUMNSDEFS_DATASETS } from '../createModel/constanst'
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 @Component({
   selector: "datasets",
@@ -32,7 +34,6 @@ export class datasetsComponent implements OnInit {
   public errorShowdata: any;
   public arrHeader: any[];
   public isShowData: boolean;
-  public columnDefs: any[];
   public frameworkComponents: any;
   public objectIdDelete: any;
   public isShowDelete: boolean;
@@ -45,6 +46,11 @@ export class datasetsComponent implements OnInit {
   private _success = new Subject<string>();
   public dialog: any;
   public resultShow: any;
+  public defaultColDef;
+  private gridApi;
+  private gridColumnApi;
+  private columnDefs;
+  public rowData: any;
 
   staticAlertClosed = false;
   successMessage = "";
@@ -52,6 +58,7 @@ export class datasetsComponent implements OnInit {
   constructor(
     private dialogService: NbDialogService,
     private router: Router,
+    private http: HttpClient,
   ) {
     this.frameworkComponents = {
       buttonCreateModel: buttonRenderDatasetComponent,
@@ -61,9 +68,6 @@ export class datasetsComponent implements OnInit {
   }
   async ngOnInit() {
     try {
-      this.uploadFileForm = new FormGroup({
-        fileUpload: new FormControl(),
-      });
       this.isShowDelete = false;
       this.isShowCreateModel = false;
       this.isShowData = false;
@@ -99,6 +103,14 @@ export class datasetsComponent implements OnInit {
           label: "Create",
         },
       }
+      // this.gridApi.sizeColumnsToFit();
+
+      this.defaultColDef = {
+        // editable: true,
+        filter: 'createdAt',
+        floatingFilter: true,
+        resizable: true,
+      };
 
       setTimeout(() => (this.staticAlertClosed = true), 20000);
 
@@ -121,7 +133,6 @@ export class datasetsComponent implements OnInit {
           oId: this.objectIdDelete,
         },
       });
-      console.log(result);
       if (result.data['error']) {
         this.resultDelete = "Delete error: " + result.data['error'];
         console.log(this.resultDelete);
@@ -148,24 +159,39 @@ export class datasetsComponent implements OnInit {
   onclickCreateModel(e) {
     try {
       this.objectIdCreateModel = e.rowData["objectId"];
+      // this.router.navigate([
+      //   "/pages/createModel",
+      //   { objectIdData: this.objectIdCreateModel },
+      // ]);
       this.router.navigate([
-        "/pages/createModel",
-        { objectIdData: this.objectIdCreateModel },
-      ]);
+        "/pages/createModel"],
+        { queryParams: { objectIdData: this.objectIdCreateModel } });
     } catch (err) {
       console.log(err);
     }
   }
 
-  formDialog() {
+  async formDialog() {
     this.dialog = this.dialogService.open(formUploadComponent, {
       context: {
-        showDataResult: this.showDataResult,
+        dataShow: this.showDataResult,
       },
     });
     this.dialog.onClose.subscribe((resultDataDialog) => {
-      this.showDataResult = resultDataDialog;
+      async (res) => {
+        this.showDataResult = await Axios({
+          method: "GET",
+          url: this.root_url + "getData",
+          params: {
+            userId: this.userIdLogin,
+          },
+        });
+      }
     });
+  }
+
+  onFirstDataRendered(params) {
+    params.api.sizeColumnsToFit();
   }
 
 }

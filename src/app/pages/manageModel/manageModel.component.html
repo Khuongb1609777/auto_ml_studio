@@ -1,8 +1,9 @@
 <nb-card>
   <nb-card-header tableTitle>Your Model</nb-card-header>
   <nb-card-body>
-    <ag-grid-angular *ngIf="isShowModels" tableShowModel class="ag-theme-alpine" [rowData]="showDataModels"
-      [columnDefs]="columnDefs" [frameworkComponents]="frameworkComponents">
+    <ag-grid-angular *ngIf="isShowModels" tableShowModel ar-grid-data [defaultColDef]="defaultColDef"
+      class="ag-theme-alpine" [rowData]="showDataModels" [columnDefs]="columnDefs"
+      (firstDataRendered)="onFirstDataRendered($event)" id="myGrid" [frameworkComponents]="frameworkComponents">
     </ag-grid-angular>
   </nb-card-body>
 </nb-card>

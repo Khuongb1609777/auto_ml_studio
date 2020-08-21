@@ -26,6 +26,7 @@ export class formUploadComponent {
   public checkType: boolean;
   public buttonSubmitStatus: any;
   public resultShow: any;
+  public dataShow: any;
 
   constructor(protected dialogRef: NbDialogRef<any>) { }
 
@@ -83,13 +84,14 @@ export class formUploadComponent {
           },
         });
         if (this.resultShow.data['results']) {
-          this.showDataResult = this.resultShow.data["results"];
+          this.dataShow = this.resultShow.data["results"];
         }
         this.isShowData = true;
-        this.dialogRef.close(this.showDataResult);
+        this.dialogRef.close(this.dataShow);
       })
       .catch((err) => {
         console.log(err);
       });
   }
+
 }

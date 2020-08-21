@@ -4,56 +4,70 @@
     <nb-card-header headerTitle>
       Create Model
     </nb-card-header>
-    <nb-card-body>
-      <nb-layout>
-        <nb-layout-column class="colored-column-warning" columnsStyle>
-          <nb-select placeholder="Select balel for model">
-            <nb-option *ngFor="let col of arrColData; let i = index" [value]="i"
-              (selectionChange)="getColLabel($event, i, col)">{{ col }}</nb-option>
-          </nb-select>
-        </nb-layout-column>
-        <nb-layout-column class="colored-column-danger" columnsStype>
-          <nb-select multiple placeholder="Select feature for model" [selected]="selectArr">
-            <nb-option value="all" (selectionChange)="selectAll($event)">
-              check all
-            </nb-option>
-            <nb-option *ngFor="let col of arrColData; let i = index" value="{{ i }}" disabled="{{ colLabel === i }}"
-              (selectionChange)="getColFeature($event, i)">{{ col }}</nb-option>
-          </nb-select>
-        </nb-layout-column>
-        <nb-layout-column columnsStype>
-          <nb-select placeholder="Select Algorithm">
-            <nb-option *ngFor="let athm of arrAlgorithm; let i = index" value="athm.algorithmName"
-              (selectionChange)="getAlgorithm($event, i)">{{ athm.algorithmName }}</nb-option>
-          </nb-select>
-          <div *ngIf="isshowParam" style="text-align: center; padding-top: 20px;">
-            <table style="text-align: center; vertical-align: middle;">
-              <tr *ngFor="let param of params" style="text-align: center; vertical-align: middle;">
-                <td style="text-align: center; vertical-align: middle;">
-                  {{ param }}
-                </td>
-                <td style="text-align: center; vertical-align: middle;">
-                  <input fieldSize="small" type="text" nbInput placeholder="{{ param }}" [(ngModel)]="inputValue[param]"
-                    (keypress)="inputValue[param] = $event.target.value" />
-                </td>
-              </tr>
-            </table>
-          </div>
-        </nb-layout-column>
-      </nb-layout>
+    <nb-card-body class="custom-wrapper">
+      <div class="custom-wrapper-select">
+        <nb-select placeholder="Select label for model" size="medium">
+          <nb-option *ngFor="let col of arrColData; let i = index" [value]="i"
+            (selectionChange)="getColLabel($event, i, col)">{{ col }}</nb-option>
+        </nb-select>
+      </div>
+      <div class="custom-wrapper-select">
+        <nb-select multiple placeholder="Select feature for model" [selected]="selectArr" size="medium">
+          <nb-option value="all" (selectionChange)="selectAll($event)">
+            check all
+          </nb-option>
+          <nb-option *ngFor="let col of arrColData; let i = index" value="{{ i }}" disabled="{{ colLabel === i }}"
+            (selectionChange)="getColFeature($event, i)">{{ col }}</nb-option>
+        </nb-select>
+      </div>
+      <div class="custom-wrapper-select">
+        <nb-select placeholder="Select Algorithm" size="medium">
+          <nb-option *ngFor="let athm of arrAlgorithm; let i = index" value="athm.algorithmName"
+            (selectionChange)="getAlgorithm($event, i)">{{ athm.algorithmName }}</nb-option>
+        </nb-select>
+      </div>
+      <div *ngIf="isshowParam" center class="custom-wrapper-select">
+        <table center>
+          <tr *ngFor="let param of params" center>
+            <td center>
+              {{ param }}
+            </td>
+            <td center>
+              <input fieldSize="small" type="text" nbInput placeholder="{{ param }}" [(ngModel)]="inputValue[param]"
+                (keypress)="inputValue[param] = $event.target.value" />
+            </td>
+          </tr>
+          <tr>
 
-      <div>
-        <label>
-          <button nbButton size="small" (click)="createModel()" type="submit" value="Submit" status="primary">
-            Create
-          </button>
-        </label>
+          </tr>
+          <tr>
+            <td>
+
+            </td>
+            <td>
+              <button *ngIf="isshowParam" nbButton size="tiny" (click)="defaultParams()" type="submit" value="Submit"
+                status="primary">
+                Default params
+              </button>
+            </td>
+          </tr>
+        </table>
+
       </div>
     </nb-card-body>
+    <nb-card-footer>
+      <button nbButton size="small" (click)="createModel()" type="submit" value="Submit" status="primary">
+        Create
+      </button>
+    </nb-card-footer>
   </nb-card>
 </div>
 
+
+
+
+
+
 <div *ngIf="chooseDataFlag">
-  <a (click)="chooseData()">choose datasets</a>
-  before create model
+  You must <a (click)="chooseData()">select the data</a> before creating the model
 </div>

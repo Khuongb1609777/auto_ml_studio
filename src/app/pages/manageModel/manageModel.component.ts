@@ -10,6 +10,8 @@ import { Content } from "@angular/compiler/src/render3/r3_ast";
 import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 import { COLUMNSDEFS_MANAGE_MODEL } from "../createModel/constanst"
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 @Component({
   selector: "manageModel",
@@ -18,13 +20,13 @@ import { COLUMNSDEFS_MANAGE_MODEL } from "../createModel/constanst"
 })
 export class manageModelComponent implements OnInit {
   public data: any;
-  public root_url: any;
+  public root_url: string;
   public showDataModels: any;
   public isShowModels: any;
-  public userIdLogin: any;
+  public userIdLogin: string;
   public columnDefs: any[];
   public frameworkComponents: any;
-  public athmApi: any;
+  public athmApi: string;
   public colFeatureModel: any;
   public colFeatureModelName: any;
   public colLabelModel: any;
@@ -36,6 +38,7 @@ export class manageModelComponent implements OnInit {
   public infoApi: any;
   public dataName: any;
   public dialog: any;
+  public defaultColDef;
   private _success = new Subject<string>();
 
   staticAlertClosed = false;
@@ -93,6 +96,13 @@ export class manageModelComponent implements OnInit {
           label: "Publish Api",
         },
       }
+
+      this.defaultColDef = {
+        editable: true,
+        filter: 'createdAt',
+        floatingFilter: true,
+        resizable: true,
+      };
 
     } catch (err) {
       this.data = "rpa-iot-api";
@@ -196,5 +206,8 @@ export class manageModelComponent implements OnInit {
     } catch (err) {
       console.log(err);
     }
+  }
+  onFirstDataRendered(params) {
+    params.api.sizeColumnsToFit();
   }
 }

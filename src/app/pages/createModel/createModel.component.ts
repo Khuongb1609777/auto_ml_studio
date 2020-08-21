@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { ActivatedRoute } from "@angular/router";
 import axios from "axios";
@@ -15,6 +15,7 @@ import { CHECK_PARAMS_CREATE_MODEL } from './constanst'
   selector: "createModel",
   styleUrls: ["./createModel.component.scss"],
   templateUrl: "./createModel.component.html",
+  encapsulation: ViewEncapsulation.None,
 })
 export class createModelComponent implements OnInit {
   formModel = new FormGroup({
@@ -55,7 +56,8 @@ export class createModelComponent implements OnInit {
       this.notificationCreate = CHECK_PARAMS_CREATE_MODEL;
       console.log(typeof (this.notificationCreate));
       console.log(this.notificationCreate['errorFeature'])
-      this.idDataCreateFrom = this.route.snapshot.params.objectIdData;
+      // this.idDataCreateFrom = this.route.snapshot.params.objectIdData;
+      this.idDataCreateFrom = this.route.snapshot.queryParamMap.get('objectIdData');
       if (this.idDataCreateFrom) {
         this.colFeature = []
         this.colLabel = -1;
@@ -227,5 +229,8 @@ export class createModelComponent implements OnInit {
 
   chooseData() {
     this.router.navigate(["/pages/datasets"]);
+  }
+  defaultParams() {
+    this.isshowParam = false;
   }
 }
