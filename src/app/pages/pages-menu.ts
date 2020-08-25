@@ -23,13 +23,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: "/pages/datasets",
     home: true,
   },
+  // {
+  //   title: "Create Model",
+  //   icon: "edit-outline",
+  //   link: "/pages/createModel",
+  // },
   {
-    title: "Create Model",
-    icon: "edit-outline",
-    link: "/pages/createModel",
-  },
-  {
-    title: "Manage Model",
+    title: "Models",
     icon: "book-outline",
     link: "/pages/manageModel",
   },

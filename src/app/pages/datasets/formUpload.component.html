@@ -4,21 +4,24 @@
     </nb-card-header>
     <nb-card-body>
         <table>
-            <tr style="text-align:center;">
-                <td style="text-align:center;">
-                    <input type="file" id="file" name="file" formControlName="fileUpload" placeholder="Text field"
-                        (change)="fileChange($event)" />
+            <tr>
+                <td colspan="2">
+                    <input type="text" [(ngModel)]="fileName" nbInput fullWidth fieldSize="medium"
+                        placeholder="Data Name">
                 </td>
-                <td>
-                    <button nbButton [disabled]="buttonSubmitStatus !== 'unable'" size="tiny" type="button"
-                        status="primary" (click)="upload()">
-                        upload
-                    </button>
+            </tr>
+            <tr style="text-align:center;">
+                <td style="text-align:center;" colspan="2">
+                    <input type="file" nbInput fullWidth fieldSize="small" placeholder="Text field"
+                        (change)="fileChange($event)" />
                 </td>
             </tr>
             <tr>
-                <td *ngIf="checkType" style="font-size: 12px;color:red;" colspan="2">
-                    {{ notificationFile }}
+                <td colspan="2" class="button-right">
+                    <button nbButton [disabled]="buttonSubmitStatus !== 'unable'" size="medium" type="button"
+                        status="primary" (click)="upload()">
+                        upload
+                    </button>
                 </td>
             </tr>
             <tr></tr>

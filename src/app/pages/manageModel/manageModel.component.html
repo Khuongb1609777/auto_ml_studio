@@ -6,6 +6,11 @@
       (firstDataRendered)="onFirstDataRendered($event)" id="myGrid" [frameworkComponents]="frameworkComponents">
     </ag-grid-angular>
   </nb-card-body>
+  <nb-card-footer>
+    <button nbButton size="small" (click)="formDialogCreateModel()" type="submit" value="Submit" status="primary">
+      New model
+    </button>
+  </nb-card-footer>
 </nb-card>
 <p *ngIf="errorFlag" errorGetDetail>{{ errorGetDetail }}</p>
 

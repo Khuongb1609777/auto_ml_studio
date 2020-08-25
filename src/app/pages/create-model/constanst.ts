@@ -15,28 +15,34 @@ export const DEFAULT_PARAMS = {
 }
 
 export const CHECK_PARAMS_CREATE_MODEL = {
-    errorLabel: "you must choose at least 1 option (label)",
-    errorFeature: "you must choose at least 1 option (feature)",
-    errorAlgorithm: "you must choose at least 1 option (algorithm)",
+    errorLabel: "you must choose at least 1 label",
+    errorFeature: "you must choose at least 1 feature",
+    errorAlgorithm: "you must choose at least 1 algorithm",
 }
 
 
 export const COLUMNSDEFS_MANAGE_MODEL = [
     {
-        headerName: "Model ID",
-        field: "objectId",
+        headerName: "Model name",
+        field: "modelName",
         sortable: true,
         filter: true,
     },
-    {
-        headerName: "Create At",
-        field: "createdAt",
-        sortable: true,
-        filter: true,
-    },
+    // {
+    //     headerName: "Create At",
+    //     field: "createdAt",
+    //     sortable: true,
+    //     filter: true,
+    // },
+    // {
+    //     headerName: "Datasets",
+    //     field: "idDataModel",
+    //     sortable: true,
+    //     filter: true,
+    // },
     {
         headerName: "Datasets",
-        field: "idDataModel",
+        field: "dataName",
         sortable: true,
         filter: true,
     },
@@ -56,18 +62,18 @@ export const COLUMNSDEFS_DATASETS = [
         sortable: true,
         filter: true,
     },
-    {
-        headerName: "Create At",
-        field: "createdAt",
-        sortable: true,
-        filter: true,
-    },
-    {
-        headerName: "Update At",
-        field: "updatedAt",
-        sortable: true,
-        filter: true,
-    },
+    // {
+    //     headerName: "Create At",
+    //     field: "createdAt",
+    //     sortable: true,
+    //     filter: true,
+    // },
+    // {
+    //     headerName: "Update At",
+    //     field: "updatedAt",
+    //     sortable: true,
+    //     filter: true,
+    // },
     {
         headerName: "Data Name",
         field: "dataName",
@@ -75,3 +81,10 @@ export const COLUMNSDEFS_DATASETS = [
         filter: true,
     },
 ];
+
+export const COLDEF_AUTO_RESIZE = {
+    filter: 'createdAt',
+    floatingFilter: true,
+    resizable: true,
+};
+

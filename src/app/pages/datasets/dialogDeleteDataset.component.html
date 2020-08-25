@@ -1,0 +1,18 @@
+<nb-card>
+    <nb-card-header>DELETE DATASET</nb-card-header>
+    <nb-card-body> Delete dataset {{ dataName }} ?</nb-card-body>
+    <nb-card-footer>
+        <table class="table_size">
+            <tr>
+                <td class="button_left">
+                    <button nbButton size="small" status="primary" (click)="dialogRef.close()">Close</button>
+                </td>
+                <td class="button_right" style="right: auto;">
+                    <button nbButton size="small" status="danger" (click)="deleteDataset()">Delete</button>
+                </td>
+            </tr>
+        </table>
+
+
+    </nb-card-footer>
+</nb-card>

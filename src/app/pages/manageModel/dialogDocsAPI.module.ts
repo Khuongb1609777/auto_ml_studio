@@ -16,4 +16,4 @@ import { dialogDocsAPIComponent } from "./dialogDocsAPI.component";
   imports: [NbButtonModule, NbCardModule, NbTabsetModule, CommonModule],
   declarations: [dialogDocsAPIComponent],
 })
-export class dialogDocsAPIModule {}
+export class dialogDocsAPIModule { }

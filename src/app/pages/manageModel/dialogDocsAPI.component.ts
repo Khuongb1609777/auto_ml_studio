@@ -1,21 +1,8 @@
-import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { Component, OnInit, HostBinding } from "@angular/core";
+import { NbToastrService, NbComponentStatus } from '@nebular/theme';
 import { NbDialogRef } from "@nebular/theme";
-import { ICellRendererAngularComp } from "ag-grid-angular";
-import { ICellRendererParams, IAfterGuiAttachedParams } from "ag-grid";
-import Axios from "axios";
-import {
-  NbMenuModule,
-  NbInputModule,
-  NbCardModule,
-  NbButtonModule,
-  NbCheckboxModule,
-  NbRadioModule,
-  NbLayoutModule,
-  NbSelectModule,
-  NbTabsetModule,
-} from "@nebular/theme";
-import { Console } from "console";
+import { ClipboardModule } from 'ngx-clipboard';
+import { ClipboardService } from 'ngx-clipboard';
 
 @Component({
   selector: "docsAPI",
@@ -26,21 +13,22 @@ export class dialogDocsAPIComponent {
   userIdLogin = "JclGidZqhN";
   root_method = "POST";
   root_url = "http://localhost:5000/";
-  public athm: any;
-  public colLabel: any;
-  public colLabelName: any;
-  public colFeature: any;
-  public colFeatureName: any;
-  public modelId: any;
-  public dataId: any;
-  public urlApi: any;
-  public descriptionModel: any;
-  public errorDetail: any;
+  public athm: String;
+  public colLabel: string;
+  public colLabelName: string;
+  public colFeature: string;
+  public colFeatureName: string;
+  public colFeatureNameArr: [];
+  public modelId: string;
+  public dataId: string;
+  public urlApi: string;
+  public descriptionModel: string;
+  public errorDetail: string;
   public errorFlag: boolean;
   public flagSuccess: boolean;
-  public dataName: any;
+  public dataName: string;
 
-  constructor(private dialogRef: NbDialogRef<any>) {
+  constructor(private dialogRef: NbDialogRef<any>, private toastrService: NbToastrService, private _clipboardService: ClipboardService) {
     this.athm = "";
     this.colLabel = "";
     this.colLabelName = "";
@@ -62,6 +50,47 @@ export class dialogDocsAPIComponent {
       this.errorFlag = true;
     } else {
       this.flagSuccess = true;
+    }
+    console.log(this.colFeatureName);
+  }
+  copyCurlCsv() {
+    try {
+      const urlAPI = this.root_url + "createApiModel";
+      const method = 'POST';
+      const header = 'Content-Type: multipart/form-data';
+      const inputColumns = this.colFeature;
+      const modelId = this.modelId;
+      const curl = `\ncurl --request ${method} '${this.urlApi}' \\\n--header '${header}' \\\n --form 'modelId=${modelId}' \\\n --form 'inputColumns=${inputColumns}'`;
+      this._clipboardService.copy(curl);
+      const notificationSuccess = "copy to clipboard";
+      const success = "COPY"
+      this.toastrService.show(notificationSuccess, `SUCCESS: ${success}`, { status: "success", duration: 3000 });
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
+
+
+  copyCurlJson() {
+    try {
+      const urlAPI = this.root_url + "createApiModel_jsondata";
+      const method = 'POST';
+      const header = 'Content-Type: application/json';
+      const modelId = this.modelId;
+      const colFeatureNameArr = this.colFeatureName.split(",");
+      const dataRaw = {};
+      var dataTest = ""
+      for (const col of colFeatureNameArr) { dataTest = dataTest + '"' + col + '"' + ':' + '"' + '"' + ',' }
+      var dataTest2 = dataTest.substring(0, dataTest.length - 1)
+      const curl = `\ncurl --request ${method} '${urlAPI}' \\\n--header '${header}' \\\n--data-raw '{ \\\n "modelId":"${modelId}", \\\n "dataTest": [\\\n{\\\n  ${dataTest2}\\\n}\\\n]\\\n}'`;
+      this._clipboardService.copy(curl);
+      const notificationSuccess = "copy to clipboard";
+      const success = "COPY"
+      this.toastrService.show(notificationSuccess, `SUCCESS: ${success}`, { status: "success", duration: 3000 });
+    }
+    catch (err) {
+      console.log(err);
     }
   }
 }

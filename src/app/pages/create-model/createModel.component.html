@@ -2,17 +2,20 @@
 <div *ngIf="isshowFrom">
   <nb-card>
     <nb-card-header headerTitle>
-      Create Model
+      Create Model for {{ nameData }}
     </nb-card-header>
     <nb-card-body class="custom-wrapper">
       <div class="custom-wrapper-select">
-        <nb-select placeholder="Select label for model" size="medium">
+        <input type="text" [(ngModel)]="modelName" nbInput fullWidth fieldSize="medium" placeholder="Model Name">
+      </div>
+      <div class="custom-wrapper-select">
+        <nb-select placeholder="Label: " size="medium">
           <nb-option *ngFor="let col of arrColData; let i = index" [value]="i"
             (selectionChange)="getColLabel($event, i, col)">{{ col }}</nb-option>
         </nb-select>
       </div>
       <div class="custom-wrapper-select">
-        <nb-select multiple placeholder="Select feature for model" [selected]="selectArr" size="medium">
+        <nb-select multiple placeholder="Feature:" [selected]="selectArr" size="medium">
           <nb-option value="all" (selectionChange)="selectAll($event)">
             check all
           </nb-option>
@@ -40,7 +43,7 @@
           <tr>
 
           </tr>
-          <tr>
+          <!-- <tr>
             <td>
 
             </td>
@@ -50,7 +53,7 @@
                 Default params
               </button>
             </td>
-          </tr>
+          </tr> -->
         </table>
 
       </div>

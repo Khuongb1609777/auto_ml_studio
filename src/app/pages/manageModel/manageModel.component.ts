@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostBinding } from "@angular/core";
+import { NbToastrService, NbComponentStatus } from '@nebular/theme';
 import Axios from "axios";
 import { buttonRenderManageModelComponent } from "./button-renderer/buttonRenderManageModel.component";
 import {
@@ -12,6 +13,11 @@ import { debounceTime } from "rxjs/operators";
 import { COLUMNSDEFS_MANAGE_MODEL } from "../createModel/constanst"
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import { createModelComponent } from "../createModel/createModel.component"
+import { datasetsComponent } from "../datasets/datasets.component"
+import { dialogDeleteModelComponent } from "./dialogDeleteModel.component"
+// import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { stringToArray, Context } from 'ag-grid-community';
 
 @Component({
   selector: "manageModel",
@@ -19,6 +25,9 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
   templateUrl: "./manageModel.component.html",
 })
 export class manageModelComponent implements OnInit {
+  private errorName: String;
+  @HostBinding('class')
+  classes = 'example-items-rows';
   public data: any;
   public root_url: string;
   public showDataModels: any;
@@ -27,27 +36,37 @@ export class manageModelComponent implements OnInit {
   public columnDefs: any[];
   public frameworkComponents: any;
   public athmApi: string;
-  public colFeatureModel: any;
-  public colFeatureModelName: any;
-  public colLabelModel: any;
-  public colLabelModelName: any;
-  public modelId: any;
-  public dataId: any;
-  public descriptionModel: any;
+  public colFeatureModel: string;
+  public colFeatureModelName: string;
+  public colLabelModel: string;
+  public colLabelModelName: string;
+  public modelId: string;
+  public dataId: string;
+  public descriptionModel: string;
   public errorFlag: boolean;
-  public infoApi: any;
-  public dataName: any;
+  public infoApi: string;
+  public dataName: string;
   public dialog: any;
   public defaultColDef;
-  private _success = new Subject<string>();
+  public updatedShowModel: boolean;
+  public showDataModelsUpdate: any;
+  public keyUpdate: boolean;
+
 
   staticAlertClosed = false;
   successMessage = "";
 
-  constructor(private dialogService: NbDialogService) {
+  constructor(private dialogService: NbDialogService, private toastrService: NbToastrService) {
     this.frameworkComponents = {
       buttonDeleteModel: buttonRenderManageModelComponent,
       buttonShowDetailModel: buttonRenderManageModelComponent,
+    };
+
+    this.defaultColDef = {
+      // editable: true,
+      filter: 'createdAt',
+      floatingFilter: true,
+      resizable: true,
     };
   }
 
@@ -56,14 +75,21 @@ export class manageModelComponent implements OnInit {
       this.errorFlag = false;
       this.userIdLogin = "JclGidZqhN";
       this.root_url = "http://localhost:5000/";
-      const resultShow = await Axios({
-        method: "GET",
-        url: this.root_url + String("getDataModels"),
-        params: {
-          userId: this.userIdLogin,
-        },
-      });
-      this.showDataModels = resultShow.data["results"];
+      if (this.keyUpdate) {
+        this.showDataModels = this.showDataModelsUpdate
+      }
+      else {
+        const resultShow = await Axios({
+          method: "GET",
+          url: this.root_url + String("getDataModels"),
+          params: {
+            userId: this.userIdLogin,
+          },
+        });
+        this.showDataModels = resultShow.data["results"];
+        console.log(this.showDataModels);
+      }
+
       this.showDataModels.forEach((value, index) => {
         this.showDataModels[index]["idDataModel"] = this.showDataModels[index][
           "dataModel"
@@ -97,23 +123,10 @@ export class manageModelComponent implements OnInit {
         },
       }
 
-      this.defaultColDef = {
-        editable: true,
-        filter: 'createdAt',
-        floatingFilter: true,
-        resizable: true,
-      };
-
     } catch (err) {
       this.data = "rpa-iot-api";
     }
 
-    setTimeout(() => (this.staticAlertClosed = true), 20000);
-
-    this._success.subscribe((message) => (this.successMessage = message));
-    this._success
-      .pipe(debounceTime(5000))
-      .subscribe(() => (this.successMessage = ""));
   }
 
   async onclickShowDetailModel(e) {
@@ -167,47 +180,74 @@ export class manageModelComponent implements OnInit {
 
   async onclickDelete(e) {
     try {
-      var objectIdDelete = e.rowData["objectId"];
-      var resultDelete = await Axios({
-        method: "POST",
-        url: this.root_url + String("deleteDataModel"),
-        params: {
-          oId: objectIdDelete,
-          class: "Model",
-        },
-      })
-
-      var showDataModelsTemp = await Axios({
-        method: "GET",
-        url: this.root_url + String("getDataModels"),
-        params: {
-          userId: this.userIdLogin,
-        },
-      })
-
-      this.showDataModels = showDataModelsTemp.data["results"];
-      this.showDataModels.forEach((value, index) => {
-        this.showDataModels[index]["idDataModel"] = this.showDataModels[
-          index
-        ]["dataModel"]["objectId"];
-        this.showDataModels[index]["idDataModel"] = this.showDataModels[
-          index
-        ]["dataModel"]["objectId"];
-        var fullName = this.showDataModels[index]["modelFile"][
-          "name"
-        ].split("_", 5);
-        this.showDataModels[index]["athmAndDataName"] = (
-          String(fullName[2]) +
-          "-" +
-          String(fullName[3])
-        ).split(".", 2)[0];
+      const dialogDeleteModel = this.dialogService.open(dialogDeleteModelComponent, {
+        context: {
+          objectIdDelete: e.rowData['objectId'],
+          nameObjectDelete: e.rowData['modelName'],
+          userIdLogin: this.userIdLogin
+        }
+      }
+      );
+      dialogDeleteModel.onClose.subscribe(async (reloadData) => {
+        if (reloadData) {
+          const resultShow = await Axios({
+            method: "GET",
+            url: this.root_url + String("getDataModels"),
+            params: {
+              userId: this.userIdLogin,
+            },
+          });
+          this.showDataModels = resultShow.data["results"];
+          this.showDataModels.forEach((value, index) => {
+            this.showDataModels[index]["idDataModel"] = this.showDataModels[index][
+              "dataModel"
+            ]["objectId"];
+            var fullName = this.showDataModels[index]["modelFile"]["name"].split(
+              "_",
+              5
+            );
+            this.showDataModels[index]["athmAndDataName"] = String(
+              fullName[2]
+            ).split(".", 2)[0];
+          });
+        }
       });
-      this._success.next(`delete successfully model ${objectIdDelete}`);
     } catch (err) {
       console.log(err);
     }
   }
   onFirstDataRendered(params) {
     params.api.sizeColumnsToFit();
+  }
+
+  formDialogCreateModel() {
+    const dialogCreateModel = this.dialogService.open(datasetsComponent, {
+      context: {
+        isDialog: true,
+      }
+    }
+    );
+    dialogCreateModel.onClose.subscribe(async (resultDataDialog) => {
+      const resultShow = await Axios({
+        method: "GET",
+        url: this.root_url + String("getDataModels"),
+        params: {
+          userId: this.userIdLogin,
+        },
+      });
+      this.showDataModels = resultShow.data["results"];
+      this.showDataModels.forEach((value, index) => {
+        this.showDataModels[index]["idDataModel"] = this.showDataModels[index][
+          "dataModel"
+        ]["objectId"];
+        var fullName = this.showDataModels[index]["modelFile"]["name"].split(
+          "_",
+          5
+        );
+        this.showDataModels[index]["athmAndDataName"] = String(
+          fullName[2]
+        ).split(".", 2)[0];
+      });
+    });
   }
 }

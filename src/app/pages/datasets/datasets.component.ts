@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostBinding } from "@angular/core";
+import { NbToastrService, NbComponentStatus } from '@nebular/theme';
 import { FormControl, FormGroup } from "@angular/forms";
 import { HttpClient } from '@angular/common/http';
 import Axios from "axios";
@@ -12,9 +13,14 @@ import { formUploadComponent } from "./formUpload.component";
 import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 import { environment } from '../../../environments/environment';
-import { COLUMNSDEFS_DATASETS } from '../createModel/constanst'
+import { COLUMNSDEFS_DATASETS } from '../createModel/constanst';
+import { createModelComponent } from "../createModel/createModel.component";
+import { dialogDeleteDatasetComponent } from "./dialogDeleteDataset.component";
+import { NbDialogRef } from "@nebular/theme";
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
+import { Context } from 'ag-grid-community';
 
 @Component({
   selector: "datasets",
@@ -22,6 +28,9 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
   templateUrl: "./datasets.component.html",
 })
 export class datasetsComponent implements OnInit {
+  private errorName: string;
+  @HostBinding('class')
+  classes = 'example-items-rows';
   public data: any;
   public root_url: any;
   public root_method: any;
@@ -51,6 +60,8 @@ export class datasetsComponent implements OnInit {
   private gridColumnApi;
   private columnDefs;
   public rowData: any;
+  public isDialog: boolean;
+  public loading: boolean;
 
   staticAlertClosed = false;
   successMessage = "";
@@ -59,12 +70,19 @@ export class datasetsComponent implements OnInit {
     private dialogService: NbDialogService,
     private router: Router,
     private http: HttpClient,
+    private toastrService: NbToastrService,
+    private dialogRef: NbDialogRef<any>
   ) {
     this.frameworkComponents = {
       buttonCreateModel: buttonRenderDatasetComponent,
       buttonDeleteDataset: buttonRenderDatasetComponent,
 
     };
+    this.defaultColDef = {
+      resizable: true,
+      flex: 1,
+    };
+    this.isDialog = false
   }
   async ngOnInit() {
     try {
@@ -74,6 +92,7 @@ export class datasetsComponent implements OnInit {
       this.userIdLogin = "JclGidZqhN";
       this.root_method = "GET";
       this.root_url = environment.apiUrl;
+      this.loading = false;
       const resultShow = await Axios({
         method: "GET",
         url: this.root_url + "getData",
@@ -85,7 +104,6 @@ export class datasetsComponent implements OnInit {
       this.isShowData = true;
 
       this.columnDefs = COLUMNSDEFS_DATASETS
-      //Create button delete dataset
       this.columnDefs[4] = {
         headerName: "Delete Dataset",
         cellRenderer: "buttonDeleteDataset",
@@ -94,7 +112,6 @@ export class datasetsComponent implements OnInit {
           label: "Delete",
         },
       }
-      //create button create model
       this.columnDefs[5] = {
         headerName: "Create Model",
         cellRenderer: "buttonCreateModel",
@@ -103,14 +120,7 @@ export class datasetsComponent implements OnInit {
           label: "Create",
         },
       }
-      // this.gridApi.sizeColumnsToFit();
 
-      this.defaultColDef = {
-        // editable: true,
-        filter: 'createdAt',
-        floatingFilter: true,
-        resizable: true,
-      };
 
       setTimeout(() => (this.staticAlertClosed = true), 20000);
 
@@ -125,32 +135,25 @@ export class datasetsComponent implements OnInit {
 
   async onclickDelete(e) {
     try {
-      this.objectIdDelete = e.rowData["objectId"];
-      var result = await Axios({
-        method: "POST",
-        url: this.root_url + "deleteData",
-        params: {
-          oId: this.objectIdDelete,
-        },
+      const dialogDeleteData = this.dialogService.open(dialogDeleteDatasetComponent, {
+        context: {
+          dataName: e.rowData['dataName'],
+          objectIdDelete: e.rowData['objectId'],
+        }
       });
-      if (result.data['error']) {
-        this.resultDelete = "Delete error: " + result.data['error'];
-        console.log(this.resultDelete);
-      }
-      else {
-        var resultRegetData = await Axios({
-          method: "GET",
-          url: "http://localhost:5000/getData",
-          params: {
-            userId: this.userIdLogin,
-          },
-        });
-        this.showDataResult = resultRegetData.data["results"];
-        this.isShowData = true;
-        this._success.next(
-          ` Delete successfully dataset ${this.objectIdDelete}.`
-        );
-      }
+      dialogDeleteData.onClose.subscribe(async (reloadData) => {
+        if (reloadData) {
+          const resultShow = await Axios({
+            method: "GET",
+            url: this.root_url + "getData",
+            params: {
+              userId: this.userIdLogin,
+            },
+          });
+          this.showDataResult = resultShow.data["results"];
+        }
+
+      });
     } catch (err) {
       console.log(err);
     }
@@ -158,35 +161,50 @@ export class datasetsComponent implements OnInit {
 
   onclickCreateModel(e) {
     try {
+      this.loading = true;
+      setTimeout(() => this.loading = false, 3000);
       this.objectIdCreateModel = e.rowData["objectId"];
+      var objectDataName = e.rowData['dataName']
       // this.router.navigate([
-      //   "/pages/createModel",
-      //   { objectIdData: this.objectIdCreateModel },
-      // ]);
-      this.router.navigate([
-        "/pages/createModel"],
-        { queryParams: { objectIdData: this.objectIdCreateModel } });
+      //   "/pages/createModel"],
+      //   { queryParams: { objectIdData: this.objectIdCreateModel } });
+      const dialogCreateModel = this.dialogService.open(createModelComponent, {
+        context: {
+          idDataCreateModel: String(this.objectIdCreateModel),
+          nameDataCreateModel: String(objectDataName),
+        },
+      });
+      // this.dialogRef.close
+      dialogCreateModel.onClose.subscribe(async (isClose) => {
+
+        if (isClose) {
+          var reload = true;
+          this.dialogRef.close(reload)
+        }
+
+      })
     } catch (err) {
       console.log(err);
     }
+
   }
 
   async formDialog() {
-    this.dialog = this.dialogService.open(formUploadComponent, {
+    const formDialog = this.dialogService.open(formUploadComponent, {
       context: {
         dataShow: this.showDataResult,
       },
+      autoFocus: false
     });
-    this.dialog.onClose.subscribe((resultDataDialog) => {
-      async (res) => {
-        this.showDataResult = await Axios({
-          method: "GET",
-          url: this.root_url + "getData",
-          params: {
-            userId: this.userIdLogin,
-          },
-        });
-      }
+    formDialog.onClose.subscribe(async (reloadData) => {
+      var showDataResultTemp = await Axios({
+        method: "GET",
+        url: this.root_url + "getData",
+        params: {
+          userId: this.userIdLogin,
+        },
+      });
+      this.showDataResult = showDataResultTemp.data['results']
     });
   }
 

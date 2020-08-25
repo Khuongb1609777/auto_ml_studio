@@ -1,0 +1,16 @@
+<nb-card>
+    <nb-card-header>DELETE MODEL</nb-card-header>
+    <nb-card-body> Delete model {{ nameObjectDelete }} ?</nb-card-body>
+    <nb-card-footer>
+        <table class="table_size">
+            <tr>
+                <td class="button_left">
+                    <button nbButton size="small" status="primary" (click)="dialogRef.close()">Close</button>
+                </td>
+                <td class="button_right" style="right: auto;">
+                    <button nbButton size="small" status="danger" (click)="deleteModel()">Delete</button>
+                </td>
+            </tr>
+        </table>
+    </nb-card-footer>
+</nb-card>

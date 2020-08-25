@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { } from "@nebular/theme";
+import { Component, OnInit, HostBinding } from "@angular/core";
+import { NbToastrService, NbComponentStatus } from '@nebular/theme';
 import { NbDialogRef } from "@nebular/theme";
 import { ICellRendererAngularComp } from "ag-grid-angular";
 import { ICellRendererParams, IAfterGuiAttachedParams } from "ag-grid";
@@ -11,8 +11,12 @@ import { environment } from '../../../environments/environment';
 @Component({
   selector: "form-upload",
   templateUrl: "./formUpload.component.html",
+  styleUrls: ["./formUpload.component.scss"],
 })
 export class formUploadComponent {
+  private errorName: string;
+  @HostBinding('class')
+  classes = 'example-items-rows';
   public userIdLogin: any;
   public root_method: any;
   public root_url: any;
@@ -27,14 +31,17 @@ export class formUploadComponent {
   public buttonSubmitStatus: any;
   public resultShow: any;
   public dataShow: any;
+  public infoUpload: any;
+  public fileName: any;
 
-  constructor(protected dialogRef: NbDialogRef<any>) { }
+  constructor(protected dialogRef: NbDialogRef<any>, private toastrService: NbToastrService) { }
 
   ngOnInit() {
     this.root_method = "POST";
     this.userIdLogin = "JclGidZqhN";
     this.root_url = environment.apiUrl;
     this.notificationFile = "";
+    this.fileName = ""
     this.checkType = false;
     this.isShowData = false;
     this.buttonSubmitStatus = "disable";
@@ -69,29 +76,19 @@ export class formUploadComponent {
     }
   }
 
-  upload() {
-    Axios({
+  async upload() {
+    this.formCurrent.append("dataName", this.fileName)
+    var infoUploadTemp = await Axios({
       method: "POST",
       url: this.root_url + String("upfile"),
       data: this.formCurrent,
     })
-      .then(async (res) => {
-        this.resultShow = await Axios({
-          method: "GET",
-          url: this.root_url + String("getData"),
-          params: {
-            userId: this.userIdLogin,
-          },
-        });
-        if (this.resultShow.data['results']) {
-          this.dataShow = this.resultShow.data["results"];
-        }
-        this.isShowData = true;
-        this.dialogRef.close(this.dataShow);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.infoUpload = infoUploadTemp.data
+    var idDataUpload = this.infoUpload['objectId']
+    this.errorName = "Upload dataset"
+    this.dialogRef.close(this.dataShow);
+    var messegeUpload = "Upload successfully data id: " + String(idDataUpload)
+    this.toastrService.show(messegeUpload, `SUCCESS: ${this.errorName}`, { status: "success" });
   }
 
 }

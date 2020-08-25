@@ -8,6 +8,7 @@ import {
   NbRadioModule,
   NbLayoutModule,
   NbSelectModule,
+  NbSpinnerModule,
 } from "@nebular/theme";
 
 import { ThemeModule } from "../@theme/theme.module";
@@ -19,7 +20,6 @@ import { MiscellaneousModule } from "./miscellaneous/miscellaneous.module";
 import { ShareModule } from "../@shared/share.module";
 import { datasetsComponent } from "./datasets/datasets.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { userRegisterComponent } from "./userRegister/userRegister.component";
 import { createModelComponent } from "./createModel/createModel.component";
 import { manageModelComponent } from "./manageModel/manageModel.component";
 import { AgGridModule } from "ag-grid-angular";
@@ -33,6 +33,10 @@ import { formUploadComponent } from "./datasets/formUpload.component";
 import { FormUpLoadModule } from "./datasets/formUpload.module";
 import { dialogDocsAPIComponent } from "./manageModel/dialogDocsAPI.component";
 import { dialogDocsAPIModule } from "./manageModel/dialogDocsAPI.module";
+import { dialogDeleteModelComponent } from "./manageModel/dialogDeleteModel.component"
+import { dialogDeleteModelModule } from "./manageModel/dialogDeleteModel.module"
+import { ClipboardModule } from 'ngx-clipboard';
+
 
 @NgModule({
   imports: [
@@ -50,6 +54,7 @@ import { dialogDocsAPIModule } from "./manageModel/dialogDocsAPI.module";
     NbRadioModule,
     NbLayoutModule,
     NbSelectModule,
+    NbSpinnerModule,
     dialogDocsAPIModule,
     HttpClientModule,
     ReactiveFormsModule,
@@ -57,13 +62,14 @@ import { dialogDocsAPIModule } from "./manageModel/dialogDocsAPI.module";
     buttonRenderDatasetModule,
     buttonRenderManageModelModule,
     dialogDocsAPIModule,
+    dialogDeleteModelModule,
     FormUpLoadModule,
+    ClipboardModule,
     AgGridModule.withComponents([buttonRenderDatasetComponent, buttonRenderManageModelComponent]),
   ],
   declarations: [
     PagesComponent,
     datasetsComponent,
-    userRegisterComponent,
     createModelComponent,
     manageModelComponent,
   ],
@@ -71,7 +77,8 @@ import { dialogDocsAPIModule } from "./manageModel/dialogDocsAPI.module";
     buttonRenderDatasetComponent,
     dialogDocsAPIComponent,
     formUploadComponent,
-    buttonRenderManageModelComponent
+    buttonRenderManageModelComponent,
+    dialogDeleteModelComponent
   ],
 })
 export class PagesModule { }

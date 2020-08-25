@@ -1,16 +1,15 @@
-<nb-card>
+<nb-card [class]="isDialog ? 'dialog-size' : ''" [nbSpinner]="loading">
   <nb-card-header style="text-align: center; font-size: 2em;">Your Dataset</nb-card-header>
   <nb-card-body>
     <ag-grid-angular *ngIf="isShowData" [defaultColDef]="defaultColDef" ar-grid-data class="ag-theme-alpine"
       [rowData]="showDataResult" [columnDefs]="columnDefs" (firstDataRendered)="onFirstDataRendered($event)" id="myGrid"
       [frameworkComponents]="frameworkComponents">
     </ag-grid-angular>
-    <button nbButton size="small" (click)="formDialog()" type="submit" value="Submit" status="primary">
+
+  </nb-card-body>
+  <nb-card-footer>
+    <button nbButton size="small" (click)="formDialog()" value="Submit" status="primary">
       New dataset
     </button>
-  </nb-card-body>
+  </nb-card-footer>
 </nb-card>
-
-<ngb-alert style="color: green;" *ngIf="successMessage" type="success" (close)="successMessage = ''">
-  {{ successMessage }}</ngb-alert>
-<p style="color: red;" *ngIf="isShowCreateModel">{{ objectIdCreateModel }}</p>

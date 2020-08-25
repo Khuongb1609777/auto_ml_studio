@@ -7,9 +7,9 @@ import { ECommerceComponent } from "./e-commerce/e-commerce.component";
 import { ParseSDKComponent } from "./parseSDK/parseSDK.component";
 import { NotFoundComponent } from "./miscellaneous/not-found/not-found.component";
 import { datasetsComponent } from "./datasets/datasets.component";
-import { userRegisterComponent } from "./userRegister/userRegister.component";
 import { createModelComponent } from "./createModel/createModel.component";
 import { manageModelComponent } from "./manageModel/manageModel.component";
+import { NbDialogRef } from '@nebular/theme';
 
 const routes: Routes = [
   {
@@ -48,10 +48,6 @@ const routes: Routes = [
         component: manageModelComponent,
       },
       {
-        path: "userRegister",
-        component: userRegisterComponent,
-      },
-      {
         path: "",
         // redirectTo: "dashboard",
         redirectTo: "datasets",
@@ -67,6 +63,12 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
+  providers: [{
+    provide: NbDialogRef,
+    useValue: {
+      close: (dialogResult: any) => { }
+    }
+  }],
   exports: [RouterModule],
 })
 export class PagesRoutingModule { }

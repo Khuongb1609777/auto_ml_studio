@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation, HostBinding } from "@angular/core";
+import { NbToastrService, NbComponentStatus } from '@nebular/theme';
 import { HttpClient } from "@angular/common/http";
 import { ActivatedRoute } from "@angular/router";
 import axios from "axios";
@@ -10,12 +11,20 @@ import { Router } from "@angular/router";
 import { environment } from '../../../environments/environment';
 import { GET_COLUMNS_FROM } from './constanst';
 import { CHECK_PARAMS_CREATE_MODEL } from './constanst'
+import { NbDialogRef } from "@nebular/theme";
 
 @Component({
   selector: "createModel",
   styleUrls: ["./createModel.component.scss"],
   templateUrl: "./createModel.component.html",
   encapsulation: ViewEncapsulation.None,
+  styles: [
+    `
+    ::ng-deep nb-layout-column {
+      height: 80vw;
+    }
+  `,
+  ],
 })
 export class createModelComponent implements OnInit {
   formModel = new FormGroup({
@@ -23,7 +32,9 @@ export class createModelComponent implements OnInit {
     colFeature: new FormControl(""),
     colLabel: new FormControl(""),
   });
-
+  private errorName: string;
+  @HostBinding('class')
+  classes = 'example-items-rows';
   public errorLogin: boolean;
   public notification: string;
   public sessionToken: boolean;
@@ -48,16 +59,19 @@ export class createModelComponent implements OnInit {
   public chooseDataFlag: boolean;
   public notificationCreate: {};
   public errorCreate: {};
+  public defaultParamsFlag: boolean;
+  public idDataCreateModel: string;
+  public nameDataCreateModel: string;
+  public nameData: string;
+  public modelName: String;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router, private toastrService: NbToastrService, private dialogRef: NbDialogRef<any>) { }
   message: string;
   async ngOnInit() {
     try {
-      this.notificationCreate = CHECK_PARAMS_CREATE_MODEL;
-      console.log(typeof (this.notificationCreate));
-      console.log(this.notificationCreate['errorFeature'])
-      // this.idDataCreateFrom = this.route.snapshot.params.objectIdData;
-      this.idDataCreateFrom = this.route.snapshot.queryParamMap.get('objectIdData');
+      this.modelName = ""
+      this.idDataCreateFrom = this.idDataCreateModel
+      this.nameData = this.nameDataCreateModel
       if (this.idDataCreateFrom) {
         this.colFeature = []
         this.colLabel = -1;
@@ -71,6 +85,8 @@ export class createModelComponent implements OnInit {
         this.selectArr = [];
         this.checkAllFlag = false;
         this.errorCreate = {}
+        this.defaultParamsFlag = false;
+
         var arrColDataTemp = await axios({
           method: "GET",
           url: this.root_url + String(GET_COLUMNS_FROM),
@@ -78,7 +94,6 @@ export class createModelComponent implements OnInit {
             objectId: this.idDataCreateFrom,
           },
         })
-        console.log(arrColDataTemp);
         if (arrColDataTemp.data) {
           this.arrColData = arrColDataTemp.data;
           this.isshowFrom = true;
@@ -179,26 +194,31 @@ export class createModelComponent implements OnInit {
 
   async createModel() {
     try {
-      console.log(this.colLabel)
-      console.log(this.colFeature)
-      console.log(typeof (this.colLabel))
       if (this.colLabel == -1) {
-        alert(this.notificationCreate['errorLabel']);
+        this.errorName = "Label"
+        this.toastrService.show(this.notificationCreate['errorLabel'], `ERROR: ${this.errorName}`, { status: "danger" });
       } else {
         if (this.colFeature.length == 0) {
-          alert(this.notificationCreate['errorFeature']);
+          this.errorName = "Feature"
+          this.toastrService.show(this.notificationCreate['errorFeature'], `ERROR: ${this.errorName}`, { status: "danger" });
         }
         else {
           if (this.algorithm == "") {
-            alert(this.notificationCreate['errorAlgorithm']);
+            this.errorName = "Algorithm"
+            this.toastrService.show(this.notificationCreate['errorAlgorithm'], `ERROR: ${this.errorName}`, { status: "danger" });
           }
           else {
             this.customParams = {};
-            Object.keys(this.inputValue).map((key) => {
-              if (this.inputValue[key] !== "") {
-                this.customParams[key] = this.inputValue[key];
-              }
-            });
+            if (this.defaultParamsFlag) {
+              this.customParams = {}
+            } else {
+              Object.keys(this.inputValue).map((key) => {
+                if (this.inputValue[key] !== "") {
+                  this.customParams[key] = this.inputValue[key];
+                }
+              });
+            }
+
             var returnCreate = await axios({
               method: "POST",
               url: "http://localhost:5000/createModel",
@@ -209,13 +229,20 @@ export class createModelComponent implements OnInit {
                 feature: String(this.colFeature),
                 algorithm: this.algorithm,
                 params: this.customParams,
+                modelname: this.modelName
               },
             })
-            console.log(returnCreate)
+            // console.log(returnCreate.data['objectId'])
             if (returnCreate.data['error']) {
-              alert(returnCreate.data['error']);
+              this.errorName = "Create Model"
+              this.toastrService.show(returnCreate.data['error'], `ERROR: ${this.errorName}`, { status: "danger", duration: 15000 });
             }
             else {
+              this.errorName = "Create Model"
+              var messageCreateModel = "Create successfully model: " + String(this.modelName)
+              this.toastrService.show(messageCreateModel, `SUCCESS: ${this.errorName}`, { status: "success", duration: 4000 });
+              var isClose = true
+              this.dialogRef.close(isClose);
               this.router.navigate(["/pages/manageModel"]);
             }
           }
@@ -232,5 +259,6 @@ export class createModelComponent implements OnInit {
   }
   defaultParams() {
     this.isshowParam = false;
+    this.defaultParamsFlag = true;
   }
 }
