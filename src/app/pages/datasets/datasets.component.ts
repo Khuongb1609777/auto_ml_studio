@@ -3,19 +3,19 @@ import { NbToastrService, NbComponentStatus } from '@nebular/theme';
 import { FormControl, FormGroup } from "@angular/forms";
 import { HttpClient } from '@angular/common/http';
 import Axios from "axios";
-import { buttonRenderDatasetComponent } from "./renderer/buttonRenderDataset.component";
+import { ButtonRenderDatasetComponent } from "./renderer/button-render-dataset.component";
 import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
 import { RSA_NO_PADDING } from "constants";
 import { navigate } from "@reach/router";
 import { NbDialogService } from "@nebular/theme";
-import { formUploadComponent } from "./formUpload.component";
+import { FormUploadComponent } from "./form-upload.component";
 import { Subject } from "rxjs";
 import { debounceTime } from "rxjs/operators";
 import { environment } from '../../../environments/environment';
-import { COLUMNSDEFS_DATASETS } from '../createModel/constanst';
-import { createModelComponent } from "../createModel/createModel.component";
-import { dialogDeleteDatasetComponent } from "./dialogDeleteDataset.component";
+import { COLUMNSDEFS_DATASETS } from '../create-model/constanst';
+import { CreateModelComponent } from "../create-model/create-model.component";
+import { DialogDeleteDatasetComponent } from "./dialog-delete-dataset.component";
 import { NbDialogRef } from "@nebular/theme";
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -27,7 +27,7 @@ import { Context } from 'ag-grid-community';
   styleUrls: ["./datasets.component.scss"],
   templateUrl: "./datasets.component.html",
 })
-export class datasetsComponent implements OnInit {
+export class DatasetsComponent implements OnInit {
   private errorName: string;
   @HostBinding('class')
   classes = 'example-items-rows';
@@ -74,8 +74,8 @@ export class datasetsComponent implements OnInit {
     private dialogRef: NbDialogRef<any>
   ) {
     this.frameworkComponents = {
-      buttonCreateModel: buttonRenderDatasetComponent,
-      buttonDeleteDataset: buttonRenderDatasetComponent,
+      buttonCreateModel: ButtonRenderDatasetComponent,
+      buttonDeleteDataset: ButtonRenderDatasetComponent,
 
     };
     this.defaultColDef = {
@@ -95,7 +95,7 @@ export class datasetsComponent implements OnInit {
       this.loading = false;
       const resultShow = await Axios({
         method: "GET",
-        url: this.root_url + "getData",
+        url: this.root_url + "get-data",
         params: {
           userId: this.userIdLogin,
         },
@@ -108,7 +108,7 @@ export class datasetsComponent implements OnInit {
         headerName: "Delete Dataset",
         cellRenderer: "buttonDeleteDataset",
         cellRendererParams: {
-          onClick: this.onclickDelete.bind(this),
+          onClick: this.onClickDelete.bind(this),
           label: "Delete",
         },
       }
@@ -116,11 +116,10 @@ export class datasetsComponent implements OnInit {
         headerName: "Create Model",
         cellRenderer: "buttonCreateModel",
         cellRendererParams: {
-          onClick: this.onclickCreateModel.bind(this),
+          onClick: this.onClickCreateModel.bind(this),
           label: "Create",
         },
       }
-
 
       setTimeout(() => (this.staticAlertClosed = true), 20000);
 
@@ -133,9 +132,9 @@ export class datasetsComponent implements OnInit {
     }
   }
 
-  async onclickDelete(e) {
+  async onClickDelete(e) {
     try {
-      const dialogDeleteData = this.dialogService.open(dialogDeleteDatasetComponent, {
+      const dialogDeleteData = this.dialogService.open(DialogDeleteDatasetComponent, {
         context: {
           dataName: e.rowData['dataName'],
           objectIdDelete: e.rowData['objectId'],
@@ -145,7 +144,7 @@ export class datasetsComponent implements OnInit {
         if (reloadData) {
           const resultShow = await Axios({
             method: "GET",
-            url: this.root_url + "getData",
+            url: this.root_url + "get-data",
             params: {
               userId: this.userIdLogin,
             },
@@ -159,7 +158,7 @@ export class datasetsComponent implements OnInit {
     }
   }
 
-  onclickCreateModel(e) {
+  onClickCreateModel(e) {
     try {
       this.loading = true;
       setTimeout(() => this.loading = false, 3000);
@@ -168,7 +167,7 @@ export class datasetsComponent implements OnInit {
       // this.router.navigate([
       //   "/pages/createModel"],
       //   { queryParams: { objectIdData: this.objectIdCreateModel } });
-      const dialogCreateModel = this.dialogService.open(createModelComponent, {
+      const dialogCreateModel = this.dialogService.open(CreateModelComponent, {
         context: {
           idDataCreateModel: String(this.objectIdCreateModel),
           nameDataCreateModel: String(objectDataName),
@@ -190,7 +189,7 @@ export class datasetsComponent implements OnInit {
   }
 
   async formDialog() {
-    const formDialog = this.dialogService.open(formUploadComponent, {
+    const formDialog = this.dialogService.open(FormUploadComponent, {
       context: {
         dataShow: this.showDataResult,
       },
@@ -199,13 +198,17 @@ export class datasetsComponent implements OnInit {
     formDialog.onClose.subscribe(async (reloadData) => {
       var showDataResultTemp = await Axios({
         method: "GET",
-        url: this.root_url + "getData",
+        url: this.root_url + "get-data",
         params: {
           userId: this.userIdLogin,
         },
       });
       this.showDataResult = showDataResultTemp.data['results']
     });
+  }
+
+  onClickDowloadModel() {
+    //code
   }
 
   onFirstDataRendered(params) {

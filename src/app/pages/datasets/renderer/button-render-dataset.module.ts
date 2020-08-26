@@ -6,10 +6,10 @@ import {
   NbButtonModule,
 } from "@nebular/theme";
 
-import { buttonRenderDatasetComponent } from "./buttonRenderDataset.component";
+import { ButtonRenderDatasetComponent } from "./button-render-dataset.component";
 
 @NgModule({
   imports: [NbButtonModule],
-  declarations: [buttonRenderDatasetComponent],
+  declarations: [ButtonRenderDatasetComponent],
 })
-export class buttonRenderDatasetModule { }
+export class ButtonRenderDatasetModule { }

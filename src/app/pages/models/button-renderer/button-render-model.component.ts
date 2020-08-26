@@ -5,9 +5,9 @@ import { ICellRendererParams, IAfterGuiAttachedParams } from "ag-grid";
 
 @Component({
     selector: "app-button-renderer",
-    templateUrl: "./buttonRenderManageModel.component.html",
+    templateUrl: "./button-render-model.component.html",
 })
-export class buttonRenderManageModelComponent implements ICellRendererAngularComp {
+export class ButtonRenderManageModelComponent implements ICellRendererAngularComp {
     params;
     label: string;
 

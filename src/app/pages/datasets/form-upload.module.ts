@@ -12,10 +12,10 @@ import {
 
 } from "@nebular/theme";
 
-import { formUploadComponent } from "./formUpload.component";
+import { FormUploadComponent } from "./form-upload.component";
 
 @NgModule({
   imports: [NbButtonModule, NbCardModule, NbTabsetModule, CommonModule, NbInputModule, FormsModule],
-  declarations: [formUploadComponent],
+  declarations: [FormUploadComponent],
 })
 export class FormUpLoadModule { }

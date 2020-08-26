@@ -1,14 +1,13 @@
 import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
-
 import { PagesComponent } from "./pages.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ECommerceComponent } from "./e-commerce/e-commerce.component";
 import { ParseSDKComponent } from "./parseSDK/parseSDK.component";
 import { NotFoundComponent } from "./miscellaneous/not-found/not-found.component";
-import { datasetsComponent } from "./datasets/datasets.component";
-import { createModelComponent } from "./createModel/createModel.component";
-import { manageModelComponent } from "./manageModel/manageModel.component";
+import { DatasetsComponent } from "./datasets/datasets.component";
+import { CreateModelComponent } from "./create-model/create-model.component";
+import { ModelsComponent } from "./models/models.component";
 import { NbDialogRef } from '@nebular/theme';
 
 const routes: Routes = [
@@ -37,15 +36,15 @@ const routes: Routes = [
       },
       {
         path: "datasets",
-        component: datasetsComponent,
+        component: DatasetsComponent,
       },
       {
         path: "createModel",
-        component: createModelComponent,
+        component: CreateModelComponent,
       },
       {
-        path: "manageModel",
-        component: manageModelComponent,
+        path: "models",
+        component: ModelsComponent,
       },
       {
         path: "",

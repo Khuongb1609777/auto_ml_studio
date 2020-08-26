@@ -8,11 +8,11 @@ import axios from "axios"
 
 
 @Component({
-    selector: "DeleteModel",
-    styleUrls: ["./dialogDeleteModel.component.scss"],
-    templateUrl: "./dialogDeleteModel.component.html",
+    selector: "delete-model",
+    styleUrls: ["./dialog-delete-model.component.scss"],
+    templateUrl: "./dialog-delete-model.component.html",
 })
-export class dialogDeleteModelComponent {
+export class DialogDeleteModelComponent {
     private errorName: string;
     @HostBinding('class')
     classes = 'example-items-rows';
@@ -37,7 +37,7 @@ export class dialogDeleteModelComponent {
         var objectId = this.objectIdDelete
         var resultDelete = await axios({
             method: "POST",
-            url: this.root_url + String("deleteDataModel"),
+            url: this.root_url + String("delete-data-model"),
             params: {
                 oId: objectId,
                 class: "Model",

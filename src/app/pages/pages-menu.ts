@@ -31,7 +31,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: "Models",
     icon: "book-outline",
-    link: "/pages/manageModel",
+    link: "/pages/models",
   },
   // {
   //   title: "userRegister",

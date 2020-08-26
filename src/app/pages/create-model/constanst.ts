@@ -56,12 +56,12 @@ export const COLUMNSDEFS_MANAGE_MODEL = [
 
 
 export const COLUMNSDEFS_DATASETS = [
-    {
-        headerName: "Dataset ID",
-        field: "objectId",
-        sortable: true,
-        filter: true,
-    },
+    // {
+    //     headerName: "Dataset ID",
+    //     field: "objectId",
+    //     sortable: true,
+    //     filter: true,
+    // },
     // {
     //     headerName: "Create At",
     //     field: "createdAt",

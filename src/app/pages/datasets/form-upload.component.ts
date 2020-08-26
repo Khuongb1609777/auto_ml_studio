@@ -10,10 +10,10 @@ import { environment } from '../../../environments/environment';
 
 @Component({
   selector: "form-upload",
-  templateUrl: "./formUpload.component.html",
-  styleUrls: ["./formUpload.component.scss"],
+  templateUrl: "./form-upload.component.html",
+  styleUrls: ["./form-upload.component.scss"],
 })
-export class formUploadComponent {
+export class FormUploadComponent {
   private errorName: string;
   @HostBinding('class')
   classes = 'example-items-rows';
@@ -80,7 +80,7 @@ export class formUploadComponent {
     this.formCurrent.append("dataName", this.fileName)
     var infoUploadTemp = await Axios({
       method: "POST",
-      url: this.root_url + String("upfile"),
+      url: this.root_url + String("upload-file"),
       data: this.formCurrent,
     })
     this.infoUpload = infoUploadTemp.data

@@ -11,10 +11,10 @@ import {
     NbTabsetComponent,
 } from "@nebular/theme";
 
-import { dialogDeleteModelComponent } from "./dialogDeleteModel.component";
+import { DialogDeleteDatasetComponent } from "./dialog-delete-dataset.component";
 
 @NgModule({
     imports: [NbButtonModule, NbCardModule, NbTabsetModule, CommonModule],
-    declarations: [dialogDeleteModelComponent],
+    declarations: [DialogDeleteDatasetComponent],
 })
-export class dialogDeleteModelModule { }
+export class DialogDeleteDatasetModule { }

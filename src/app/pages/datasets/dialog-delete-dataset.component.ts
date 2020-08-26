@@ -9,10 +9,10 @@ import axios from "axios"
 
 @Component({
     selector: "DeleteDataset",
-    styleUrls: ["./dialogDeleteDataset.component.scss"],
-    templateUrl: "./dialogDeleteDataset.component.html",
+    styleUrls: ["./dialog-delete-dataset.component.scss"],
+    templateUrl: "./dialog-delete-dataset.component.html",
 })
-export class dialogDeleteDatasetComponent {
+export class DialogDeleteDatasetComponent {
     public dataName: string;
     public objectIdDelete: string;
     public root_url: string;
@@ -35,7 +35,7 @@ export class dialogDeleteDatasetComponent {
     async deleteDataset() {
         var result = await axios({
             method: "POST",
-            url: this.root_url + "deleteData",
+            url: this.root_url + "delete-data",
             params: {
                 oId: this.objectIdDelete,
             },

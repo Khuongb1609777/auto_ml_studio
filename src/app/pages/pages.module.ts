@@ -18,23 +18,28 @@ import { DashboardModule } from "./dashboard/dashboard.module";
 import { ECommerceModule } from "./e-commerce/e-commerce.module";
 import { MiscellaneousModule } from "./miscellaneous/miscellaneous.module";
 import { ShareModule } from "../@shared/share.module";
-import { datasetsComponent } from "./datasets/datasets.component";
+import { DatasetsComponent } from "./datasets/datasets.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { createModelComponent } from "./createModel/createModel.component";
-import { manageModelComponent } from "./manageModel/manageModel.component";
+import { CreateModelComponent } from "./create-model/create-model.component";
+// import { ManageModelComponent } from "./manageModel/ManageModel.component";
+import { ModelsComponent } from "./models/models.component"
 import { AgGridModule } from "ag-grid-angular";
-import { buttonRenderDatasetModule } from "./datasets/renderer/buttonRenderDataset.module";
-import { buttonRenderDatasetComponent } from "./datasets/renderer/buttonRenderDataset.component";
-import { buttonRenderManageModelComponent } from "./manageModel/button-renderer/buttonRenderManageModel.component"
-import { buttonRenderManageModelModule } from "./manageModel/button-renderer/buttonRenderManageModel.module"
+import { ButtonRenderDatasetModule } from "./datasets/renderer/button-render-dataset.module";
+import { ButtonRenderDatasetComponent } from "./datasets/renderer/button-render-dataset.component";
+// import { buttonRenderManageModelComponent } from "./manageModel/button-renderer/buttonRenderManageModel.component"
+import { ButtonRenderManageModelComponent } from "./models/button-renderer/button-render-model.component"
+// import { buttonRenderManageModelModule } from "./manageModel/button-renderer/buttonRenderManageModel.module"
+import { ButtonRenderManageModelModule } from "./models/button-renderer/button-render-model.module"
 import { HttpClientModule } from "@angular/common/http";
 import { navigate } from "@reach/router";
-import { formUploadComponent } from "./datasets/formUpload.component";
-import { FormUpLoadModule } from "./datasets/formUpload.module";
-import { dialogDocsAPIComponent } from "./manageModel/dialogDocsAPI.component";
-import { dialogDocsAPIModule } from "./manageModel/dialogDocsAPI.module";
-import { dialogDeleteModelComponent } from "./manageModel/dialogDeleteModel.component"
-import { dialogDeleteModelModule } from "./manageModel/dialogDeleteModel.module"
+import { FormUploadComponent } from "./datasets/form-upload.component";
+import { FormUpLoadModule } from "./datasets/form-upload.module";
+// import { dialogDocsAPIComponent } from "./manageModel/DialogDocsAPI.component";
+import { DialogDocsAPIComponent } from "./models/dialog-docs-api.component"
+// import { dialogDocsAPIModule } from "./manageModel/dialog-docs-api.module";
+import { DialogDocsAPIModule } from "./models/dialog-docs-api.module"
+import { DialogDeleteModelComponent } from "./models/dialog-delete-model.component";
+import { DialogDeleteModelModule } from "./models/dialog-delete-model.module"
 import { ClipboardModule } from 'ngx-clipboard';
 
 
@@ -55,30 +60,30 @@ import { ClipboardModule } from 'ngx-clipboard';
     NbLayoutModule,
     NbSelectModule,
     NbSpinnerModule,
-    dialogDocsAPIModule,
+    DialogDocsAPIModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    buttonRenderDatasetModule,
-    buttonRenderManageModelModule,
-    dialogDocsAPIModule,
-    dialogDeleteModelModule,
+    ButtonRenderDatasetModule,
+    ButtonRenderManageModelModule,
+    DialogDocsAPIModule,
+    DialogDeleteModelModule,
     FormUpLoadModule,
     ClipboardModule,
-    AgGridModule.withComponents([buttonRenderDatasetComponent, buttonRenderManageModelComponent]),
+    AgGridModule.withComponents([ButtonRenderDatasetComponent, ButtonRenderManageModelComponent]),
   ],
   declarations: [
     PagesComponent,
-    datasetsComponent,
-    createModelComponent,
-    manageModelComponent,
+    DatasetsComponent,
+    CreateModelComponent,
+    ModelsComponent,
   ],
   entryComponents: [
-    buttonRenderDatasetComponent,
-    dialogDocsAPIComponent,
-    formUploadComponent,
-    buttonRenderManageModelComponent,
-    dialogDeleteModelComponent
+    ButtonRenderDatasetComponent,
+    DialogDocsAPIComponent,
+    FormUploadComponent,
+    ButtonRenderManageModelComponent,
+    DialogDeleteModelComponent
   ],
 })
 export class PagesModule { }

@@ -6,10 +6,10 @@ import {
     NbButtonModule,
 } from "@nebular/theme";
 
-import { buttonRenderManageModelComponent } from "./buttonRenderManageModel.component";
+import { ButtonRenderManageModelComponent } from "./button-render-model.component";
 
 @NgModule({
     imports: [NbButtonModule],
-    declarations: [buttonRenderManageModelComponent],
+    declarations: [ButtonRenderManageModelComponent],
 })
-export class buttonRenderManageModelModule { }
+export class ButtonRenderManageModelModule { }

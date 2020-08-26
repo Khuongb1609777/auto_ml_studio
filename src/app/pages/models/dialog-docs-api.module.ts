@@ -1,5 +1,4 @@
 import { NgModule } from "@angular/core";
-
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from "@angular/platform-browser";
 import {
@@ -11,10 +10,10 @@ import {
     NbTabsetComponent,
 } from "@nebular/theme";
 
-import { dialogDeleteDatasetComponent } from "./dialogDeleteDataset.component";
+import { DialogDocsAPIComponent } from "./dialog-docs-api.component";
 
 @NgModule({
     imports: [NbButtonModule, NbCardModule, NbTabsetModule, CommonModule],
-    declarations: [dialogDeleteDatasetComponent],
+    declarations: [DialogDocsAPIComponent],
 })
-export class dialogDeleteDatasetModule { }
+export class DialogDocsAPIModule { }
