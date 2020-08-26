@@ -17,6 +17,7 @@ import { CreateModelComponent } from "../create-model/create-model.component"
 import { DatasetsComponent } from "../datasets/datasets.component"
 import { DialogDeleteModelComponent } from "./dialog-delete-model.component"
 import { stringToArray, Context } from 'ag-grid-community';
+import { environment } from '../../../environments/environment'
 
 @Component({
     selector: "models",
@@ -73,7 +74,7 @@ export class ModelsComponent implements OnInit {
         try {
             this.errorFlag = false;
             this.userIdLogin = "JclGidZqhN";
-            this.root_url = "http://localhost:5000/";
+            this.root_url = environment.apiUrl;
             if (this.keyUpdate) {
                 this.showDataModels = this.showDataModelsUpdate
             }
@@ -86,22 +87,19 @@ export class ModelsComponent implements OnInit {
                     },
                 });
                 this.showDataModels = resultShow.data["results"];
-                console.log(this.showDataModels);
+                console.log(this.showDataModels)
             }
 
             this.showDataModels.forEach((value, index) => {
-                this.showDataModels[index]["idDataModel"] = this.showDataModels[index][
-                    "dataModel"
-                ]["objectId"];
-                var fullName = this.showDataModels[index]["modelFile"]["name"].split(
-                    "_",
-                    5
-                );
-                this.showDataModels[index]["athmAndDataName"] = String(
-                    fullName[2]
-                ).split(".", 2)[0];
+                this.showDataModels[index]["algorithmName"] = this.showDataModels[index][
+                    "algorithm"
+                ]["algorithmName"];
             });
-
+            this.showDataModels.forEach((value, index) => {
+                this.showDataModels[index]["dataName"] = this.showDataModels[index][
+                    "dataModel"
+                ]["dataName"];
+            });
             this.isShowModels = true;
 
             this.columnDefs = COLUMNSDEFS_MANAGE_MODEL
@@ -130,48 +128,30 @@ export class ModelsComponent implements OnInit {
 
     async onClickShowDetailModel(e) {
         try {
-            this.modelId = e.rowData["objectId"];
-            this.dataId = e.rowData["idDataModel"];
-            var infoApiTemp = await Axios({
-                method: "GET",
-                url: this.root_url + String("get-model-detail"),
-                params: {
-                    modelId: this.modelId,
+            console.log(e['rowData'])
+            this.athmApi = e['rowData']["algorithmName"];
+            this.colFeatureModel = e['rowData']["colFeature"];
+            this.colFeatureModelName = e['rowData']["colFeatureName"];
+            this.colLabelModel = e['rowData']["colLabel"];
+            this.colLabelModelName = e['rowData']["colLabelName"];
+            this.descriptionModel = e['rowData']["description"];
+            this.dataName = e['rowData']["dataName"];
+            console.log("name", this.dataName);
+            this.dialogService.open(DialogDocsAPIComponent, {
+                context: {
+                    athm: this.athmApi,
+                    colFeature: this.colFeatureModel,
+                    colFeatureName: this.colFeatureModelName,
+                    colLabel: this.colLabelModel,
+                    colLabelName: this.colLabelModelName,
+                    modelId: e['rowData']['objectId'],
+                    dataId: this.dataId,
+                    dataName: this.dataName,
+                    urlApi: "http://localhost:5000/create-api-model",
+                    descriptionModel: this.descriptionModel,
                 },
-            })
-            this.infoApi = infoApiTemp.data
-            if (this.infoApi["error"]) {
-                var errorGetDetail = this.infoApi["error"];
-                this.errorFlag = true;
-                this.dialog = this.dialogService.open(DialogDocsAPIComponent, {
-                    context: {
-                        errorDetail: errorGetDetail,
-                    },
-                });
-            } else {
-                this.athmApi = this.infoApi["algorithm"];
-                this.colFeatureModel = this.infoApi["colFeature"];
-                this.colFeatureModelName = this.infoApi["colFeatureName"];
-                this.colLabelModel = this.infoApi["colLabel"];
-                this.colLabelModelName = this.infoApi["colLabelName"];
-                this.descriptionModel = this.infoApi["description"];
-                this.dataName = this.infoApi["dataName"];
-                console.log(this.dialogService)
-                this.dialogService.open(DialogDocsAPIComponent, {
-                    context: {
-                        athm: this.athmApi,
-                        colFeature: this.colFeatureModel,
-                        colFeatureName: this.colFeatureModelName,
-                        colLabel: this.colLabelModel,
-                        colLabelName: this.colLabelModelName,
-                        modelId: this.modelId,
-                        dataId: this.dataId,
-                        dataName: this.dataName,
-                        urlApi: "http://localhost:5000/create-api-model",
-                        descriptionModel: this.descriptionModel,
-                    },
-                });
-            }
+            });
+
         } catch (err) {
             console.log(err);
         }
@@ -198,16 +178,14 @@ export class ModelsComponent implements OnInit {
                     });
                     this.showDataModels = resultShow.data["results"];
                     this.showDataModels.forEach((value, index) => {
-                        this.showDataModels[index]["idDataModel"] = this.showDataModels[index][
+                        this.showDataModels[index]["algorithmName"] = this.showDataModels[index][
+                            "algorithm"
+                        ]["algorithmName"];
+                    });
+                    this.showDataModels.forEach((value, index) => {
+                        this.showDataModels[index]["dataName"] = this.showDataModels[index][
                             "dataModel"
-                        ]["objectId"];
-                        var fullName = this.showDataModels[index]["modelFile"]["name"].split(
-                            "_",
-                            5
-                        );
-                        this.showDataModels[index]["athmAndDataName"] = String(
-                            fullName[2]
-                        ).split(".", 2)[0];
+                        ]["dataName"];
                     });
                 }
             });
@@ -236,16 +214,14 @@ export class ModelsComponent implements OnInit {
             });
             this.showDataModels = resultShow.data["results"];
             this.showDataModels.forEach((value, index) => {
-                this.showDataModels[index]["idDataModel"] = this.showDataModels[index][
+                this.showDataModels[index]["algorithmName"] = this.showDataModels[index][
+                    "algorithm"
+                ]["algorithmName"];
+            });
+            this.showDataModels.forEach((value, index) => {
+                this.showDataModels[index]["dataName"] = this.showDataModels[index][
                     "dataModel"
-                ]["objectId"];
-                var fullName = this.showDataModels[index]["modelFile"]["name"].split(
-                    "_",
-                    5
-                );
-                this.showDataModels[index]["athmAndDataName"] = String(
-                    fullName[2]
-                ).split(".", 2)[0];
+                ]["dataName"];
             });
         });
     }

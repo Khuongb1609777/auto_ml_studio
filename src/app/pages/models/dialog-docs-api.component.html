@@ -8,21 +8,21 @@
                             Model {{ modelId }}
                         </nb-card-header>
                         <nb-card-body bodyWidth>
-                            <table tableWidth>
+                            <table style="width:100%;">
                                 <tr>
-                                    <td>Data:</td>
+                                    <td class="width-columns">Data:</td>
                                     <td>{{ dataName }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Algorithm:</td>
+                                    <td class="width-columns">Algorithm:</td>
                                     <td>{{ athm }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Columns feature:</td>
+                                    <td class="width-columns">Columns feature:</td>
                                     <td>{{ colFeatureName }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Column label:</td>
+                                    <td class="width-columns">Column label:</td>
                                     <td>{{ colLabelName }}</td>
                                 </tr>
                             </table>
@@ -40,40 +40,38 @@
                             Set up postman for model {{ modelId }}
                         </nb-card-header>
                         <nb-card-body bodyWidth>
-                            <table tableWidth>
+                            <table style="width:100%;">
                                 <tr>
-                                    <td></td>
-                                    <td class="button-right"> <button nbButton size="small" (click)="copyCurlCsv()"
-                                            type="submit" value="Submit" status="primary">
+                                    <td colspan="2" class="button-right"> <button nbButton size="small"
+                                            (click)="copyCurlJson()" type="submit" value="Submit" status="primary">
                                             copy
                                         </button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Url</td>
-                                    <td>{{ urlApi }}</td>
+                                    <td class="width-columns">Url</td>
+                                    <td>{{ urlApiCsv }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Method</td>
-                                    <td>GET</td>
+                                    <td class="width-columns">Method</td>
+                                    <td>POST</td>
                                 </tr>
                                 <tr>
-                                    <td>Headers - Content/type</td>
+                                    <td class="width-columns">Headers - Content/type</td>
                                     <td>multipart/form-data</td>
                                 </tr>
                                 <tr>
-                                    <td>modelId</td>
+                                    <td class="width-columns">modelId</td>
                                     <td>{{ modelId }}</td>
                                 </tr>
                                 <tr>
-                                    <td>dataTest</td>
+                                    <td class="width-columns">dataTest</td>
                                     <td>datatest_name.csv</td>
                                 </tr>
                                 <tr>
-                                    <td>inputColumns</td>
+                                    <td class="width-columns">inputColumns</td>
                                     <td>{{ colFeature }}</td>
                                 </tr>
-
                             </table>
                         </nb-card-body>
                     </nb-card>
@@ -84,33 +82,32 @@
                             Set up postman for model {{ modelId }}
                         </nb-card-header>
                         <nb-card-body bodyWidth>
-                            <table tableWidth>
+                            <table style="width: 100%;">
                                 <tr>
-                                    <td></td>
-                                    <td class="button-right"> <button nbButton size="small" (click)="copyCurlJson()"
-                                            type="submit" value="Submit" status="primary">
+                                    <td colspan="2" class="button-right"> <button nbButton size="small"
+                                            (click)="copyCurlJson()" type="submit" value="Submit" status="primary">
                                             copy
                                         </button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Url</td>
-                                    <td>{{ urlApi }}</td>
+                                    <td class="width-columns">Url</td>
+                                    <td>{{ urlApiJson }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Method</td>
-                                    <td>GET</td>
+                                    <td class="width-columns">Method</td>
+                                    <td>POST</td>
                                 </tr>
                                 <tr>
-                                    <td>Headers - Content/type</td>
+                                    <td class="width-columns">Headers - Content/type</td>
                                     <td>application/json</td>
                                 </tr>
                                 <tr>
-                                    <td>modelId</td>
+                                    <td class="width-columns">modelId</td>
                                     <td>{{ modelId }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Columns feature:</td>
+                                    <td class="width-columns">inputColumns</td>
                                     <td>{{ colFeatureName }}</td>
                                 </tr>
 

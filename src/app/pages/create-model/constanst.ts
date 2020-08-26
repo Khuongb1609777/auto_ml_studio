@@ -48,7 +48,7 @@ export const COLUMNSDEFS_MANAGE_MODEL = [
     },
     {
         headerName: "Algorithm",
-        field: "athmAndDataName",
+        field: "algorithmName",
         sortable: true,
         filter: true,
     },

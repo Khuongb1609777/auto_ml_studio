@@ -76,6 +76,7 @@ export class DatasetsComponent implements OnInit {
     this.frameworkComponents = {
       buttonCreateModel: ButtonRenderDatasetComponent,
       buttonDeleteDataset: ButtonRenderDatasetComponent,
+      buttonDownloadDataset: ButtonRenderDatasetComponent,
 
     };
     this.defaultColDef = {
@@ -105,6 +106,14 @@ export class DatasetsComponent implements OnInit {
 
       this.columnDefs = COLUMNSDEFS_DATASETS
       this.columnDefs[4] = {
+        headerName: "Download Dataset",
+        cellRenderer: "buttonDownloadDataset",
+        cellRendererParams: {
+          onClick: this.onClickDownloadDataset.bind(this),
+          label: "Download",
+        },
+      }
+      this.columnDefs[5] = {
         headerName: "Delete Dataset",
         cellRenderer: "buttonDeleteDataset",
         cellRendererParams: {
@@ -112,7 +121,7 @@ export class DatasetsComponent implements OnInit {
           label: "Delete",
         },
       }
-      this.columnDefs[5] = {
+      this.columnDefs[6] = {
         headerName: "Create Model",
         cellRenderer: "buttonCreateModel",
         cellRendererParams: {
@@ -189,26 +198,47 @@ export class DatasetsComponent implements OnInit {
   }
 
   async formDialog() {
-    const formDialog = this.dialogService.open(FormUploadComponent, {
-      context: {
-        dataShow: this.showDataResult,
-      },
-      autoFocus: false
-    });
-    formDialog.onClose.subscribe(async (reloadData) => {
-      var showDataResultTemp = await Axios({
-        method: "GET",
-        url: this.root_url + "get-data",
-        params: {
-          userId: this.userIdLogin,
+    try {
+      const formDialog = this.dialogService.open(FormUploadComponent, {
+        context: {
+          dataShow: this.showDataResult,
         },
+        autoFocus: false
       });
-      this.showDataResult = showDataResultTemp.data['results']
-    });
+      formDialog.onClose.subscribe(async (reloadData) => {
+        var showDataResultTemp = await Axios({
+          method: "GET",
+          url: this.root_url + "get-data",
+          params: {
+            userId: this.userIdLogin,
+          },
+        });
+        this.showDataResult = showDataResultTemp.data['results']
+      });
+    }
+    catch (err) {
+      console.log(err);
+    }
   }
 
-  onClickDowloadModel() {
-    //code
+  async onClickDownloadDataset(e) {
+    try {
+      const resultDownload = await Axios({
+        method: "GET",
+        url: this.root_url + "download-dataset",
+        params: {
+          dataId: e['rowData']['objectId'],
+          className: "Data"
+        },
+      });
+      if (resultDownload['config']['url']) {
+        window.open(resultDownload['config']['url'] + "?dataId=" + String(e['rowData']['objectId']) + "&className=Data")
+      } else {
+
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   onFirstDataRendered(params) {

@@ -3,6 +3,7 @@ import { NbToastrService, NbComponentStatus } from '@nebular/theme';
 import { NbDialogRef } from "@nebular/theme";
 import { ClipboardModule } from 'ngx-clipboard';
 import { ClipboardService } from 'ngx-clipboard';
+import { environment } from '../../../environments/environment';
 
 @Component({
     selector: "docs-API",
@@ -12,7 +13,6 @@ import { ClipboardService } from 'ngx-clipboard';
 export class DialogDocsAPIComponent {
     userIdLogin = "JclGidZqhN";
     root_method = "POST";
-    root_url = "http://localhost:5000/";
     public athm: String;
     public colLabel: string;
     public colLabelName: string;
@@ -27,6 +27,8 @@ export class DialogDocsAPIComponent {
     public errorFlag: boolean;
     public flagSuccess: boolean;
     public dataName: string;
+    public urlApiJson: string;
+    public urlApiCsv: string;
 
     constructor(private dialogRef: NbDialogRef<any>, private toastrService: NbToastrService, private _clipboardService: ClipboardService) {
         this.athm = "";
@@ -41,7 +43,9 @@ export class DialogDocsAPIComponent {
         this.errorFlag = false;
         this.flagSuccess = false;
         this.errorDetail = "";
-        this.dataName = "adfasf";
+        this.dataName = "";
+        this.urlApiCsv = environment.apiUrl + "create-api-model";
+        this.urlApiJson = environment.apiUrl + "create-api-model-jsondata"
     }
 
     ngOnInit() {
@@ -55,7 +59,7 @@ export class DialogDocsAPIComponent {
     }
     copyCurlCsv() {
         try {
-            const urlAPI = this.root_url + "create-api-model";
+            const urlAPI = this.urlApiCsv;
             const method = 'POST';
             const header = 'Content-Type: multipart/form-data';
             const inputColumns = this.colFeature;
@@ -74,7 +78,7 @@ export class DialogDocsAPIComponent {
 
     copyCurlJson() {
         try {
-            const urlAPI = this.root_url + "create-api-model-jsondata";
+            const urlAPI = this.urlApiJson;
             const method = 'POST';
             const header = 'Content-Type: application/json';
             const modelId = this.modelId;

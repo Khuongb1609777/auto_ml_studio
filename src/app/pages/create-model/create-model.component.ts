@@ -44,6 +44,7 @@ export class CreateModelComponent implements OnInit {
   public arrColData: any[];
   public arrAlgorithm: any[];
   public algorithm: any;
+  public algorithmId: any;
   public params: any[];
   public customParams: any;
   public isshowFrom: boolean;
@@ -64,6 +65,7 @@ export class CreateModelComponent implements OnInit {
   public nameDataCreateModel: string;
   public nameData: string;
   public modelName: String;
+  public userId: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private toastrService: NbToastrService, private dialogRef: NbDialogRef<any>) { }
   message: string;
@@ -73,9 +75,11 @@ export class CreateModelComponent implements OnInit {
       this.idDataCreateFrom = this.idDataCreateModel
       this.nameData = this.nameDataCreateModel
       if (this.idDataCreateFrom) {
-        this.colFeature = []
+        this.userId = "JclGidZqhN";
+        this.colFeature = [];
         this.colLabel = -1;
-        this.algorithm = ""
+        this.algorithm = "";
+        this.algorithmId = "";
         this.root_url = environment.apiUrl;
         this.sizes = ["large"];
         this.isshowParam = false;
@@ -84,7 +88,7 @@ export class CreateModelComponent implements OnInit {
         this.params = [];
         this.selectArr = [];
         this.checkAllFlag = false;
-        this.errorCreate = {}
+        this.errorCreate = {};
         this.defaultParamsFlag = false;
         this.notificationCreate = CHECK_PARAMS_CREATE_MODEL
 
@@ -173,19 +177,7 @@ export class CreateModelComponent implements OnInit {
       var params_values_default = athm['params'];
       console.log(Object.keys(params_values_default));
       this.algorithm = athm['algorithmName'];
-      // var paramsTemp = await axios({
-      //   method: "GET",
-      //   url: this.root_url + String("get-params"),
-      //   params: {
-      //     className: this.algorithm,
-      //   },
-      // })
-      // this.params = paramsTemp.data['results'][0];
-      // var parammeter = [];
-      // for (var k in this.params) parammeter.push(k);
-      // parammeter = parammeter.filter((p) => p != "createAt");
-      // var keysRemove = ["objectId", "createdAt", "updatedAt", "modelId"];
-      // for (index in parammeter) parammeter = parammeter.filter((p) => p !== keysRemove[index]);
+      this.algorithmId = athm['objectId'];
       this.params = Object.keys(params_values_default);
       this.isshowParam = true;
       this.customParams = {};
@@ -227,11 +219,13 @@ export class CreateModelComponent implements OnInit {
               method: "POST",
               url: "http://localhost:5000/create-model",
               params: {
-                objectId: this.idDataCreateFrom,
+                userId: this.userId,
+                dataId: this.idDataCreateFrom,
                 className: "Data",
                 label: this.colLabel,
                 feature: String(this.colFeature),
                 algorithm: this.algorithm,
+                algorithmId: this.algorithmId,
                 params: this.customParams,
                 modelname: this.modelName
               },
@@ -239,9 +233,6 @@ export class CreateModelComponent implements OnInit {
             console.log(returnCreate);
             // console.log(returnCreate.data['objectId'])
             if (returnCreate.data['error']) {
-              console.log(returnCreate.data)
-              console.log("okieeeeeeeeeeeeeeeeee");
-              console.log(returnCreate.data['error'])
               this.errorName = "Create Model"
               this.toastrService.show(returnCreate.data['error'], `ERROR: ${this.errorName}`, { status: "danger", duration: 15000 });
             }
