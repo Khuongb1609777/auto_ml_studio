@@ -56,7 +56,7 @@ export class FormUploadComponent {
       if (fileList.length > 0) {
         const formData: FormData = new FormData();
         let file: File = fileList[0];
-        if (file["type"] != "application/vnd.ms-excel") {
+        if (file["type"] != "text/csv") {
           this.notificationFile = "Dataset must be 'CSV' file ";
           this.buttonSubmitStatus = "disable";
           this.checkType = true;
