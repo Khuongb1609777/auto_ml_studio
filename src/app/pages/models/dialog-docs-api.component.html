@@ -4,9 +4,6 @@
             <nb-tabset fullWidth>
                 <nb-tab tabTitle="Model detail">
                     <nb-card status="success">
-                        <nb-card-header headerTitle>
-                            Model {{ modelId }}
-                        </nb-card-header>
                         <nb-card-body bodyWidth>
                             <table style="width:100%;">
                                 <tr>
@@ -36,14 +33,11 @@
                 </nb-tab>
                 <nb-tab tabTitle="Create API CSV">
                     <nb-card status="success">
-                        <nb-card-header headerTitle>
-                            Set up postman for model {{ modelId }}
-                        </nb-card-header>
                         <nb-card-body bodyWidth>
                             <table style="width:100%;">
                                 <tr>
                                     <td colspan="2" class="button-right"> <button nbButton size="small"
-                                            (click)="copyCurlJson()" type="submit" value="Submit" status="primary">
+                                            (click)="copyCurlCsv()" type="submit" value="Submit" status="primary">
                                             copy
                                         </button>
                                     </td>
@@ -78,9 +72,6 @@
                 </nb-tab>
                 <nb-tab tabTitle="Create API Json">
                     <nb-card status="success">
-                        <nb-card-header headerTitle>
-                            Set up postman for model {{ modelId }}
-                        </nb-card-header>
                         <nb-card-body bodyWidth>
                             <table style="width: 100%;">
                                 <tr>

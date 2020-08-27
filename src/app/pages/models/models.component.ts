@@ -128,7 +128,6 @@ export class ModelsComponent implements OnInit {
 
     async onClickShowDetailModel(e) {
         try {
-            console.log(e['rowData'])
             this.athmApi = e['rowData']["algorithmName"];
             this.colFeatureModel = e['rowData']["colFeature"];
             this.colFeatureModelName = e['rowData']["colFeatureName"];
@@ -136,7 +135,6 @@ export class ModelsComponent implements OnInit {
             this.colLabelModelName = e['rowData']["colLabelName"];
             this.descriptionModel = e['rowData']["description"];
             this.dataName = e['rowData']["dataName"];
-            console.log("name", this.dataName);
             this.dialogService.open(DialogDocsAPIComponent, {
                 context: {
                     athm: this.athmApi,

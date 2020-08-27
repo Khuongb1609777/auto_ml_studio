@@ -44,12 +44,11 @@ export class DialogDocsAPIComponent {
         this.flagSuccess = false;
         this.errorDetail = "";
         this.dataName = "";
-        this.urlApiCsv = environment.apiUrl + "create-api-model";
-        this.urlApiJson = environment.apiUrl + "create-api-model-jsondata"
+
     }
 
     ngOnInit() {
-        console.log(this.dataName);
+        this.urlApi = environment.apiUrl + "model-publish-api";
         if (this.errorDetail) {
             this.errorFlag = true;
         } else {
@@ -59,12 +58,12 @@ export class DialogDocsAPIComponent {
     }
     copyCurlCsv() {
         try {
-            const urlAPI = this.urlApiCsv;
             const method = 'POST';
             const header = 'Content-Type: multipart/form-data';
             const inputColumns = this.colFeature;
             const modelId = this.modelId;
             const curl = `\ncurl --request ${method} '${this.urlApi}' \\\n--header '${header}' \\\n --form 'modelId=${modelId}' \\\n --form 'inputColumns=${inputColumns}'`;
+            console.log(curl)
             this._clipboardService.copy(curl);
             const notificationSuccess = "copy to clipboard";
             const success = "COPY"
@@ -78,16 +77,16 @@ export class DialogDocsAPIComponent {
 
     copyCurlJson() {
         try {
-            const urlAPI = this.urlApiJson;
             const method = 'POST';
             const header = 'Content-Type: application/json';
             const modelId = this.modelId;
             const colFeatureNameArr = this.colFeatureName.split(",");
             const dataRaw = {};
-            var dataTest = ""
-            for (const col of colFeatureNameArr) { dataTest = dataTest + '"' + col + '"' + ':' + '"' + '"' + ',' }
-            var dataTest2 = dataTest.substring(0, dataTest.length - 1)
-            const curl = `\ncurl --request ${method} '${urlAPI}' \\\n--header '${header}' \\\n--data-raw '{ \\\n "modelId":"${modelId}", \\\n "dataTest": [\\\n{\\\n  ${dataTest2}\\\n}\\\n]\\\n}'`;
+            var data = ""
+            for (const col of colFeatureNameArr) { data = data + '"' + col + '"' + ':' + '"' + '"' + ',' }
+            var data2 = data.substring(0, data.length - 1)
+            const curl = `\ncurl --request ${method} '${this.urlApi}' \\\n--header '${header}' \\\n--data-raw '{ \\\n "modelId":"${modelId}", \\\n "data": [\\\n{\\\n  ${data2}\\\n}\\\n]\\\n}'`;
+            console.log(curl);
             this._clipboardService.copy(curl);
             const notificationSuccess = "copy to clipboard";
             const success = "COPY"

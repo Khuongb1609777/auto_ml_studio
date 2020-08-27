@@ -56,14 +56,14 @@ export class FormUploadComponent {
       if (fileList.length > 0) {
         const formData: FormData = new FormData();
         let file: File = fileList[0];
-        if (file["type"] != "text/csv") {
-          this.notificationFile = "Dataset must be 'CSV' file ";
-          this.buttonSubmitStatus = "disable";
-          this.checkType = true;
-        } else {
-          this.notificationFile = "";
-          this.buttonSubmitStatus = "unable";
-        }
+        // if (file["type"] != "text/csv") {
+        //   this.notificationFile = "Dataset must be 'CSV' file ";
+        //   this.buttonSubmitStatus = "disable";
+        //   this.checkType = true;
+        // } else {
+        //   this.notificationFile = "";
+        //   this.buttonSubmitStatus = "unable";
+        // }
         // (this.fileUploaded = document.querySelector("#file"));
         formData.append("fileUploaded", file);
         formData.append("userId", "JclGidZqhN");
