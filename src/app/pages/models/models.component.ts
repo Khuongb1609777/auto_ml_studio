@@ -18,6 +18,9 @@ import { DatasetsComponent } from "../datasets/datasets.component"
 import { DialogDeleteModelComponent } from "./dialog-delete-model.component"
 import { stringToArray, Context } from 'ag-grid-community';
 import { environment } from '../../../environments/environment'
+import { LOADING } from '../create-model/constanst'
+import { NO_ROW_AG_GRID } from '../create-model/constanst'
+
 
 @Component({
     selector: "models",
@@ -51,6 +54,8 @@ export class ModelsComponent implements OnInit {
     public updatedShowModel: boolean;
     public showDataModelsUpdate: any;
     public keyUpdate: boolean;
+    public loadingTemplate: string;
+    public noRowsTemplate: string;
 
 
     staticAlertClosed = false;
@@ -68,6 +73,8 @@ export class ModelsComponent implements OnInit {
             floatingFilter: true,
             resizable: true,
         };
+        this.noRowsTemplate = this.noRowsTemplate;
+        this.loadingTemplate = LOADING
     }
 
     async ngOnInit() {
@@ -75,33 +82,28 @@ export class ModelsComponent implements OnInit {
             this.errorFlag = false;
             this.userIdLogin = "JclGidZqhN";
             this.root_url = environment.apiUrl;
-            if (this.keyUpdate) {
-                this.showDataModels = this.showDataModelsUpdate
-            }
-            else {
-                const resultShow = await Axios({
-                    method: "GET",
-                    url: this.root_url + String("get-data-models"),
-                    params: {
-                        userId: this.userIdLogin,
-                    },
-                });
-                this.showDataModels = resultShow.data["results"];
-                console.log(this.showDataModels)
-            }
-
-            this.showDataModels.forEach((value, index) => {
-                this.showDataModels[index]["algorithmName"] = this.showDataModels[index][
-                    "algorithm"
-                ]["algorithmName"];
+            const resultShow = await Axios({
+                method: "GET",
+                url: this.root_url + String("get-data-models"),
+                params: {
+                    userId: this.userIdLogin,
+                },
             });
-            this.showDataModels.forEach((value, index) => {
-                this.showDataModels[index]["dataName"] = this.showDataModels[index][
-                    "dataModel"
-                ]["dataName"];
-            });
+            this.showDataModels = resultShow.data["results"];
+            // this.showDataModels[0]["algorithmName"] = "name"
+            // console.log("xxxxxxxxxxxxxx", this.showDataModels[0]["algorithmName"])
+            console.log('dataModel-----------------', this.showDataModels)
+            // this.showDataModels.forEach((value, index) => {
+            //     this.showDataModels[index]["algorithmName"] = value['algorithm']['algorithmName']
+            // });
+            // console.log('algorithm', this.showDataModels[0]['algorithmName'])
+            // this.showDataModels.forEach((value, index) => {
+            //     console.log("index", index);
+            //     console.log("data_name", value['dataModel']['dataName'])
+            //     // this.showDataModels[index]["dataName"] = value['dataModel']['dataName']
+            // });
+            // console.log('dataName', this.showDataModels['dataName'])
             this.isShowModels = true;
-
             this.columnDefs = COLUMNSDEFS_MANAGE_MODEL
             this.columnDefs[4] = {
                 headerName: "Delete Model",
@@ -119,6 +121,7 @@ export class ModelsComponent implements OnInit {
                     label: "Publish Api",
                 },
             }
+            console.log('data model', this.showDataModels)
 
         } catch (err) {
             this.data = "rpa-iot-api";
@@ -175,16 +178,16 @@ export class ModelsComponent implements OnInit {
                         },
                     });
                     this.showDataModels = resultShow.data["results"];
-                    this.showDataModels.forEach((value, index) => {
-                        this.showDataModels[index]["algorithmName"] = this.showDataModels[index][
-                            "algorithm"
-                        ]["algorithmName"];
-                    });
-                    this.showDataModels.forEach((value, index) => {
-                        this.showDataModels[index]["dataName"] = this.showDataModels[index][
-                            "dataModel"
-                        ]["dataName"];
-                    });
+                    // this.showDataModels.forEach((value, index) => {
+                    //     this.showDataModels[index]["algorithmName"] = this.showDataModels[index][
+                    //         "algorithm"
+                    //     ]["algorithmName"];
+                    // });
+                    // this.showDataModels.forEach((value, index) => {
+                    //     this.showDataModels[index]["dataName"] = this.showDataModels[index][
+                    //         "dataModel"
+                    //     ]["dataName"];
+                    // });
                 }
             });
         } catch (err) {
@@ -211,16 +214,16 @@ export class ModelsComponent implements OnInit {
                 },
             });
             this.showDataModels = resultShow.data["results"];
-            this.showDataModels.forEach((value, index) => {
-                this.showDataModels[index]["algorithmName"] = this.showDataModels[index][
-                    "algorithm"
-                ]["algorithmName"];
-            });
-            this.showDataModels.forEach((value, index) => {
-                this.showDataModels[index]["dataName"] = this.showDataModels[index][
-                    "dataModel"
-                ]["dataName"];
-            });
+            // this.showDataModels.forEach((value, index) => {
+            //     this.showDataModels[index]["algorithmName"] = this.showDataModels[index][
+            //         "algorithm"
+            //     ]["algorithmName"];
+            // });
+            // this.showDataModels.forEach((value, index) => {
+            //     this.showDataModels[index]["dataName"] = this.showDataModels[index][
+            //         "dataModel"
+            //     ]["dataName"];
+            // });
         });
     }
 }

@@ -21,6 +21,8 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { Context } from 'ag-grid-community';
+import { LOADING } from '../create-model/constanst'
+import { NO_ROW_AG_GRID } from '../create-model/constanst'
 
 @Component({
   selector: "datasets",
@@ -62,6 +64,8 @@ export class DatasetsComponent implements OnInit {
   public rowData: any;
   public isDialog: boolean;
   public loading: boolean;
+  public loadingTemplate: string;
+  public noRowsTemplate: string;
 
   staticAlertClosed = false;
   successMessage = "";
@@ -83,6 +87,9 @@ export class DatasetsComponent implements OnInit {
       resizable: true,
       flex: 1,
     };
+    this.loadingTemplate = LOADING
+    this.noRowsTemplate = NO_ROW_AG_GRID
+
     this.isDialog = false
   }
   async ngOnInit() {

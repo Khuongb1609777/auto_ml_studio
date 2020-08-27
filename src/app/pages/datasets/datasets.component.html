@@ -3,7 +3,8 @@
   <nb-card-body>
     <ag-grid-angular *ngIf="isShowData" [defaultColDef]="defaultColDef" ar-grid-data class="ag-theme-alpine"
       [rowData]="showDataResult" [columnDefs]="columnDefs" (firstDataRendered)="onFirstDataRendered($event)" id="myGrid"
-      [frameworkComponents]="frameworkComponents">
+      [frameworkComponents]="frameworkComponents" [overlayLoadingTemplate]="loadingTemplate"
+      [overlayNoRowsTemplate]="noRowsTemplate">
     </ag-grid-angular>
 
   </nb-card-body>

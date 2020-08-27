@@ -28,27 +28,15 @@ export const COLUMNSDEFS_MANAGE_MODEL = [
         sortable: true,
         filter: true,
     },
-    // {
-    //     headerName: "Create At",
-    //     field: "createdAt",
-    //     sortable: true,
-    //     filter: true,
-    // },
-    // {
-    //     headerName: "Datasets",
-    //     field: "idDataModel",
-    //     sortable: true,
-    //     filter: true,
-    // },
     {
         headerName: "Datasets",
-        field: "dataName",
+        field: "dataModel.dataName",
         sortable: true,
         filter: true,
     },
     {
         headerName: "Algorithm",
-        field: "algorithmName",
+        field: "algorithm.algorithmName",
         sortable: true,
         filter: true,
     },
@@ -87,4 +75,9 @@ export const COLDEF_AUTO_RESIZE = {
     floatingFilter: true,
     resizable: true,
 };
+
+
+export const LOADING = `<div><span>loading...</span></div>`;
+
+export const NO_ROW_AG_GRID = `<div><span>No data...</span></div>`;
 

@@ -43,7 +43,7 @@ export class DialogDeleteDatasetComponent {
         if (result.data['error']) {
             this.errorName = "DELETE DATASET"
             var notificationDeleteDataset = result.data['error']
-            this.toastrService.show(notificationDeleteDataset, `ERROR: ${this.errorName}`, { status: "danger" });
+            this.toastrService.show(notificationDeleteDataset, `ERROR: ${this.errorName}`, { status: "danger", duration: 7000 });
         }
         else {
             this.errorName = "DELETE DATASET"
