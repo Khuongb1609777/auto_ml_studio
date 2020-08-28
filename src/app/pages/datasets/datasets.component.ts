@@ -57,15 +57,16 @@ export class DatasetsComponent implements OnInit {
   private _success = new Subject<string>();
   public dialog: any;
   public resultShow: any;
-  public defaultColDef;
+  public defaultColDef: any;
   private gridApi;
   private gridColumnApi;
-  private columnDefs;
+  public columnDefs: any;
   public rowData: any;
   public isDialog: boolean;
   public loading: boolean;
   public loadingTemplate: string;
   public noRowsTemplate: string;
+
 
   staticAlertClosed = false;
   successMessage = "";
@@ -87,20 +88,21 @@ export class DatasetsComponent implements OnInit {
       resizable: true,
       flex: 1,
     };
-    this.loadingTemplate = LOADING
-    this.noRowsTemplate = NO_ROW_AG_GRID
+    this.loadingTemplate = `<div><span>Loading...</span></div>`
+    this.noRowsTemplate = `<div><span>No data</span></div>`;
 
     this.isDialog = false
   }
   async ngOnInit() {
     try {
+      this.loading = true;
+      // setTimeout(() => this.loading = false, 3000);
       this.isShowDelete = false;
       this.isShowCreateModel = false;
       this.isShowData = false;
       this.userIdLogin = "JclGidZqhN";
       this.root_method = "GET";
       this.root_url = environment.apiUrl;
-      this.loading = false;
       const resultShow = await Axios({
         method: "GET",
         url: this.root_url + "get-data",
@@ -109,6 +111,7 @@ export class DatasetsComponent implements OnInit {
         },
       });
       this.showDataResult = resultShow.data["results"];
+      this.loading = false
       this.isShowData = true;
 
       this.columnDefs = COLUMNSDEFS_DATASETS
@@ -137,12 +140,12 @@ export class DatasetsComponent implements OnInit {
         },
       }
 
-      setTimeout(() => (this.staticAlertClosed = true), 20000);
+      // setTimeout(() => (this.staticAlertClosed = true), 20000);
 
-      this._success.subscribe((message) => (this.successMessage = message));
-      this._success
-        .pipe(debounceTime(5000))
-        .subscribe(() => (this.successMessage = ""));
+      // this._success.subscribe((message) => (this.successMessage = message));
+      // this._success
+      //   .pipe(debounceTime(5000))
+      //   .subscribe(() => (this.successMessage = ""));
     } catch (err) {
       this.data = "rpa-iot-api";
     }
@@ -150,25 +153,40 @@ export class DatasetsComponent implements OnInit {
 
   async onClickDelete(e) {
     try {
-      const dialogDeleteData = this.dialogService.open(DialogDeleteDatasetComponent, {
-        context: {
-          dataName: e.rowData['dataName'],
-          objectIdDelete: e.rowData['objectId'],
-        }
+      const checkDelete = await Axios({
+        method: "GET",
+        url: this.root_url + "check-data-delete",
+        params: {
+          className: "Data",
+          dataId: e.rowData['objectId'],
+        },
       });
-      dialogDeleteData.onClose.subscribe(async (reloadData) => {
-        if (reloadData) {
-          const resultShow = await Axios({
-            method: "GET",
-            url: this.root_url + "get-data",
-            params: {
-              userId: this.userIdLogin,
-            },
-          });
-          this.showDataResult = resultShow.data["results"];
-        }
-
-      });
+      // console.log(checkDelete['data']['status'])
+      if (checkDelete['data']['status'] == 200) {
+        const dialogDeleteData = this.dialogService.open(DialogDeleteDatasetComponent, {
+          context: {
+            dataName: e.rowData['dataName'],
+            objectIdDelete: e.rowData['objectId'],
+          }
+        });
+        dialogDeleteData.onClose.subscribe(async (reloadData) => {
+          if (reloadData) {
+            const resultShow = await Axios({
+              method: "GET",
+              url: this.root_url + "get-data",
+              params: {
+                userId: this.userIdLogin,
+              },
+            });
+            this.showDataResult = resultShow.data["results"];
+          }
+        });
+      } else {
+        this.errorName = "DELETE DATASET"
+        var notificationDeleteDataset = checkDelete['data']['error']
+        this.toastrService.show(notificationDeleteDataset, `ERROR: ${this.errorName}`, { status: "danger", duration: 7000 });
+      }
+      // });
     } catch (err) {
       console.log(err);
     }
@@ -176,25 +194,24 @@ export class DatasetsComponent implements OnInit {
 
   onClickCreateModel(e) {
     try {
-      this.loading = true;
-      setTimeout(() => this.loading = false, 3000);
       this.objectIdCreateModel = e.rowData["objectId"];
       var objectDataName = e.rowData['dataName']
       // this.router.navigate([
       //   "/pages/createModel"],
       //   { queryParams: { objectIdData: this.objectIdCreateModel } });
+      var reload_spiner = true;
       const dialogCreateModel = this.dialogService.open(CreateModelComponent, {
         context: {
           idDataCreateModel: String(this.objectIdCreateModel),
           nameDataCreateModel: String(objectDataName),
+          reload: reload_spiner,
         },
       });
       // this.dialogRef.close
       dialogCreateModel.onClose.subscribe(async (isClose) => {
 
         if (isClose) {
-          var reload = true;
-          this.dialogRef.close(reload)
+          this.dialogRef.close()
         }
 
       })

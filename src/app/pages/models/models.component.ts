@@ -58,9 +58,6 @@ export class ModelsComponent implements OnInit {
     public noRowsTemplate: string;
 
 
-    staticAlertClosed = false;
-    successMessage = "";
-
     constructor(private dialogService: NbDialogService, private toastrService: NbToastrService) {
         this.frameworkComponents = {
             buttonDeleteModel: ButtonRenderManageModelComponent,
@@ -73,8 +70,8 @@ export class ModelsComponent implements OnInit {
             floatingFilter: true,
             resizable: true,
         };
-        this.noRowsTemplate = this.noRowsTemplate;
-        this.loadingTemplate = LOADING
+        this.noRowsTemplate = `<div><span>No model</span></div>`;
+        this.loadingTemplate = `<div><span>Loading...</span></div>`
     }
 
     async ngOnInit() {
@@ -90,19 +87,6 @@ export class ModelsComponent implements OnInit {
                 },
             });
             this.showDataModels = resultShow.data["results"];
-            // this.showDataModels[0]["algorithmName"] = "name"
-            // console.log("xxxxxxxxxxxxxx", this.showDataModels[0]["algorithmName"])
-            console.log('dataModel-----------------', this.showDataModels)
-            // this.showDataModels.forEach((value, index) => {
-            //     this.showDataModels[index]["algorithmName"] = value['algorithm']['algorithmName']
-            // });
-            // console.log('algorithm', this.showDataModels[0]['algorithmName'])
-            // this.showDataModels.forEach((value, index) => {
-            //     console.log("index", index);
-            //     console.log("data_name", value['dataModel']['dataName'])
-            //     // this.showDataModels[index]["dataName"] = value['dataModel']['dataName']
-            // });
-            // console.log('dataName', this.showDataModels['dataName'])
             this.isShowModels = true;
             this.columnDefs = COLUMNSDEFS_MANAGE_MODEL
             this.columnDefs[4] = {

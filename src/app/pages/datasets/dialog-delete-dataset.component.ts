@@ -29,7 +29,7 @@ export class DialogDeleteDatasetComponent {
     }
 
     ngOnInit() {
-        console.log(this.dataName);
+
     }
 
     async deleteDataset() {

@@ -45,7 +45,9 @@ export class CreateModelComponent implements OnInit {
   public arrAlgorithm: any[];
   public algorithm: any;
   public algorithmId: any;
+  public paramChoose: any;
   public params: any[];
+  public paramValuesDefault: any[];
   public customParams: any;
   public isshowFrom: boolean;
   public idDataCreateFrom: string;
@@ -66,8 +68,12 @@ export class CreateModelComponent implements OnInit {
   public nameData: string;
   public modelName: String;
   public userId: string;
+  public loading: boolean;
+  public reload: boolean;
 
-  constructor(private route: ActivatedRoute, private router: Router, private toastrService: NbToastrService, private dialogRef: NbDialogRef<any>) { }
+  constructor(private route: ActivatedRoute, private router: Router, private toastrService: NbToastrService, private dialogRef: NbDialogRef<any>) {
+    this.reload = false;
+  }
   message: string;
   async ngOnInit() {
     try {
@@ -91,6 +97,11 @@ export class CreateModelComponent implements OnInit {
         this.errorCreate = {};
         this.defaultParamsFlag = false;
         this.notificationCreate = CHECK_PARAMS_CREATE_MODEL
+        this.reload = true;
+        setTimeout(() => this.loading = false, 20000);
+        // setTimeout(() => this.loading = false, 3000);
+
+
 
         var arrColDataTemp = await axios({
           method: "GET",
@@ -116,7 +127,8 @@ export class CreateModelComponent implements OnInit {
         })
         if (arrAlgorithmTemp.data.results) {
           this.arrAlgorithm = arrAlgorithmTemp.data.results;
-          console.log(this.arrAlgorithm);
+
+          this.reload = false;
           this.isshowFrom = true;
         }
         else {
@@ -174,11 +186,12 @@ export class CreateModelComponent implements OnInit {
 
   async getAlgorithm(event, athm) {
     try {
-      var params_values_default = athm['params'];
-      console.log(Object.keys(params_values_default));
+      this.paramChoose = athm['params'];
+      // console.log(Object.keys(paramChoose));
       this.algorithm = athm['algorithmName'];
       this.algorithmId = athm['objectId'];
-      this.params = Object.keys(params_values_default);
+      this.params = Object.keys(this.paramChoose);
+      this.paramValuesDefault = Object.values(this.paramChoose);
       this.isshowParam = true;
       this.customParams = {};
       this.inputValue = {};
@@ -189,7 +202,6 @@ export class CreateModelComponent implements OnInit {
 
   async createModel() {
     try {
-      console.log(this.algorithm);
       if (this.colLabel == -1) {
         this.errorName = "Label"
         this.toastrService.show(this.notificationCreate['errorLabel'], `ERROR: ${this.errorName}`, { status: "danger" });
@@ -205,16 +217,15 @@ export class CreateModelComponent implements OnInit {
           }
           else {
             this.customParams = {};
-            if (this.defaultParamsFlag) {
-              this.customParams = {}
-            } else {
-              Object.keys(this.inputValue).map((key) => {
-                if (this.inputValue[key] !== "") {
-                  this.customParams[key] = this.inputValue[key];
-                }
-              });
-            }
+            Object.keys(this.paramChoose).map((key) => {
+              if (this.paramChoose[key] !== "") {
+                this.customParams[key] = this.paramChoose[key];
+              }
+            });
+            console.log(this.customParams)
 
+            this.reload = true;
+            setTimeout(() => this.loading = false, 3000);
             var returnCreate = await axios({
               method: "POST",
               url: "http://localhost:5000/create-model",
@@ -230,19 +241,22 @@ export class CreateModelComponent implements OnInit {
                 modelname: this.modelName
               },
             })
-            console.log(returnCreate);
-            // console.log(returnCreate.data['objectId'])
             if (returnCreate.data['error']) {
+              this.reload = false;
               this.errorName = "Create Model"
               this.toastrService.show(returnCreate.data['error'], `ERROR: ${this.errorName}`, { status: "danger", duration: 15000 });
             }
             else {
               this.errorName = "Create Model"
               var messageCreateModel = "Create successfully model: " + String(this.modelName)
+              this.reload = false;
               this.toastrService.show(messageCreateModel, `SUCCESS: ${this.errorName}`, { status: "success", duration: 4000 });
               var isClose = true
               this.dialogRef.close(isClose);
-              this.router.navigate(["/pages/models"]);
+              this.router.navigate(["/pages/models"], { queryParams: { loading: this.loading } });
+              // this.router.navigate([
+              //   "/pages/createModel"],
+              //   );
             }
           }
         }

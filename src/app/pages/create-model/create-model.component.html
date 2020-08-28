@@ -1,6 +1,6 @@
 <!-- <p *ngIf = "isshowFrom">{{ arrColData }}</p> -->
 <div *ngIf="isshowFrom">
-  <nb-card>
+  <nb-card [nbSpinner]="reload" nbSpinnerSize="tiny" nbSpinnerStatus="primary">
     <nb-card-header headerTitle>
       Create Model for {{ nameData }}
     </nb-card-header>
@@ -31,13 +31,13 @@
       </div>
       <div *ngIf="isshowParam" center class="custom-wrapper-select">
         <table center>
-          <tr *ngFor="let param of params" center>
+          <tr *ngFor="let param of params; let i = index " center>
             <td center>
-              {{ param }}
+              {{ param}}
             </td>
             <td center>
-              <input fieldSize="small" type="text" nbInput placeholder="{{ param }}" [(ngModel)]="inputValue[param]"
-                (keypress)="inputValue[param] = $event.target.value" />
+              <input fieldSize="small" type="text" id="params" nbInput placeholder="{{ paramValuesDefault[i] }}"
+                [(ngModel)]="paramChoose[param]" (keypress)="paramChoose[param] = $event.target.value" />
             </td>
           </tr>
           <tr>
@@ -68,7 +68,7 @@
 
 
 
-
+<!-- 
 <div *ngIf="chooseDataFlag">
   You must <a (click)="chooseData()">select the data</a> before creating the model
-</div>
+</div> -->

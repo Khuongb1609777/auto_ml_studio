@@ -1,12 +1,12 @@
-<nb-card [class]="isDialog ? 'dialog-size' : ''" [nbSpinner]="loading">
+<nb-card [class]="isDialog ? 'dialog-size' : ''">
   <!-- <nb-card-header style="text-align: center; font-size: 2em;">Your Dataset</nb-card-header> -->
+  <!-- <nb-card-body [nbSpinner]="loading" nbSpinnerStatus="primary"></nb-card-body> -->
   <nb-card-body>
-    <ag-grid-angular *ngIf="isShowData" [defaultColDef]="defaultColDef" ar-grid-data class="ag-theme-alpine"
-      [rowData]="showDataResult" [columnDefs]="columnDefs" (firstDataRendered)="onFirstDataRendered($event)" id="myGrid"
+    <ag-grid-angular [defaultColDef]="defaultColDef" ar-grid-data class="ag-theme-alpine" [rowData]="showDataResult"
+      [columnDefs]="columnDefs" (firstDataRendered)="onFirstDataRendered($event)" id="myGrid"
       [frameworkComponents]="frameworkComponents" [overlayLoadingTemplate]="loadingTemplate"
       [overlayNoRowsTemplate]="noRowsTemplate">
     </ag-grid-angular>
-
   </nb-card-body>
   <nb-card-footer>
     <button nbButton size="small" (click)="formDialog()" value="Submit" status="primary">
