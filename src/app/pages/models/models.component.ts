@@ -105,7 +105,6 @@ export class ModelsComponent implements OnInit {
                     label: "Publish Api",
                 },
             }
-            console.log('data model', this.showDataModels)
 
         } catch (err) {
             this.data = "rpa-iot-api";
@@ -115,13 +114,13 @@ export class ModelsComponent implements OnInit {
 
     async onClickShowDetailModel(e) {
         try {
-            this.athmApi = e['rowData']["algorithmName"];
+            this.athmApi = e.rowData["algorithm"]["algorithmName"];
             this.colFeatureModel = e['rowData']["colFeature"];
             this.colFeatureModelName = e['rowData']["colFeatureName"];
             this.colLabelModel = e['rowData']["colLabel"];
             this.colLabelModelName = e['rowData']["colLabelName"];
             this.descriptionModel = e['rowData']["description"];
-            this.dataName = e['rowData']["dataName"];
+            this.dataName = e.rowData['dataModel']["dataName"];
             this.dialogService.open(DialogDocsAPIComponent, {
                 context: {
                     athm: this.athmApi,
