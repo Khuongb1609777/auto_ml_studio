@@ -76,6 +76,8 @@ export const COLDEF_AUTO_RESIZE = {
     resizable: true,
 };
 
+export const delimiter = [",", ";", "tab"]
+
 
 export const LOADING = `<div><span>loading...</span></div>`;
 

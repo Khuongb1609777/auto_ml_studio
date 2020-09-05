@@ -3,28 +3,88 @@
         UPLOAD DATASET
     </nb-card-header>
     <nb-card-body>
-        <table>
-            <tr>
-                <td colspan="2" class="td-style">
-                    <input type="text" [(ngModel)]="fileName" nbInput fullWidth fieldSize="medium"
-                        placeholder="Data Name">
-                </td>
-            </tr>
-            <tr style="text-align:center;">
-                <td colspan="2" class="td-style">
-                    <input type="file" nbInput fullWidth fieldSize="small" placeholder="Text field"
-                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                        (change)="fileChange($event)" />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" class="button-left">
-                    <button nbButton size="medium" type="button" status="primary" (click)="upload()">
-                        upload
-                    </button>
-                </td>
-            </tr>
-            <tr></tr>
-        </table>
+        <nb-tabset fullwidth>
+            <nb-tab tabTitle="Upload file">
+                <!-- <nb-card>
+                    <nb-card-body> -->
+                <table>
+                    <tr>
+                        <td colspan="2" class="td-style">
+                            <input type="text" [(ngModel)]="fileName" class="input-style" nbInput fullWidth
+                                fieldSize="medium" placeholder="Data Name"><br>
+                        </td>
+                    </tr>
+                    <tr style="text-align:center;">
+                        <td colspan="2" class="td-style">
+                            <input type="file" nbInput class="input-style" fullWidth fieldSize="small"
+                                placeholder="Text field"
+                                accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                (change)="fileChange($event)" /><br>
+                        </td>
+                    </tr>
+                    <tr style="text-align:center;">
+                        <td colspan="2" class="td-style">
+                            <nb-select placeholder="Delimiter: " fullWidth size="medium">
+                                <nb-option *ngFor="let deli of listDelimiter; let i = index" [value]="i"
+                                    (selectionChange)="getDelimiter($event, i, deli)">{{ deli }}</nb-option>
+                            </nb-select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="button-left">
+                            <!-- <button nbButton size="medium" [disabled]="buttonSubmitStatus === 'disable'" type="button"
+                                status="primary" (click)="uploadFile()">
+                                upload
+                            </button> -->
+                            <button nbButton size="medium" type="button" status="primary" (click)="uploadFile()">
+                                upload
+                            </button>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                </table>
+                <!-- </nb-card-body>
+                </nb-card> -->
+            </nb-tab>
+            <nb-tab tabTitle="From url">
+                <table>
+                    <tr>
+                        <td colspan="2" class="td-style">
+                            <input type="text" class="input-style" [(ngModel)]="fileName" nbInput fullWidth
+                                fieldSize="medium" placeholder="Data Name"><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="td-style">
+                            <input type="text" class="input-style" s [(ngModel)]="urlData" nbInput fullWidth
+                                fieldSize="medium" placeholder="url data"><br>
+                        </td>
+                    </tr>
+                    <tr style="text-align:center;">
+                        <td colspan="2" class="td-style">
+                            <nb-select placeholder="Delimiter: " fullWidth size="medium">
+                                <nb-option *ngFor="let deli of listDelimiter; let i = index" [value]="i"
+                                    (selectionChange)="getDelimiter($event, i, deli)">{{ deli }}</nb-option>
+                            </nb-select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="button-left">
+                            <!-- <button nbButton size="medium" [disabled]="buttonSubmitStatus === 'disable'" type="button"
+                                status="primary" (click)="uploadFileUrl()">
+                                upload
+                            </button> -->
+                            <button nbButton size="medium" type="button" status="primary" (click)="uploadFileUrl()">
+                                upload
+                            </button>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                </table>
+
+            </nb-tab>
+
+        </nb-tabset>
+
     </nb-card-body>
 </nb-card>

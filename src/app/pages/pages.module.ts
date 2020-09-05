@@ -21,25 +21,20 @@ import { ShareModule } from "../@shared/share.module";
 import { DatasetsComponent } from "./datasets/datasets.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CreateModelComponent } from "./create-model/create-model.component";
-// import { ManageModelComponent } from "./manageModel/ManageModel.component";
 import { ModelsComponent } from "./models/models.component"
 import { AgGridModule } from "ag-grid-angular";
 import { ButtonRenderDatasetModule } from "./datasets/renderer/button-render-dataset.module";
 import { ButtonRenderDatasetComponent } from "./datasets/renderer/button-render-dataset.component";
-// import { buttonRenderManageModelComponent } from "./manageModel/button-renderer/buttonRenderManageModel.component"
 import { ButtonRenderManageModelComponent } from "./models/button-renderer/button-render-model.component"
-// import { buttonRenderManageModelModule } from "./manageModel/button-renderer/buttonRenderManageModel.module"
 import { ButtonRenderManageModelModule } from "./models/button-renderer/button-render-model.module"
 import { HttpClientModule } from "@angular/common/http";
 import { navigate } from "@reach/router";
 import { FormUploadComponent } from "./datasets/form-upload.component";
 import { FormUpLoadModule } from "./datasets/form-upload.module";
-// import { dialogDocsAPIComponent } from "./manageModel/DialogDocsAPI.component";
 import { DialogDocsAPIComponent } from "./models/dialog-docs-api.component"
-// import { dialogDocsAPIModule } from "./manageModel/dialog-docs-api.module";
-import { DialogDocsAPIModule } from "./models/dialog-docs-api.module"
+import { DialogDocsAPIModule } from "./models/dialog-docs-api.module";
 import { DialogDeleteModelComponent } from "./models/dialog-delete-model.component";
-import { DialogDeleteModelModule } from "./models/dialog-delete-model.module"
+import { DialogDeleteModelModule } from "./models/dialog-delete-model.module";
 import { ClipboardModule } from 'ngx-clipboard';
 
 

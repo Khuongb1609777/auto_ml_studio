@@ -9,13 +9,15 @@ import {
   NbButtonModule,
   NbTabsetModule,
   NbTabsetComponent,
+  NbSelectComponent,
+  NbSelectModule
 
 } from "@nebular/theme";
 
 import { FormUploadComponent } from "./form-upload.component";
 
 @NgModule({
-  imports: [NbButtonModule, NbCardModule, NbTabsetModule, CommonModule, NbInputModule, FormsModule],
+  imports: [NbButtonModule, NbCardModule, NbTabsetModule, CommonModule, NbInputModule, FormsModule, NbSelectModule],
   declarations: [FormUploadComponent],
 })
 export class FormUpLoadModule { }

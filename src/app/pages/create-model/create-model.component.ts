@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewEncapsulation, HostBinding } from "@angular/core";
 import { NbToastrService, NbComponentStatus } from '@nebular/theme';
-import { HttpClient } from "@angular/common/http";
 import { ActivatedRoute } from "@angular/router";
 import axios from "axios";
 import { FormGroup, FormControl, FormBuilder } from "@angular/forms";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NbComponentSize } from "@nebular/theme";
 import { NbDialogService } from "@nebular/theme";
 import { Router } from "@angular/router";
@@ -27,11 +25,6 @@ import { NbDialogRef } from "@nebular/theme";
   ],
 })
 export class CreateModelComponent implements OnInit {
-  formModel = new FormGroup({
-    algorithm: new FormControl(""),
-    colFeature: new FormControl(""),
-    colLabel: new FormControl(""),
-  });
   private errorName: string;
   @HostBinding('class')
   classes = 'example-items-rows';
