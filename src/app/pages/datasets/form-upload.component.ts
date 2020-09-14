@@ -1,5 +1,5 @@
 import { Component, OnInit, HostBinding } from "@angular/core";
-import { NbToastrService, NbComponentStatus } from '@nebular/theme';
+import { NbToastrService, NbComponentStatus, NbSpinnerComponent } from '@nebular/theme';
 import { NbDialogRef } from "@nebular/theme";
 import { ICellRendererAngularComp } from "ag-grid-angular";
 import { ICellRendererParams, IAfterGuiAttachedParams } from "ag-grid";
@@ -37,6 +37,7 @@ export class FormUploadComponent {
   public listDelimiter: any;
   public delimiter: any;
   public filetail: any;
+  public reload: boolean;
 
   constructor(protected dialogRef: NbDialogRef<any>, private toastrService: NbToastrService) { }
 
@@ -52,6 +53,7 @@ export class FormUploadComponent {
     this.listDelimiter = delimiter;
     this.filetail = "";
     this.buttonSubmitStatus = "disable";
+    this.reload = false;
     this.uploadFileForm = new FormGroup({
       fileUpload: new FormControl(),
     });
@@ -63,7 +65,7 @@ export class FormUploadComponent {
 
   fileChange(event) {
     try {
-      console.log(event)
+      // console.log(event)
       let fileList: FileList = event.target.files;
       if (fileList.length > 0) {
         const formData: FormData = new FormData();
@@ -103,6 +105,8 @@ export class FormUploadComponent {
     if (this.delimiter == "") {
       this.delimiter = ","
     }
+    this.reload = true;
+    // setTimeout(() => this.loading = false, 3000);
     this.formCurrent.append("dataName", this.fileName)
     this.formCurrent.append("separator", this.delimiter)
     var infoUploadTemp = await Axios({
@@ -114,13 +118,16 @@ export class FormUploadComponent {
     var idDataUpload = this.infoUpload['objectId']
     if (infoUploadTemp.data['objectId']) {
       this.errorName = "Upload dataset"
+      this.reload = false;
       this.dialogRef.close(this.dataShow);
       var messegeUpload = "Upload successfully : " + String(this.fileName)
       this.toastrService.show(messegeUpload, `SUCCESS: ${this.errorName}`, { status: "success" });
     } else {
+
       this.errorName = "Upload dataset"
       this.dialogRef.close(this.dataShow);
       var messegeUpload = "Upload fail : " + String(this.fileName)
+      this.reload = false;
       this.toastrService.show(messegeUpload, `ERROR: ${this.errorName}`, { status: "danger" });
     }
 
@@ -130,6 +137,7 @@ export class FormUploadComponent {
     if (this.delimiter == "") {
       this.delimiter = ","
     }
+    this.reload = true;
     var infoUploadFromUrl = await Axios({
       method: "POST",
       url: this.root_url + String("upload-file-url"),
@@ -142,11 +150,13 @@ export class FormUploadComponent {
     })
     this.infoUpload = infoUploadFromUrl.data
     if (this.infoUpload['error']) {
+      this.reload = false;
       var messegeUpload = "Upload fail : " + String(this.infoUpload['error'])
       this.toastrService.show(messegeUpload, `ERROR: UPLOAD DATASET`, { status: "danger" });
     }
     else {
       this.errorName = "UPLOAD"
+      this.reload = false;
       this.dialogRef.close(this.dataShow);
       var messegeUpload = "Upload successfully : " + String(this.fileName)
       this.toastrService.show(messegeUpload, `SUCCESS: UPLOAD DATASET`, { status: "success" });

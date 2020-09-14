@@ -215,7 +215,7 @@ export class CreateModelComponent implements OnInit {
                 this.customParams[key] = this.paramChoose[key];
               }
             });
-            console.log(this.customParams)
+            // console.log(this.customParams)
 
             this.reload = true;
             setTimeout(() => this.loading = false, 3000);
