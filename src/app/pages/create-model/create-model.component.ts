@@ -57,12 +57,14 @@ export class CreateModelComponent implements OnInit {
   public errorCreate: {};
   public defaultParamsFlag: boolean;
   public idDataCreateModel: string;
-  public nameDataCreateModel: string;
-  public nameData: string;
+  public classNameCreateModel: string;
+  public className: string;
   public modelName: String;
   public userId: string;
   public loading: boolean;
   public reload: boolean;
+  public dataNameCreateModel: string;
+  public dataName: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private toastrService: NbToastrService, private dialogRef: NbDialogRef<any>) {
     this.reload = false;
@@ -71,9 +73,10 @@ export class CreateModelComponent implements OnInit {
   async ngOnInit() {
     try {
       this.modelName = ""
-      this.idDataCreateFrom = this.idDataCreateModel
-      this.nameData = this.nameDataCreateModel
-      if (this.idDataCreateFrom) {
+      this.className = this.classNameCreateModel
+      this.dataName = this.dataNameCreateModel
+      console.log(this.className);
+      if (this.className) {
         this.userId = "JclGidZqhN";
         this.colFeature = [];
         this.colLabel = -1;
@@ -92,18 +95,16 @@ export class CreateModelComponent implements OnInit {
         this.notificationCreate = CHECK_PARAMS_CREATE_MODEL
         this.reload = true;
         setTimeout(() => this.loading = false, 20000);
-        // setTimeout(() => this.loading = false, 3000);
-
-
 
         var arrColDataTemp = await axios({
           method: "GET",
           url: this.root_url + String("get-columns-form"),
           params: {
-            objectId: this.idDataCreateFrom,
+            className: this.className,
           },
         })
         if (arrColDataTemp.data) {
+          console.log(arrColDataTemp)
           this.arrColData = arrColDataTemp.data;
           this.isshowFrom = true;
         }
@@ -118,9 +119,8 @@ export class CreateModelComponent implements OnInit {
             className: "Algorithm",
           },
         })
-        if (arrAlgorithmTemp.data.results) {
+        if (arrAlgorithmTemp) {
           this.arrAlgorithm = arrAlgorithmTemp.data.results;
-
           this.reload = false;
           this.isshowFrom = true;
         }
@@ -223,9 +223,8 @@ export class CreateModelComponent implements OnInit {
               method: "POST",
               url: "http://localhost:5000/create-model",
               params: {
-                userId: this.userId,
-                dataId: this.idDataCreateFrom,
-                className: "Data",
+                dataName: this.dataName,
+                className: this.className,
                 label: this.colLabel,
                 feature: String(this.colFeature),
                 algorithm: this.algorithm,

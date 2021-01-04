@@ -1,0 +1,24 @@
+:host {
+  display: block;
+  max-height: 30rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.card-row {
+  display: flex;
+  margin: 0px;
+}
+
+.card-col {
+  flex: 1 0 calc(50% - 1rem);
+  margin: 0px;
+}
+
+.demo-chart {
+  height: 400px;
+}
+
+// .ng-star-inserted {
+//   height: 600px !important;
+// }

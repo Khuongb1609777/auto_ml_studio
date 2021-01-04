@@ -1,20 +1,35 @@
 <nb-card>
-    <!-- <nb-card-header tableTitle>Your Model</nb-card-header> -->
-    <nb-card-body>
-        <ag-grid-angular tableShowModel ar-grid-data [defaultColDef]="defaultColDef" class="ag-theme-alpine"
-            [rowData]="showDataModels" [columnDefs]="columnDefs" (firstDataRendered)="onFirstDataRendered($event)"
-            id="myGrid" [frameworkComponents]="frameworkComponents" [overlayLoadingTemplate]="loadingTemplate"
-            [overlayNoRowsTemplate]="noRowsTemplate">
-        </ag-grid-angular>
-    </nb-card-body>
-    <nb-card-footer>
-        <button nbButton size="small" (click)="formDialogCreateModel()" type="submit" value="Submit" status="primary">
-            New model
-        </button>
-    </nb-card-footer>
+  <!-- <nb-card-header tableTitle>Your Model</nb-card-header> -->
+  <nb-card-body>
+    <ag-grid-angular
+      tableShowModel
+      ar-grid-data
+      [defaultColDef]="defaultColDef"
+      class="ag-theme-alpine"
+      [rowData]="showDataModels"
+      [columnDefs]="columnDefs"
+      (firstDataRendered)="onFirstDataRendered($event)"
+      id="myGrid"
+      [frameworkComponents]="frameworkComponents"
+      [overlayLoadingTemplate]="loadingTemplate"
+      [overlayNoRowsTemplate]="noRowsTemplate"
+    >
+    </ag-grid-angular>
+  </nb-card-body>
+  <nb-card-footer>
+    <button
+      nbButton
+      size="small"
+      (click)="modelMxUse()"
+      type="submit"
+      value="Submit"
+      status="primary"
+    >
+      CHẨN ĐOÁN BÉO PHÌ
+    </button>
+  </nb-card-footer>
 </nb-card>
 <!-- <p *ngIf="errorFlag" errorGetDetail>{{ errorGetDetail }}</p> -->
-
 
 <!-- <ngb-alert deleteSuccess *ngIf="successMessage" type="success" (close)="successMessage = ''">
     {{ successMessage }}</ngb-alert> -->

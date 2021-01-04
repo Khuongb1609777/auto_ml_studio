@@ -6,9 +6,14 @@ import { ECommerceComponent } from "./e-commerce/e-commerce.component";
 import { ParseSDKComponent } from "./parseSDK/parseSDK.component";
 import { NotFoundComponent } from "./miscellaneous/not-found/not-found.component";
 import { DatasetsComponent } from "./datasets/datasets.component";
+import { DatasetsPreprocessingComponent } from "./datasets-preprocessing/datasets-preprocessing.component";
+import { DatasetCompareComponent } from "./dataset-compare/dataset-compare.component"
+import { DataAnalystComponent } from "./data-analyst/data-analyst.component";
+import { DiagnosisObesityComponent } from "./diagnosis-obesity/diagnosis-obesity.component";
 import { CreateModelComponent } from "./create-model/create-model.component";
 import { ModelsComponent } from "./models/models.component";
 import { NbDialogRef } from '@nebular/theme';
+import { DatasetObesityComponent } from "./dataset-obesity/dataset-obesity.component";
 
 const routes: Routes = [
   {
@@ -37,6 +42,26 @@ const routes: Routes = [
       {
         path: "datasets",
         component: DatasetsComponent,
+      },
+      {
+        path: "datasets-preprocessing",
+        component: DatasetsPreprocessingComponent,
+      },
+      {
+        path: "datasets-merge",
+        component: DatasetCompareComponent,
+      },
+      {
+        path: "data-analyst",
+        component: DataAnalystComponent,
+      },
+      {
+        path: "dataset-obesity",
+        component: DatasetObesityComponent,
+      },
+      {
+        path: "diagnosis-obesity",
+        component: DiagnosisObesityComponent,
       },
       {
         path: "createModel",

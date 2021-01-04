@@ -6,42 +6,73 @@
     </nb-card-header>
     <nb-card-body class="custom-wrapper">
       <div class="custom-wrapper-select">
-        <input type="text" [(ngModel)]="modelName" nbInput fullWidth fieldSize="medium" placeholder="Model Name">
+        <input
+          type="text"
+          [(ngModel)]="modelName"
+          nbInput
+          fullWidth
+          fieldSize="medium"
+          placeholder="Model Name"
+        />
       </div>
       <div class="custom-wrapper-select">
         <nb-select placeholder="Label: " size="medium">
-          <nb-option *ngFor="let col of arrColData; let i = index" [value]="i"
-            (selectionChange)="getColLabel($event, i, col)">{{ col }}</nb-option>
+          <nb-option
+            *ngFor="let col of arrColData; let i = index"
+            [value]="i"
+            (selectionChange)="getColLabel($event, i, col)"
+            >{{ col }}</nb-option
+          >
         </nb-select>
       </div>
       <div class="custom-wrapper-select">
-        <nb-select multiple placeholder="Feature:" [selected]="selectArr" size="medium">
+        <nb-select
+          multiple
+          placeholder="Feature:"
+          [selected]="selectArr"
+          size="medium"
+        >
           <nb-option value="all" (selectionChange)="selectAll($event)">
             check all
           </nb-option>
-          <nb-option *ngFor="let col of arrColData; let i = index" value="{{ i }}" disabled="{{ colLabel === i }}"
-            (selectionChange)="getColFeature($event, i)">{{ col }}</nb-option>
+          <nb-option
+            *ngFor="let col of arrColData; let i = index"
+            value="{{ i }}"
+            disabled="{{ colLabel === i }}"
+            (selectionChange)="getColFeature($event, i)"
+            >{{ col }}</nb-option
+          >
         </nb-select>
       </div>
       <div class="custom-wrapper-select">
         <nb-select placeholder="Select Algorithm" size="medium">
-          <nb-option *ngFor="let athm of arrAlgorithm; let i = index" value="athm.algorithmName"
-            (selectionChange)="getAlgorithm($event, athm)">{{ athm.algorithmName }}</nb-option>
+          <nb-option
+            *ngFor="let athm of arrAlgorithm; let i = index"
+            value="athm.algorithmName"
+            (selectionChange)="getAlgorithm($event, athm)"
+            >{{ athm.algorithmName }}</nb-option
+          >
         </nb-select>
       </div>
       <div *ngIf="isshowParam" center class="custom-wrapper-select">
         <table center>
-          <tr *ngFor="let param of params; let i = index " center>
+          <tr *ngFor="let param of params; let i = index" center>
             <td center>
-              {{ param}}
+              {{ param }}
             </td>
             <td center>
-              <input fieldSize="small" type="text" id="params" nbInput placeholder="{{ paramValuesDefault[i] }}"
-                [(ngModel)]="paramChoose[param]" (keypress)="paramChoose[param] = $event.target.value" />
+              <input
+                fieldSize="small"
+                type="text"
+                id="params"
+                nbInput
+                placeholder="{{ paramValuesDefault[i] }}"
+                [(ngModel)]="paramChoose[param]"
+                (keypress)="paramChoose[param] = $event.target.value"
+              />
             </td>
           </tr>
-          <tr>
-          </tr>
+          <tr></tr>
           <!-- <tr>
             <td>
 
@@ -57,16 +88,19 @@
       </div>
     </nb-card-body>
     <nb-card-footer>
-      <button nbButton size="small" (click)="createModel()" type="submit" value="Submit" status="primary">
+      <button
+        nbButton
+        size="small"
+        (click)="createModel()"
+        type="submit"
+        value="Submit"
+        status="primary"
+      >
         Create
       </button>
     </nb-card-footer>
   </nb-card>
 </div>
-
-
-
-
 
 <!-- 
 <div *ngIf="chooseDataFlag">

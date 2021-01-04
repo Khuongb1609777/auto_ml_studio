@@ -8,7 +8,6 @@
       class="ag-theme-alpine"
       [rowData]="dataset"
       [columnDefs]="columnDefs"
-      (firstDataRendered)="onFirstDataRendered($event)"
       id="myGrid"
       [frameworkComponents]="frameworkComponents"
       [overlayLoadingTemplate]="loadingTemplate"
@@ -17,15 +16,4 @@
     >
     </ag-grid-angular>
   </nb-card-body>
-  <nb-card-footer>
-    <button
-      nbButton
-      size="small"
-      (click)="formDialog()"
-      value="Submit"
-      status="primary"
-    >
-      New dataset
-    </button>
-  </nb-card-footer>
 </nb-card>

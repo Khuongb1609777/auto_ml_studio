@@ -33,6 +33,7 @@ export class DatasetsComponent implements OnInit {
   private errorName: string;
   @HostBinding('class')
   classes = 'example-items-rows';
+  public dataset: any;
   public data: any;
   public root_url: any;
   public root_method: any;
@@ -85,8 +86,9 @@ export class DatasetsComponent implements OnInit {
 
     };
     this.defaultColDef = {
-      resizable: true,
+      resizable: false,
       flex: 1,
+      minWidth: 150,
     };
     this.loadingTemplate = `<div><span>Loading...</span></div>`
     this.noRowsTemplate = `<div><span>No data</span></div>`;
@@ -103,42 +105,19 @@ export class DatasetsComponent implements OnInit {
       this.userIdLogin = "JclGidZqhN";
       this.root_method = "GET";
       this.root_url = environment.apiUrl;
-      const resultShow = await Axios({
+      const getDataset = await Axios({
         method: "GET",
-        url: this.root_url + "get-data",
+        url: this.root_url + "get-datasets",
         params: {
-          userId: this.userIdLogin,
+          className: "DatasetMerge",
         },
       });
-      this.showDataResult = resultShow.data["results"];
+      this.dataset = getDataset.data["results"];
       this.loading = false
       this.isShowData = true;
-
       this.columnDefs = COLUMNSDEFS_DATASETS
-      this.columnDefs[4] = {
-        headerName: "Download Dataset",
-        cellRenderer: "buttonDownloadDataset",
-        cellRendererParams: {
-          onClick: this.onClickDownloadDataset.bind(this),
-          label: "Download",
-        },
-      }
-      this.columnDefs[5] = {
-        headerName: "Delete Dataset",
-        cellRenderer: "buttonDeleteDataset",
-        cellRendererParams: {
-          onClick: this.onClickDelete.bind(this),
-          label: "Delete",
-        },
-      }
-      this.columnDefs[6] = {
-        headerName: "Create Model",
-        cellRenderer: "buttonCreateModel",
-        cellRendererParams: {
-          onClick: this.onClickCreateModel.bind(this),
-          label: "Create",
-        },
-      }
+
+
 
       // setTimeout(() => (this.staticAlertClosed = true), 20000);
 
@@ -203,7 +182,6 @@ export class DatasetsComponent implements OnInit {
       const dialogCreateModel = this.dialogService.open(CreateModelComponent, {
         context: {
           idDataCreateModel: String(this.objectIdCreateModel),
-          nameDataCreateModel: String(objectDataName),
           reload: reload_spiner,
         },
       });

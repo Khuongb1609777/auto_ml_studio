@@ -1,0 +1,242 @@
+<div *ngIf="isshowFrom">
+  <nb-card>
+    <nb-card-header headerTitle> model mx </nb-card-header>
+    <nb-card-body class="custom-wrapper">
+      <table>
+        <tr>
+          <td>
+            <div class="custom-wrapper-select">
+              <input
+                type="text"
+                [(ngModel)]="age"
+                nbInput
+                fullWidth
+                fieldSize="medium"
+                placeholder="Tuổi (age)"
+              />
+            </div>
+          </td>
+          <td>
+            <div class="custom-wrapper-select">
+              <input
+                type="text"
+                [(ngModel)]="height"
+                nbInput
+                fullWidth
+                fieldSize="medium"
+                placeholder="Chiều cao (mét - ví dụ: 1.8)"
+              />
+            </div>
+          </td>
+          <td>
+            <div class="custom-wrapper-select">
+              <input
+                type="text"
+                [(ngModel)]="weight"
+                nbInput
+                fullWidth
+                fieldSize="medium"
+                placeholder="Cân nặng (kg - ví dụ: 65)"
+              />
+            </div>
+          </td>
+          <td>
+            <div class="custom-wrapper-select">
+              <nb-select placeholder="Giới tính" size="medium">
+                <nb-option
+                  *ngFor="let col of gender_values; let i = index"
+                  [value]="i"
+                  (selectionChange)="getGender($event, i, col)"
+                  >{{ col }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="custom-wrapper-select">
+              <nb-select placeholder="Lượng nước hằng ngày" size="medium">
+                <nb-option
+                  *ngFor="let col of CH2O_values; let i = index"
+                  [value]="i"
+                  (selectionChange)="getCH2O($event, i, col)"
+                  >{{ col }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </td>
+          <td>
+            <div class="custom-wrapper-select">
+              <nb-select
+                placeholder="thời gian sd thiết bị công nghệ"
+                size="medium"
+              >
+                <nb-option
+                  *ngFor="let col of TUE_values; let i = index"
+                  [value]="i"
+                  (selectionChange)="getTUE($event, i, col)"
+                  >{{ col }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </td>
+          <td>
+            <div class="custom-wrapper-select">
+              <nb-select placeholder="Ăn nhiều tp giàu calo" size="medium">
+                <nb-option
+                  *ngFor="let col of FAVC_values; let i = index"
+                  [value]="i"
+                  (selectionChange)="getFAVC($event, i, col)"
+                  >{{ col }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </td>
+          <td>
+            <div class="custom-wrapper-select">
+              <nb-select placeholder="Tiêu thụ rau mỗi bữa ăn" size="medium">
+                <nb-option
+                  *ngFor="let col of FCVC_values; let i = index"
+                  [value]="i"
+                  (selectionChange)="getFCVC($event, i, col)"
+                  >{{ col }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="custom-wrapper-select">
+              <nb-select placeholder="Số bữa ăn chính" size="medium">
+                <nb-option
+                  *ngFor="let col of NCP_values; let i = index"
+                  [value]="i"
+                  (selectionChange)="getNCP($event, i, col)"
+                  >{{ col }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </td>
+          <td>
+            <div class="custom-wrapper-select">
+              <nb-select
+                placeholder="Bữa ăn phụ giữa các bữa chính"
+                size="medium"
+              >
+                <nb-option
+                  *ngFor="let col of CAEC_values; let i = index"
+                  [value]="i"
+                  (selectionChange)="getCAEC($event, i, col)"
+                  >{{ col }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </td>
+          <td>
+            <div class="custom-wrapper-select">
+              <nb-select placeholder="Uống rượu" size="medium">
+                <nb-option
+                  *ngFor="let col of CALC_values; let i = index"
+                  [value]="i"
+                  (selectionChange)="getCALC($event, i, col)"
+                  >{{ col }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </td>
+          <td>
+            <div class="custom-wrapper-select">
+              <nb-select
+                placeholder="Theo dõi lượng calo tiêu thụ"
+                size="medium"
+              >
+                <nb-option
+                  *ngFor="let col of SCC_values; let i = index"
+                  [value]="i"
+                  (selectionChange)="getSCC($event, i, col)"
+                  >{{ col }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="custom-wrapper-select">
+              <nb-select placeholder="Hoạt động thể chất" size="medium">
+                <nb-option
+                  *ngFor="let col of FAF_values; let i = index"
+                  [value]="i"
+                  (selectionChange)="getFAF($event, i, col)"
+                  >{{ col }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </td>
+          <td>
+            <div class="custom-wrapper-select">
+              <nb-select placeholder="Phương tiện di chuyển" size="medium">
+                <nb-option
+                  *ngFor="let col of MTRANS_values; let i = index"
+                  [value]="i"
+                  (selectionChange)="getMTRANS($event, i, col)"
+                  >{{ col }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </td>
+          <td>
+            <div class="custom-wrapper-select">
+              <nb-select placeholder="Hút thuốc lá" size="medium">
+                <nb-option
+                  *ngFor="let col of SMOKE_values; let i = index"
+                  [value]="i"
+                  (selectionChange)="getSMOKE($event, i, col)"
+                  >{{ col }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </td>
+          <td>
+            <div class="custom-wrapper-select">
+              <nb-select
+                placeholder="Có thành viên trong gia đình mắc béo phì"
+                size="medium"
+              >
+                <nb-option
+                  *ngFor="let col of FHWO_values; let i = index"
+                  [value]="i"
+                  (selectionChange)="getFHWO($event, i, col)"
+                  >{{ col }}</nb-option
+                >
+              </nb-select>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </nb-card-body>
+    <nb-card-footer>
+      <button
+        nbButton
+        size="small"
+        (click)="useModel()"
+        type="submit"
+        value="Submit"
+        status="primary"
+      >
+        Chẩn đoán
+      </button>
+    </nb-card-footer>
+  </nb-card>
+  <div *ngIf="isshowKQ">
+    <nb-card>
+      <nb-card-header>Kết quả chẩn đoán</nb-card-header>
+      <nb-card-body>
+        Kết quả chẩn đoán cho thấy: {{ prediction }}
+      </nb-card-body>
+      <nb-card-footer>Mô hình máy học chẩn đoán béo phì</nb-card-footer>
+    </nb-card>
+  </div>
+</div>

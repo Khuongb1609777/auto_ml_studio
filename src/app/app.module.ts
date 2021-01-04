@@ -22,9 +22,10 @@ import {
   NbWindowModule,
 } from "@nebular/theme";
 import { ShareModule } from "./@shared/share.module";
+import { DiagnosisOfObesityComponent } from './diagnosis-of-obesity/diagnosis-of-obesity.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, DiagnosisOfObesityComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

@@ -16,6 +16,7 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { CreateModelComponent } from "../create-model/create-model.component"
 import { DatasetsComponent } from "../datasets/datasets.component"
 import { DialogDeleteModelComponent } from "./dialog-delete-model.component"
+import { DialogUseModelMxComponent } from "./dialog-use-model-mx.component"
 import { stringToArray, Context } from 'ag-grid-community';
 import { environment } from '../../../environments/environment'
 import { LOADING } from '../create-model/constanst'
@@ -86,6 +87,7 @@ export class ModelsComponent implements OnInit {
                     userId: this.userIdLogin,
                 },
             });
+            console.log(resultShow)
             this.showDataModels = resultShow.data["results"];
             this.isShowModels = true;
             this.columnDefs = COLUMNSDEFS_MANAGE_MODEL
@@ -94,15 +96,23 @@ export class ModelsComponent implements OnInit {
                 cellRenderer: "buttonDeleteModel",
                 cellRendererParams: {
                     onClick: this.onClickDeleteModel.bind(this),
-                    label: "Delete",
+                    label: "Xóa mô hình",
                 },
             }
+            // this.columnDefs[5] = {
+            //     headerName: "Use",
+            //     cellRenderer: "buttonDeleteModel",
+            //     cellRendererParams: {
+            //         onClick: this.onClickUseModel.bind(this),
+            //         label: "Use model",
+            //     },
+            // }
             this.columnDefs[5] = {
-                headerName: "Setup Postman",
+                headerName: "Triển khai (API)",
                 cellRenderer: "buttonShowDetailModel",
                 cellRendererParams: {
                     onClick: this.onClickShowDetailModel.bind(this),
-                    label: "Publish Api",
+                    label: "Triển khai",
                 },
             }
 
@@ -120,7 +130,7 @@ export class ModelsComponent implements OnInit {
             this.colLabelModel = e['rowData']["colLabel"];
             this.colLabelModelName = e['rowData']["colLabelName"];
             this.descriptionModel = e['rowData']["description"];
-            this.dataName = e.rowData['dataModel']["dataName"];
+            this.dataName = e.rowData['fromData'];
             this.dialogService.open(DialogDocsAPIComponent, {
                 context: {
                     athm: this.athmApi,
@@ -161,22 +171,22 @@ export class ModelsComponent implements OnInit {
                         },
                     });
                     this.showDataModels = resultShow.data["results"];
-                    // this.showDataModels.forEach((value, index) => {
-                    //     this.showDataModels[index]["algorithmName"] = this.showDataModels[index][
-                    //         "algorithm"
-                    //     ]["algorithmName"];
-                    // });
-                    // this.showDataModels.forEach((value, index) => {
-                    //     this.showDataModels[index]["dataName"] = this.showDataModels[index][
-                    //         "dataModel"
-                    //     ]["dataName"];
-                    // });
                 }
             });
         } catch (err) {
             console.log(err);
         }
     }
+
+    async onClickUseModel(e) {
+        try {
+            console.log(e);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+
     onFirstDataRendered(params) {
         params.api.sizeColumnsToFit();
     }
@@ -197,16 +207,23 @@ export class ModelsComponent implements OnInit {
                 },
             });
             this.showDataModels = resultShow.data["results"];
-            // this.showDataModels.forEach((value, index) => {
-            //     this.showDataModels[index]["algorithmName"] = this.showDataModels[index][
-            //         "algorithm"
-            //     ]["algorithmName"];
-            // });
-            // this.showDataModels.forEach((value, index) => {
-            //     this.showDataModels[index]["dataName"] = this.showDataModels[index][
-            //         "dataModel"
-            //     ]["dataName"];
-            // });
         });
+    }
+
+    modelMxUse() {
+        try {
+            const dialogCreateModel = this.dialogService.open(DialogUseModelMxComponent, {
+                context: {
+                    modelId: "4OD3VzZPVw",
+                    dataName: "DatasetObesity"
+                },
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    postRecord(){
+        
     }
 }

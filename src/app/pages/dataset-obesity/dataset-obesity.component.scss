@@ -1,0 +1,37 @@
+[ar-grid-data] {
+  width: 100%;
+  height: 400px;
+}
+
+.dialog-size {
+  width: calc(100vw - 100px);
+}
+
+.dialog-full-size {
+  width: 100%;
+}
+
+:host {
+  display: block;
+  max-height: 30rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.card-row {
+  display: flex;
+  margin: 0px;
+}
+
+.card-col {
+  flex: 1 0 calc(50% - 1rem);
+  margin: 0px;
+}
+
+.demo-chart {
+  height: 400px;
+}
+
+// .ng-star-inserted {
+//   height: 600px !important;
+// }

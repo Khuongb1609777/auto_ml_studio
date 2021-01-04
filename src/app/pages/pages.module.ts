@@ -36,7 +36,17 @@ import { DialogDocsAPIModule } from "./models/dialog-docs-api.module";
 import { DialogDeleteModelComponent } from "./models/dialog-delete-model.component";
 import { DialogDeleteModelModule } from "./models/dialog-delete-model.module";
 import { ClipboardModule } from 'ngx-clipboard';
-
+import { DatasetsPreprocessingComponent } from './datasets-preprocessing/datasets-preprocessing.component';
+import { DiagnosisObesityComponent } from './diagnosis-obesity/diagnosis-obesity.component';
+import { DataAnalystComponent } from './data-analyst/data-analyst.component';
+import { NgxEchartsModule} from 'ngx-echarts'
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { DatasetCompareComponent } from './dataset-compare/dataset-compare.component';
+import { DatasetObesityComponent } from './dataset-obesity/dataset-obesity.component';
+import { DialogUseModelMxComponent } from './models/dialog-use-model-mx.component';
+import { DialogUseModelMxModule } from './models/dialog-use-model-mx.module';
+import { DialogNewRecordComponent } from "./dataset-obesity/dialog-new-record.component"
+import { DialogNewRecordModule } from "./dataset-obesity/dialog-new-record.module"
 
 @NgModule({
   imports: [
@@ -66,19 +76,31 @@ import { ClipboardModule } from 'ngx-clipboard';
     FormUpLoadModule,
     ClipboardModule,
     AgGridModule.withComponents([ButtonRenderDatasetComponent, ButtonRenderManageModelComponent]),
+    NgxEchartsModule,
+    NgxChartsModule,
+    DialogUseModelMxModule,
+    DialogNewRecordModule,
+
   ],
   declarations: [
     PagesComponent,
     DatasetsComponent,
     CreateModelComponent,
     ModelsComponent,
+    DatasetsPreprocessingComponent,
+    DiagnosisObesityComponent,
+    DataAnalystComponent,
+    DatasetCompareComponent,
+    DatasetObesityComponent,
   ],
   entryComponents: [
     ButtonRenderDatasetComponent,
     DialogDocsAPIComponent,
     FormUploadComponent,
     ButtonRenderManageModelComponent,
-    DialogDeleteModelComponent
+    DialogDeleteModelComponent,
+    DialogUseModelMxComponent,
+    DialogNewRecordComponent,
   ],
 })
 export class PagesModule { }
