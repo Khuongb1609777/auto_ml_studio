@@ -23,6 +23,7 @@ import { NO_ROW_AG_GRID } from '../create-model/constanst'
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
 import { EChartOption } from 'echarts';
+import {DialogNewRecordComponent} from './dialog-new-record.component'
 
 
 @Component({
@@ -167,7 +168,7 @@ export class DatasetsPreprocessingComponent implements OnInit {
         method: "GET",
         url: this.root_url + "get-datasets",
         params: {
-          className: "DatasetMerge",
+          className: "DatasetSurveyRaw",
         },
       });
       console.log(getDataset);
@@ -190,42 +191,25 @@ export class DatasetsPreprocessingComponent implements OnInit {
         method: "GET",
         url: environment.apiUrl + String("get-data-charts"),
         params: {
-          className: 'Dataset',
+          className: 'DatasetSurveyRaw',
         },
       })
       this.dataCharts = dataChartsTemp.data;
       console.log(this.dataCharts)
-      this.genderData = this.dataCharts['chart_gender']
-      this.jobData = this.dataCharts['chart_job']
       this.mealOfThedayData = this.dataCharts['chart_meal_of_theday']
       this.breakfastOfTheweek = this.dataCharts['chart_breakfast_of_theweek']
       this.dinnerOfTheweek = this.dataCharts['chart_dinner_of_theweek']
       this.fastfoodInWeek = this.dataCharts["chart_fastfood_of_theweek"]
       this.vegetableInMeal = this.dataCharts["chart_vegetable_in_meal"]
       this.proteinOfMeal = this.dataCharts["chart_protein_of_meal"]
-      this.sourceOfFood = this.dataCharts['chart_source_of_food']
       this.waterInDay = this.dataCharts['chart_water_of_the_day']
       this.timeEx = this.dataCharts['chart_time_doexcercise_for_week']
       this.sporttime = this.dataCharts['chart_sporttime_for_week']
       this.alcohol = this.dataCharts['chart_alcohol']
-      this.sodawater = this.dataCharts['chart_sodawater']
       this.nicotine = this.dataCharts['chart_nicotine']
-      this.chronicDiseases = this.dataCharts['chart_chronicDiseases']
-      this.chronicDiseasesMedicine = this.dataCharts['chart_chronicDiseasesMedicine']
-      this.chronicDiseasesRelative = this.dataCharts['chart_chronicDiseasesRelative']
       this.requireOfJob = this.dataCharts['chart_requireOfJob']
-      this.transport = this.dataCharts['chart_transport']
       this.park = this.dataCharts['chart_park']
-      this.sedative = this.dataCharts['chart_sedative']
       this.depression = this.dataCharts['chart_depression']
-      this.age = this.dataCharts['chart_age']
-      this.bmiValues = this.dataCharts['chart_bmi']
-      // this.heightWeight = [
-      //   {
-      //     "name": "Chieu cao",
-      //     "series": this.dataCharts['chart_height_weight']
-      //   },]
-      this.heightWeight = this.dataCharts['chart_height_weight']
     } catch (err) {
       this.data = "rpa-iot-api";
     }
@@ -236,7 +220,7 @@ export class DatasetsPreprocessingComponent implements OnInit {
       var reload_spiner = true;
       const dialogCreateModel = this.dialogService.open(CreateModelComponent, {
         context: {
-          classNameCreateModel: "DatasetPreprocessing",
+          classNameCreateModel: "DatasetSurveyBalance",
           dataNameCreateModel: "DatasetVietNam",
           reload: reload_spiner,
         },
@@ -253,6 +237,19 @@ export class DatasetsPreprocessingComponent implements OnInit {
       console.log(err);
     }
 
+  }
+  onClickNewRecord(){
+    try {
+      const dialogCreateModel = this.dialogService.open(DialogNewRecordComponent, {
+          context: {
+              modelId: "52GUQmj8f1",
+              dataName: "DatasetSurveyBalance",
+              isshowFromVIE: true,
+          },
+      });
+  } catch (err) {
+      console.log(err);
+  }
   }
 
   

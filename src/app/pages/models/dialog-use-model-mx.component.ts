@@ -21,7 +21,8 @@ import { NbSelectModule } from "@nebular/theme"
 export class DialogUseModelMxComponent {
     public modelId: string;
     public dataName: string;
-    public isshowFrom: boolean;
+    public isshowFromMX: boolean;
+    public isshowFromVIE: boolean;
     public age: string;
     public height: string;
     public weight: string;
@@ -52,6 +53,40 @@ export class DialogUseModelMxComponent {
     public MTRANS: number;
     public CAEC_values: string[];
     public CAEC: number;
+
+
+    public meals_values: string[];
+    public meals: number;
+    public breakfast_values: string[];
+    public breakfast: number;
+    public dinner_values: string[];
+    public dinner: number;
+    public fastfood_values: string[];
+    public fastfood: number;
+    public vegetable_values: string[];
+    public vegetable: number;
+    public water_values: string[];
+    public water: number;
+    public protein_values: string[];
+    public protein: number;
+    public exercise_values: string[];
+    public exercise: number;
+    public sport_values: string[];
+    public sport: number;
+    public alcohol_values: string[];
+    public alcohol: number;
+    public nicotine_values: string[];
+    public nicotine: Number;
+    public sleeptime_values: string[];
+    public sleep: number;
+    public require_values: string[];
+    public require: number;
+    public park_values: string[];
+    public park: number;
+    public timeuse_values: string[];
+    public timeuse: number;
+    public depression_values: string[];
+    public depression: number;
     
 
     public prediction: string;
@@ -63,34 +98,71 @@ export class DialogUseModelMxComponent {
         this.CH2O_values =   ['dưới 1 lít',' từ 1 - 2 lít','trên 2 lít'];
         this.TUE_values =  ['dưới 2 giờ','từ 2 - 5 giờ','trên 5 giờ'];
         this.FAVC_values =  ['có','không']; ////có thường ăn nhiều thức ăn giàu calo không
-        this.FCVC_values =  ['không bao giờ','thỉnh thoảng','mỗi bữa ăn']; //tiêu thụ rau trong bưũa ăn
+        this.FCVC_values =  ['không','1 lần mỗi 2 bữa','mỗi bữa ăn']; //tiêu thụ rau trong bưũa ăn
         this.NCP_values =  [1,2,3,4,5,6]; //số bưũa ăn chính
-        this.CAEC_values =  ['không','thỉnh thoảng','thường xuyên','luôn luôn']; // ăn bữa phụ
-        this.CALC_values =  ['không','thỉnh thoảng','thường xuyên','mỗi ngày']; //uống rượu
+        this.CAEC_values =  ['không','cách 1 - 2 bữa 1 lần','cách 3 - 4 bữa 1 lần','luôn luôn']; // ăn bữa phụ
+        this.CALC_values =  ['không','1 - 3lần/tuần','3 - 6 lần/tuần','mỗi ngày']; //uống rượu
         this.SCC_values =  ['có','không'] //theo dõi lượng calo tiêu thụ
-        this.FAF_values =  ['không','1 - 2','2 - 4 ngày',' 4 - 5 ngày']; //tần suất hoạt động thể chất
+        this.FAF_values =  ['không','1 - 2 ngày 1 lần','2 - 4 ngày 1 lần',' 4 - 5 ngày 1 lần']; //tần suất hoạt động thể chất
         this.MTRANS_values =  ['Ôtô','xe máy','xe đạp','phương tiện công cộng','đi bộ'];
         this.SMOKE_values =  ['có','không'];
         this.FHWO_values =  ['có', "không"] // có thành viên trong gia đình bị béo phì không
 
+
+
+        this.meals_values = ["1","2","3","4","5","6","7"];
+        this.breakfast_values = ["không","từ 1 - 2 bữa/tuần","từ 3 - 4 bữa/tuần","từ 5 - 6 bữa/tuần","hằng ngày"];
+        this.dinner_values = ["không","từ 1 - 2 bữa/tuần","từ 3 - 4 bữa/tuần","từ 5 - 6 bữa/tuần","hằng ngày"];
+        this.fastfood_values = ["không","từ 1 - 2 bữa/tuần","từ 3 - 4 bữa/tuần","từ 5 - 6 bữa/tuần","hằng ngày"];
+        this.vegetable_values = ["dưới 50 gram/bữa","từ 50 - 100 gram/bữa","trên 100 gram/bữa"];
+        this.protein_values = ["dưới 50 gram/bữa","từ 50 - 100 gram/bữa","trên 100 gram/bữa"];
+        this.water_values = ["dưới 1 lít/ngày","từ 1 - 2 lít/ngày","từ 2 - 3 lít/ngày"];
+        this.exercise_values = ["không","dưới 1 giờ/tuần","từ 1 - 3 giờ/tuần","trên 3 giờ/tuần"];
+        this.sport_values = ["không","dưới 1 giờ/tuần","từ 1 - 3 giờ/tuần","trên 3 giờ/tuần"];
+        this.alcohol_values = ["không","có"];
+        this.nicotine_values = ["không","có"];
+        this.require_values = ["không","yêu cầu thấp","trung bình","yêu cầu cao","nặng nhọc"];
+        this.park_values = ["không","có"];
+        this.timeuse_values = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"];
+        this.depression_values = ["không","có"];
+ 
+
     }
 
     async ngOnInit() {
-        this.isshowFrom = true;
         this.reload = false;
         this.gender_values =  ['Nữ','Nam'];
         this.CH2O_values =   ['dưới 1 lít',' từ 1 - 2 lít','trên 2 lít'];
         this.TUE_values =  ['dưới 2 giờ','từ 2 - 5 giờ','trên 5 giờ'];
-        this.FAVC_values =  ['không','có']; ////có thường ăn nhiều thức ăn giàu calo không
-        this.FCVC_values =  ['không bao giờ','tỉnh thoảng','luôn ăn']; //tiêu thụ rau trong bưũa ăn
-        this.NCP_values =  [0,1,2,3,4,5,6]; //số bưũa ăn chính
-        this.CAEC_values =  ['không','thỉnh thoảng','thường xuyên','luôn luôn']; // ăn bữa phụ
-        this.CALC_values =  ['không','thỉnh thoảng','thường xuyên','luôn luôn']; //uống rượu
-        this.SCC_values =  ['không','có'] //theo dõi lượng calo tiêu thụ
-        this.FAF_values =  ['không','1 - 2','2 - 4 ngày',' 4 - 5 ngày']; //tần suất hoạt động thể chất
+        this.FAVC_values =  ['có','không']; ////có thường ăn nhiều thức ăn giàu calo không
+        this.FCVC_values =  ['không','1 lần mỗi 2 bữa','mỗi bữa ăn']; //tiêu thụ rau trong bưũa ăn
+        this.NCP_values =  [1,2,3,4,5,6]; //số bưũa ăn chính
+        this.CAEC_values =  ['không','cách 1 - 2 bữa 1 lần','cách 3 - 4 bữa 1 lần','luôn luôn']; // ăn bữa phụ
+        this.CALC_values =  ['không','1 - 3lần/tuần','3 - 6 lần/tuần','mỗi ngày']; //uống rượu
+        this.SCC_values =  ['có','không'] //theo dõi lượng calo tiêu thụ
+        this.FAF_values =  ['không','1 - 2 ngày 1 lần','2 - 4 ngày 1 lần',' 4 - 5 ngày 1 lần']; //tần suất hoạt động thể chất
         this.MTRANS_values =  ['Ôtô','xe máy','xe đạp','phương tiện công cộng','đi bộ'];
-        this.SMOKE_values =  ['không','có'];
-        this.FHWO_values =  ['không', "có"] // có thành viên trong gia đình bị béo phì không
+        this.SMOKE_values =  ['có','không'];
+        this.FHWO_values =  ['có', "không"] // có thành viên trong gia đình bị béo phì không
+
+
+        this.meals_values = ["1","2","3","4","5","6","7"];
+        this.breakfast_values = ["không","từ 1 - 2 bữa/tuần","từ 3 - 4 bữa/tuần","từ 5 - 6 bữa/tuần","hằng ngày"];
+        this.dinner_values = ["không","từ 1 - 2 bữa/tuần","từ 3 - 4 bữa/tuần","từ 5 - 6 bữa/tuần","hằng ngày"];
+        this.fastfood_values = ["không","từ 1 - 2 bữa/tuần","từ 3 - 4 bữa/tuần","từ 5 - 6 bữa/tuần","hằng ngày"];
+        this.vegetable_values = ["dưới 50 gram/bữa","từ 50 - 100 gram/bữa","trên 100 gram/bữa"];
+        this.protein_values = ["dưới 50 gram/bữa","từ 50 - 100 gram/bữa","trên 100 gram/bữa"];
+        this.water_values = ["dưới 1 lít/ngày","từ 1 - 2 lít/ngày","từ 2 - 3 lít/ngày"];
+        this.exercise_values = ["không","dưới 1 giờ/tuần","từ 1 - 3 giờ/tuần","trên 3 giờ/tuần"];
+        this.sport_values = ["không","dưới 1 giờ/tuần","từ 1 - 3 giờ/tuần","trên 3 giờ/tuần"];
+        this.alcohol_values = ["không","có"];
+        this.nicotine_values = ["không","có"];
+        this.require_values = ["không","yêu cầu thấp","trung bình","yêu cầu cao","nặng nhọc"];
+        this.park_values = ["không","có"];
+        this.sleeptime_values = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"];
+        this.timeuse_values = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"];
+        this.depression_values = ["không","có"];
+
 
         this.isshowKQ = false;
 
@@ -114,7 +186,7 @@ export class DialogUseModelMxComponent {
         }
     }
 
-    async useModel(){
+    async useModelMx(){
         try{
             var age = parseFloat(this.age);
             var height = parseFloat(this.height);
@@ -289,7 +361,158 @@ export class DialogUseModelMxComponent {
           console.log(err);
         }
     }
+
+
+
+
+    getMeals(event, index, col) {
+      try {
+        this.meals = index + 1;
+      } catch (err) {
+        console.log(err);
+      }
+  }
+  getBreakfast(event, index, col) {
+      try {
+        this.breakfast = index;
+      } catch (err) {
+        console.log(err);
+      }
+  }
+  getDinner(event, index, col) {
+      try {
+        this.dinner = index;
+      } catch (err) {
+        console.log(err);
+      }
+  }
+  getFastfood(event, index, col) {
+      try {
+        this.fastfood = index;
+      } catch (err) {
+        console.log(err);
+      }
+  }
+  getVegetable(event, index, col) {
+      try {
+        this.vegetable = index;
+      } catch (err) {
+        console.log(err);
+      }
+  }
+  getProtein(event, index, col) {
+      try {
+        this.protein = index;
+      } catch (err) {
+        console.log(err);
+      }
+  }
+  getWater(event, index, col) {
+      try {
+        this.water = index;
+      } catch (err) {
+        console.log(err);
+      }
+  }
+  getExercise(event, index, col) {
+      try {
+        this.exercise = index;
+      } catch (err) {
+        console.log(err);
+      }
+  }
+  getSport(event, index, col) {
+      try {
+        this.sport = index;
+      } catch (err) {
+        console.log(err);
+      }
+  }
+  getAlcohol(event, index, col) {
+      try {
+        this.alcohol = index;
+      } catch (err) {
+        console.log(err);
+      }
+  }
+  getNicotine(event, index, col) {
+      try {
+        this.nicotine = index;
+      } catch (err) {
+        console.log(err);
+      }
+  }
+  getRequire(event, index, col) {
+      try {
+        this.require = index;
+      } catch (err) {
+        console.log(err);
+      }
+  }
+  getPark(event, index, col) {
+      try {
+        this.park = index;
+      } catch (err) {
+        console.log(err);
+      }
+  }
+  getTimeuse(event, index, col) {
+    try {
+      this.timeuse = index;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  getDepression(event, index, col) {
+    try {
+      this.depression = index;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  getSleeptime(event, index, col) {
+    try {
+      this.sleep = index;
+    } catch (err) {
+      console.log(err);
+    }
+  }
     
+
+
+  async useModelVn(){
+    try{
+        var newRecord = [this.meals,this.alcohol, this.sleep, this.require, this.park, this.timeuse, this.depression, this.breakfast, this.protein, this.water, this.vegetable, this.exercise, this.alcohol, this.sport, this.fastfood, this.dinner];
+        var newRecordFiltered = newRecord.filter(function (el) {
+            return el != null;
+          });
+        console.log(newRecord)
+        if(newRecordFiltered.length< 16){
+            var messageCreateModel = "ERROR, please provie full information"
+            this.toastrService.show(messageCreateModel, `Error value: provide full features value  `, { status: "danger", duration: 4000 });
+        }
+        else{
+            console.log(newRecordFiltered);
+            var predictResult = await Axios({
+                method: "GET",
+                url: environment.apiUrl + String("load-model"),
+                params: {
+                  record: String(newRecord),
+                  modelId: this.modelId
+                },
+            })
+            if (predictResult){
+              console.log(predictResult.data.dataPredict[0])
+              this.prediction = predictResult.data.dataPredict[0]
+              this.isshowKQ = true;
+            }
+        }
+    }
+    catch(err){
+        console.log(err)
+    }
+}
 
 
 }

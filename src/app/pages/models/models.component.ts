@@ -215,7 +215,22 @@ export class ModelsComponent implements OnInit {
             const dialogCreateModel = this.dialogService.open(DialogUseModelMxComponent, {
                 context: {
                     modelId: "4OD3VzZPVw",
-                    dataName: "DatasetObesity"
+                    dataName: "DatasetObesity",
+                    isshowFromMX: true,
+                },
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    modelVieUse() {
+        try {
+            const dialogCreateModel = this.dialogService.open(DialogUseModelMxComponent, {
+                context: {
+                    modelId: "52GUQmj8f1",
+                    dataName: "DatasetSurveyBalance",
+                    isshowFromVIE: true,
                 },
             });
         } catch (err) {

@@ -17,16 +17,58 @@
     </ag-grid-angular>
   </nb-card-body>
   <nb-card-footer>
-    <button
-      nbButton
-      size="small"
-      (click)="modelMxUse()"
-      type="submit"
-      value="Submit"
-      status="primary"
-    >
-      CHẨN ĐOÁN BÉO PHÌ
-    </button>
+    <table>
+      <tr>
+        <td>
+          <div><button
+            nbButton
+            size="small"
+            (click)="modelMxUse()"
+            type="submit"
+            value="Submit"
+            status="primary"
+          >
+            CHẨN ĐOÁN BÉO PHÌ (MX)
+          </button></div>
+        </td>
+        <td><div><button
+          nbButton
+          size="small"
+          (click)="modelMxUse()"
+          type="submit"
+          value="Submit"
+          status="primary"
+        >
+           CẬP NHẬT MÔ HÌNH (MX)
+        </button></div></td>
+      </tr>
+      <tr>
+        <td>
+          <div><button
+            nbButton
+            size="small"
+            (click)="modelVieUse()"
+            type="submit"
+            value="Submit"
+            status="primary"
+          >
+            CHẨN ĐOÁN BÉO PHÌ (VIE)
+          </button></div>
+        </td>
+        <td><div><button
+          nbButton
+          size="small"
+          (click)="modelVieUse()"
+          type="submit"
+          value="Submit"
+          status="primary"
+        >
+           CẬP NHẬT MÔ HÌNH (VIE)
+        </button></div></td>
+      </tr>
+    </table>
+    
+    
   </nb-card-footer>
 </nb-card>
 <!-- <p *ngIf="errorFlag" errorGetDetail>{{ errorGetDetail }}</p> -->

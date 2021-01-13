@@ -16,117 +16,31 @@
     </ag-grid-angular>
   </nb-card-body>
   <nb-card-footer>
-    <button
-      nbButton
-      size="small"
-      (click)="onClickCreateModel('DatasetPreprocessing')"
-      value="Submit"
-      status="primary"
-    >
-      New model
-    </button>
+    <table>
+      <tr>
+        <td><div><button
+          nbButton
+          size="small"
+          (click)="onClickCreateModel('DatasetSurveyBalance')"
+          value="Submit"
+          status="primary"
+        >
+          Mô hình mới
+        </button></div></td>
+        <td>
+          <div><button
+            nbButton
+            size="small"
+            (click)="onClickNewRecord()"
+            value="Submit"
+            status="primary"
+          >
+            Mẫu mới
+          </button></div>
+        </td>
+      </tr>
+    </table>
   </nb-card-footer>
-</nb-card>
-
-<div class="card-row">
-  <div class="card-col">
-    <nb-card size="medium" status="success">
-      <nb-card-header>GIỚI TÍNH</nb-card-header>
-      <ngx-charts-pie-chart
-        [view]="view"
-        [scheme]="colorScheme"
-        [results]="genderData"
-        [gradient]="gradient"
-        [legendPosition]="legendPosition"
-        [labels]="showLabels"
-        [doughnut]="isDoughnut"
-        (select)="onSelect($event)"
-        (activate)="onActivate($event)"
-        (deactivate)="onDeactivate($event)"
-      >
-      </ngx-charts-pie-chart>
-    </nb-card>
-  </div>
-  <div class="card-col">
-    <nb-card size="medium" status="success">
-      <nb-card-header>NGHỀ NGHIỆP</nb-card-header>
-      <ngx-charts-pie-chart
-        [view]="view"
-        [scheme]="colorScheme2"
-        [results]="jobData"
-        [gradient]="gradient"
-        [legendPosition]="legendPosition"
-        [labels]="showLabels"
-        [doughnut]="isDoughnut"
-        (select)="onSelect($event)"
-        (activate)="onActivate($event)"
-        (deactivate)="onDeactivate($event)"
-      >
-      </ngx-charts-pie-chart>
-    </nb-card>
-  </div>
-</div>
-
-<div class="card-row">
-  <div class="card-col">
-    <nb-card size="medium" status="warning">
-      <nb-card-header>ĐỘ TUỔI</nb-card-header>
-      <ngx-charts-pie-chart
-        [view]="view"
-        [scheme]="colorScheme3"
-        [results]="age"
-        [gradient]="gradient"
-        [legendPosition]="legendPosition"
-        [labels]="showLabels"
-        [doughnut]="isDoughnut"
-        (select)="onSelect($event)"
-        (activate)="onActivate($event)"
-        (deactivate)="onDeactivate($event)"
-      >
-      </ngx-charts-pie-chart>
-    </nb-card>
-  </div>
-  <div class="card-col">
-    <nb-card size="medium" status="warning">
-      <nb-card-header>CHỈ SỐ BMI</nb-card-header>
-      <ngx-charts-pie-chart
-        [view]="view"
-        [scheme]="colorScheme"
-        [results]="bmiValues"
-        [gradient]="gradient"
-        [legendPosition]="legendPosition"
-        [labels]="showLabels"
-        [doughnut]="isDoughnut"
-        (select)="onSelect($event)"
-        (activate)="onActivate($event)"
-        (deactivate)="onDeactivate($event)"
-      >
-      </ngx-charts-pie-chart>
-    </nb-card>
-  </div>
-</div>
-
-<nb-card status="danger">
-  <nb-card-header
-    >TƯƠNG QUAN CHIỀU CAO TRUNG BÌNH THEO KHOẢNG CÂN NẶNG</nb-card-header
-  >
-  <nb-card-body>
-    <ngx-charts-bar-vertical
-      [view]="viewBar"
-      [scheme]="colorScheme"
-      [results]="heightWeight"
-      [gradient]="gradient"
-      [xAxis]="showXAxis"
-      [yAxis]="showYAxis"
-      [legend]="showLegend"
-      [showXAxisLabel]="showXAxisLabel"
-      [showYAxisLabel]="showYAxisLabel"
-      [xAxisLabel]="xAxisLabel"
-      [yAxisLabel]="yAxisLabel"
-      (select)="onSelect($event)"
-    >
-    </ngx-charts-bar-vertical>
-  </nb-card-body>
 </nb-card>
 
 <div>
@@ -190,11 +104,11 @@
     </div>
     <div class="card-col">
       <nb-card size="medium" status="warning">
-        <nb-card-header>SỐ BỮA ĂN SÁNG TRONG TUẦN</nb-card-header>
+        <nb-card-header>SỐ BỮA ĂN NHANH TRONG TUẦN</nb-card-header>
         <ngx-charts-pie-chart
           [view]="view"
           [scheme]="colorScheme2"
-          [results]="breakfastOfTheweek"
+          [results]="fastfoodInWeek"
           [gradient]="gradient"
           [legendPosition]="legendPosition"
           [labels]="showLabels"
@@ -211,11 +125,11 @@
   <div class="card-row">
     <div class="card-col">
       <nb-card size="medium" status="danger">
-        <nb-card-header>SỐ BỮA ĂN NHANH TRONG TUẦN</nb-card-header>
+        <nb-card-header>LƯỢNG THỰC PHẨM GIÀU PROTEIN MỖI BỮA</nb-card-header>
         <ngx-charts-pie-chart
           [view]="view"
-          [scheme]="colorScheme2"
-          [results]="fastfoodInWeek"
+          [scheme]="colorScheme"
+          [results]="proteinOfMeal"
           [gradient]="gradient"
           [legendPosition]="legendPosition"
           [labels]="showLabels"
@@ -234,45 +148,6 @@
           [view]="view"
           [scheme]="colorScheme"
           [results]="vegetableInMeal"
-          [gradient]="gradient"
-          [legendPosition]="legendPosition"
-          [labels]="showLabels"
-          [doughnut]="isDoughnut"
-          (select)="onSelect($event)"
-          (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)"
-        >
-        </ngx-charts-pie-chart>
-      </nb-card>
-    </div>
-  </div>
-
-  <div class="card-row">
-    <div class="card-col">
-      <nb-card size="medium" status="success">
-        <nb-card-header>LƯỢNG THỰC PHẨM GIÀU PROTEIN MỖI BỮA</nb-card-header>
-        <ngx-charts-pie-chart
-          [view]="view"
-          [scheme]="colorScheme"
-          [results]="proteinOfMeal"
-          [gradient]="gradient"
-          [legendPosition]="legendPosition"
-          [labels]="showLabels"
-          [doughnut]="isDoughnut"
-          (select)="onSelect($event)"
-          (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)"
-        >
-        </ngx-charts-pie-chart>
-      </nb-card>
-    </div>
-    <div class="card-col">
-      <nb-card size="medium" status="success">
-        <nb-card-header>NGUỒN GÔC THỰC PHẨM</nb-card-header>
-        <ngx-charts-pie-chart
-          [view]="view"
-          [scheme]="colorScheme2"
-          [results]="sourceOfFood"
           [gradient]="gradient"
           [legendPosition]="legendPosition"
           [labels]="showLabels"
@@ -367,11 +242,11 @@
   <div class="card-row">
     <div class="card-col">
       <nb-card size="medium" status="success">
-        <nb-card-header>TẦN SUẤT UỐNG NƯỚC NGỌT, CÓ GAS</nb-card-header>
+        <nb-card-header>YÊU CẦU THỂ CHẤT TRONG CÔNG VIỆC</nb-card-header>
         <ngx-charts-pie-chart
           [view]="view"
-          [scheme]="colorScheme3"
-          [results]="sodawater"
+          [scheme]="colorScheme2"
+          [results]="requireOfJob"
           [gradient]="gradient"
           [legendPosition]="legendPosition"
           [labels]="showLabels"
@@ -403,142 +278,8 @@
     </div>
   </div>
 
-  <div class="card-row">
-    <div class="card-col">
-      <nb-card size="medium" status="warning">
-        <nb-card-header>MẮC BỆNH MÃN TÍNH</nb-card-header>
-        <ngx-charts-pie-chart
-          [view]="view"
-          [scheme]="colorScheme2"
-          [results]="chronicDiseases"
-          [gradient]="gradient"
-          [legendPosition]="legendPosition"
-          [labels]="showLabels"
-          [doughnut]="isDoughnut"
-          (select)="onSelect($event)"
-          (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)"
-        >
-        </ngx-charts-pie-chart>
-      </nb-card>
-    </div>
-    <div class="card-col">
-      <nb-card size="medium" status="warning">
-        <nb-card-header>DÙNG THUỐC TRỊ BỆNH MÃN TÍNH</nb-card-header>
-        <ngx-charts-pie-chart
-          [view]="view"
-          [scheme]="colorScheme3"
-          [results]="chronicDiseasesMedicine"
-          [gradient]="gradient"
-          [legendPosition]="legendPosition"
-          [labels]="showLabels"
-          [doughnut]="isDoughnut"
-          (select)="onSelect($event)"
-          (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)"
-        >
-        </ngx-charts-pie-chart>
-      </nb-card>
-    </div>
-  </div>
 
   <div class="card-row">
-    <div class="card-col">
-      <nb-card size="medium" status="danger">
-        <nb-card-header>CÓ NGƯỜI THÂN MẮC BỆNH MÃN TÍNH</nb-card-header>
-        <ngx-charts-pie-chart
-          [view]="view"
-          [scheme]="colorScheme"
-          [results]="chronicDiseasesRelative"
-          [gradient]="gradient"
-          [legendPosition]="legendPosition"
-          [labels]="showLabels"
-          [doughnut]="isDoughnut"
-          (select)="onSelect($event)"
-          (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)"
-        >
-        </ngx-charts-pie-chart>
-      </nb-card>
-    </div>
-    <div class="card-col">
-      <nb-card size="medium" status="danger">
-        <nb-card-header>YÊU CẦU THỂ CHẤT TRONG CÔNG VIỆC</nb-card-header>
-        <ngx-charts-pie-chart
-          [view]="view"
-          [scheme]="colorScheme2"
-          [results]="requireOfJob"
-          [gradient]="gradient"
-          [legendPosition]="legendPosition"
-          [labels]="showLabels"
-          [doughnut]="isDoughnut"
-          (select)="onSelect($event)"
-          (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)"
-        >
-        </ngx-charts-pie-chart>
-      </nb-card>
-    </div>
-  </div>
-
-  <div class="card-row">
-    <div class="card-col">
-      <nb-card size="medium" status="success">
-        <nb-card-header>PHƯƠNG TIỆN DI CHUYỂN</nb-card-header>
-        <ngx-charts-pie-chart
-          [view]="view"
-          [scheme]="colorScheme3"
-          [results]="transport"
-          [gradient]="gradient"
-          [legendPosition]="legendPosition"
-          [labels]="showLabels"
-          [doughnut]="isDoughnut"
-          (select)="onSelect($event)"
-          (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)"
-        >
-        </ngx-charts-pie-chart>
-      </nb-card>
-    </div>
-    <div class="card-col">
-      <nb-card size="medium" status="success">
-        <nb-card-header>CÔNG VIÊN Ở KHU VỰC SỐNG</nb-card-header>
-        <ngx-charts-pie-chart
-          [view]="view"
-          [scheme]="colorScheme"
-          [results]="park"
-          [gradient]="gradient"
-          [legendPosition]="legendPosition"
-          [labels]="showLabels"
-          [doughnut]="isDoughnut"
-          (select)="onSelect($event)"
-          (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)"
-        >
-        </ngx-charts-pie-chart>
-      </nb-card>
-    </div>
-  </div>
-
-  <div class="card-row">
-    <div class="card-col">
-      <nb-card size="medium" status="warning">
-        <nb-card-header>SỬ DỤNG THUỐC AN THẦN</nb-card-header>
-        <ngx-charts-pie-chart
-          [view]="view"
-          [scheme]="colorScheme2"
-          [results]="sedative"
-          [gradient]="gradient"
-          [legendPosition]="legendPosition"
-          [labels]="showLabels"
-          [doughnut]="isDoughnut"
-          (select)="onSelect($event)"
-          (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)"
-        >
-        </ngx-charts-pie-chart>
-      </nb-card>
-    </div>
     <div class="card-col">
       <nb-card size="medium" status="warning">
         <nb-card-header>TRẦM CẢM, LO ÂU, CĂNG THẲNG</nb-card-header>
@@ -557,5 +298,24 @@
         </ngx-charts-pie-chart>
       </nb-card>
     </div>
+    <div class="card-col">
+      <nb-card size="medium" status="warning">
+        <nb-card-header>CÔNG VIÊN Ở KHU VỰC SỐNG</nb-card-header>
+        <ngx-charts-pie-chart
+          [view]="view"
+          [scheme]="colorScheme"
+          [results]="park"
+          [gradient]="gradient"
+          [legendPosition]="legendPosition"
+          [labels]="showLabels"
+          [doughnut]="isDoughnut"
+          (select)="onSelect($event)"
+          (activate)="onActivate($event)"
+          (deactivate)="onDeactivate($event)"
+        >
+        </ngx-charts-pie-chart>
+      </nb-card>
+    </div>
   </div>
+
 </div>

@@ -169,7 +169,7 @@ export class DialogNewRecordComponent {
             else{
                 console.log(newRecordFiltered);
                 var uploadResult = await Axios({
-                    method: "GET",
+                    method: "POST",
                     url: environment.apiUrl + String("add-record-obesity"),
                     params: {
                       record: String(newRecord),
@@ -181,7 +181,7 @@ export class DialogNewRecordComponent {
                     console.log(uploadResult)
                     this.isshowKQ = true;
                     var errorName = "Create Model"
-                    var messageCreateModel = "Add record successfully: " + String("xxx")
+                    var messageCreateModel = "Add record successfully"
                     this.reload = false;
                     this.toastrService.show(messageCreateModel, `SUCCESS:`, { status: "success", duration: 4000 });
                 }

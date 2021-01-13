@@ -156,7 +156,7 @@ export class DatasetObesityComponent implements OnInit {
         method: "GET",
         url: this.root_url + "get-datasets",
         params: {
-          className: "DatasetObesity",
+          className: "DatasetObesityRaw",
         },
       });
       console.log(getDataset);

@@ -24,7 +24,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   //   home: true,
   // },
   {
-    title: "DỮ LIỆU BÉO PHÌ (VIE)",
+    title: "DỮ LIỆU (VIE)",
     // title: "DỮ LIỆU SAU TIỀN XỬ LÝ (DATASET PREPROCESSING)",
     icon: "folder-add-outline",
     link: "/pages/datasets-preprocessing",
@@ -36,7 +36,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   //   link: "/pages/datasets-merge",
   // },
   {
-    title: "DỮ LIỆU BÉO PHÌ (MX)",
+    title: "DỮ LIỆU (MX - PE - CO)",
     // title: "DỮ LIỆU SAU TIỀN XỬ LÝ (DATASET PREPROCESSING)",
     icon: "folder-add-outline",
     link: "/pages/dataset-obesity",
