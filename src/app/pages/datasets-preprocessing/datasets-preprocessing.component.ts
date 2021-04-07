@@ -242,8 +242,7 @@ export class DatasetsPreprocessingComponent implements OnInit {
     try {
       const dialogCreateModel = this.dialogService.open(DialogNewRecordComponent, {
           context: {
-              modelId: "52GUQmj8f1",
-              dataName: "DatasetSurveyBalance",
+              class_name: "DatasetSurveyBalance",
               isshowFromVIE: true,
           },
       });

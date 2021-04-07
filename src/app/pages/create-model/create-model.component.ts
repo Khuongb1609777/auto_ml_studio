@@ -235,14 +235,14 @@ export class CreateModelComponent implements OnInit {
             })
             if (returnCreate.data['error']) {
               this.reload = false;
-              this.errorName = "Create Model"
-              this.toastrService.show(returnCreate.data['error'], `ERROR: ${this.errorName}`, { status: "danger", duration: 15000 });
+              this.errorName = "Tạo mô hình"
+              this.toastrService.show(returnCreate.data['error'], `Lỗi: ${this.errorName}`, { status: "danger", duration: 15000 });
             }
             else {
               this.errorName = "Create Model"
-              var messageCreateModel = "Create successfully model: " + String(this.modelName)
+              var messageCreateModel = "Tạo thành công mô hình: " + String(this.modelName)
               this.reload = false;
-              this.toastrService.show(messageCreateModel, `SUCCESS: ${this.errorName}`, { status: "success", duration: 4000 });
+              this.toastrService.show(messageCreateModel, `Thành công: ${this.errorName}`, { status: "success", duration: 4000 });
               var isClose = true
               this.dialogRef.close(isClose);
               this.router.navigate(["/pages/models"], { queryParams: { loading: this.loading } });

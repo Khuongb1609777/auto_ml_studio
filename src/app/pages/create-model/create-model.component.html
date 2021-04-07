@@ -2,7 +2,7 @@
 <div *ngIf="isshowFrom">
   <nb-card [nbSpinner]="reload" nbSpinnerSize="tiny" nbSpinnerStatus="primary">
     <nb-card-header headerTitle>
-      Create Model for {{ nameData }}
+      Tạo mô hình
     </nb-card-header>
     <nb-card-body class="custom-wrapper">
       <div class="custom-wrapper-select">
@@ -12,11 +12,11 @@
           nbInput
           fullWidth
           fieldSize="medium"
-          placeholder="Model Name"
+          placeholder="Tên mô hình"
         />
       </div>
       <div class="custom-wrapper-select">
-        <nb-select placeholder="Label: " size="medium">
+        <nb-select placeholder="Chọn nhãn" size="medium">
           <nb-option
             *ngFor="let col of arrColData; let i = index"
             [value]="i"
@@ -28,12 +28,12 @@
       <div class="custom-wrapper-select">
         <nb-select
           multiple
-          placeholder="Feature:"
+          placeholder="Chọn thuộc tính"
           [selected]="selectArr"
           size="medium"
         >
           <nb-option value="all" (selectionChange)="selectAll($event)">
-            check all
+            Chọn tất cả
           </nb-option>
           <nb-option
             *ngFor="let col of arrColData; let i = index"
@@ -45,7 +45,7 @@
         </nb-select>
       </div>
       <div class="custom-wrapper-select">
-        <nb-select placeholder="Select Algorithm" size="medium">
+        <nb-select placeholder="Chọn giải thuật" size="medium">
           <nb-option
             *ngFor="let athm of arrAlgorithm; let i = index"
             value="athm.algorithmName"
@@ -96,7 +96,7 @@
         value="Submit"
         status="primary"
       >
-        Create
+        Tạo mô hình
       </button>
     </nb-card-footer>
   </nb-card>

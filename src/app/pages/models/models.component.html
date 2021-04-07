@@ -1,4 +1,4 @@
-<nb-card>
+<nb-card [nbSpinner]="reload" nbSpinnerSize="tiny" nbSpinnerStatus="primary">
   <!-- <nb-card-header tableTitle>Your Model</nb-card-header> -->
   <nb-card-body>
     <ag-grid-angular
@@ -23,30 +23,6 @@
           <div><button
             nbButton
             size="small"
-            (click)="modelMxUse()"
-            type="submit"
-            value="Submit"
-            status="primary"
-          >
-            CHẨN ĐOÁN BÉO PHÌ (MX)
-          </button></div>
-        </td>
-        <td><div><button
-          nbButton
-          size="small"
-          (click)="modelMxUse()"
-          type="submit"
-          value="Submit"
-          status="primary"
-        >
-           CẬP NHẬT MÔ HÌNH (MX)
-        </button></div></td>
-      </tr>
-      <tr>
-        <td>
-          <div><button
-            nbButton
-            size="small"
             (click)="modelVieUse()"
             type="submit"
             value="Submit"
@@ -58,7 +34,7 @@
         <td><div><button
           nbButton
           size="small"
-          (click)="modelVieUse()"
+          (click)="updateModelVn()"
           type="submit"
           value="Submit"
           status="primary"
@@ -73,5 +49,27 @@
 </nb-card>
 <!-- <p *ngIf="errorFlag" errorGetDetail>{{ errorGetDetail }}</p> -->
 
-<!-- <ngb-alert deleteSuccess *ngIf="successMessage" type="success" (close)="successMessage = ''">
-    {{ successMessage }}</ngb-alert> -->
+<!--       <tr>
+        <td>
+          <div><button
+            nbButton
+            size="small"
+            (click)="modelMxUse()"
+            type="submit"
+            value="Submit"
+            status="primary"
+          >
+            CHẨN ĐOÁN BÉO PHÌ (MX)
+          </button></div>
+        </td>
+        <td><div><button
+          nbButton
+          size="small"
+          (click)="updateModelmX()"
+          type="submit"
+          value="Submit"
+          status="primary"
+        >
+           CẬP NHẬT MÔ HÌNH (MX)
+        </button></div></td>
+      </tr> -->

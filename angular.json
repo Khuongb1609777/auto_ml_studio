@@ -82,7 +82,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "port": 4209,
+            "port": 4210,
             "browserTarget": "ngx-admin-demo:build"
           },
           "configurations": {

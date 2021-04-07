@@ -6,6 +6,6 @@
 export const environment = {
   production: true,
   apiUrl:
-    window["env"]["apiUrl"] || "https://rpa-iot-dev-api.innoria.com/parse",
-  appId: window["env"]["appId"] || "d91b47af8bd27e39704139d448340365",
+     "http://lv-api.spio.live/parse",
+  appId: "d91b47af8bd27e39704139d448340365",
 };

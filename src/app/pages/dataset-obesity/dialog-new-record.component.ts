@@ -181,9 +181,9 @@ export class DialogNewRecordComponent {
                     console.log(uploadResult)
                     this.isshowKQ = true;
                     var errorName = "Create Model"
-                    var messageCreateModel = "Add record successfully"
+                    var messageCreateModel = "Thêm mẫu thành công"
                     this.reload = false;
-                    this.toastrService.show(messageCreateModel, `SUCCESS:`, { status: "success", duration: 4000 });
+                    this.toastrService.show(messageCreateModel, `Thành công:`, { status: "success", duration: 4000 });
                 }
                 
                 

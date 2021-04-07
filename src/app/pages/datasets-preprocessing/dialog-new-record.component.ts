@@ -53,7 +53,9 @@ export class DialogNewRecordComponent {
     public timeuse: number;
     public depression_values: string[];
     public depression: number;
-    
+    public obesity_values: string[]
+    public obesity: number;
+    public reload: boolean;
 
     public prediction: string;
     public isshowKQ: boolean;
@@ -75,6 +77,7 @@ export class DialogNewRecordComponent {
         this.park_values = ["không","có"];
         this.timeuse_values = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"];
         this.depression_values = ["không","có"];
+        this.obesity_values = ["Thiếu cân","Bình thường","Tiền béo phì","Béo phì loại 1","Béo phì loại 2","Béo phì loại 3"]
  
 
     }
@@ -97,6 +100,9 @@ export class DialogNewRecordComponent {
         this.sleeptime_values = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"];
         this.timeuse_values = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"];
         this.depression_values = ["không","có"];
+        this.obesity_values = ["Thiếu cân","Bình thường","Tiền béo phì","Béo phì loại 1","Béo phì loại 2","Béo phì loại 3"]
+ 
+
 
 
         this.isshowKQ = false;
@@ -234,33 +240,41 @@ export class DialogNewRecordComponent {
       console.log(err);
     }
   }
+
+  getObesity(event, index, col) {
+    try {
+      this.obesity = index;
+    } catch (err) {
+      console.log(err);
+    }
+  }
     
 
 
-  async useModelVn(){
+  async add_data(){
     try{
-        var newRecord = [this.meals,this.alcohol, this.sleep, this.require, this.park, this.timeuse, this.depression, this.breakfast, this.protein, this.water, this.vegetable, this.exercise, this.alcohol, this.sport, this.fastfood, this.dinner];
+        var newRecord = [this.meals,this.nicotine, this.sleep, this.require, this.park, this.timeuse, this.depression, this.breakfast, this.protein, this.water, this.vegetable, this.exercise, this.alcohol, this.sport, this.fastfood, this.dinner, this.obesity];
         var newRecordFiltered = newRecord.filter(function (el) {
             return el != null;
           });
         console.log(newRecord)
-        if(newRecordFiltered.length< 16){
+        if(newRecordFiltered.length< 17){
             var messageCreateModel = "ERROR, please provie full information"
             this.toastrService.show(messageCreateModel, `Error value: provide full features value  `, { status: "danger", duration: 4000 });
         }
         else{
             var predictResult = await Axios({
-                method: "GET",
-                url: environment.apiUrl + String("load-model"),
+                method: "POST",
+                url: environment.apiUrl + String("new-record-survey"),
                 params: {
                   record: String(newRecord),
-                  modelId:""
+                  className:"DatasetSurveyBalance"
                 },
             })
             if (predictResult){
-              console.log(predictResult.data.dataPredict[0])
-              this.prediction = predictResult.data.dataPredict[0]
-              this.isshowKQ = true;
+              var messageCreateModel = "Thêm mẫu thành công"
+              this.reload = false;
+              this.toastrService.show(messageCreateModel, `Thành công:`, { status: "success", duration: 4000 });
             }
         }
     }

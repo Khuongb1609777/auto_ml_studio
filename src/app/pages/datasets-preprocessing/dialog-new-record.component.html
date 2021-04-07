@@ -1,6 +1,6 @@
 <div *ngIf="isshowFromVIE">
     <nb-card>
-      <nb-card-header headerTitle> MÔ HÌNH TRÊN TẬP DỮ LIỆU VIỆT NAM </nb-card-header>
+      <nb-card-header headerTitle>Thêm dữ liệu mới</nb-card-header>
       <nb-card-body class="custom-wrapper">
         <table>
           <tr>
@@ -10,6 +10,7 @@
                   <nb-option
                     *ngFor="let col of meals_values; let i = index"
                     [value]="i"
+                    fullWidth
                     (selectionChange)="getMeals($event, i, col)"
                     >{{ col }}</nb-option
                   >
@@ -22,6 +23,7 @@
                   <nb-option
                     *ngFor="let col of breakfast_values; let i = index"
                     [value]="i"
+                    fullWidth
                     (selectionChange)="getBreakfast($event, i, col)"
                     >{{ col }}</nb-option
                   >
@@ -34,6 +36,7 @@
                   <nb-option
                     *ngFor="let col of dinner_values; let i = index"
                     [value]="i"
+                    fullWidth
                     (selectionChange)="getDinner($event, i, col)"
                     >{{ col }}</nb-option
                   >
@@ -45,6 +48,7 @@
                 <nb-option
                   *ngFor="let col of fastfood_values; let i = index"
                   [value]="i"
+                  fullWidth
                   (selectionChange)="getFastfood($event, i, col)"
                   >{{ col }}</nb-option
                 >
@@ -59,6 +63,7 @@
                   <nb-option
                     *ngFor="let col of protein_values; let i = index"
                     [value]="i"
+                    fullWidth
                     (selectionChange)="getProtein($event, i, col)"
                     >{{ col }}</nb-option
                   >
@@ -74,6 +79,7 @@
                   <nb-option
                     *ngFor="let col of water_values; let i = index"
                     [value]="i"
+                    fullWidth
                     (selectionChange)="getWater($event, i, col)"
                     >{{ col }}</nb-option
                   >
@@ -86,6 +92,7 @@
                   <nb-option
                     *ngFor="let col of exercise_values; let i = index"
                     [value]="i"
+                    fullWidth
                     (selectionChange)="getExercise($event, i, col)"
                     >{{ col }}</nb-option
                   >
@@ -98,6 +105,7 @@
                   <nb-option
                     *ngFor="let col of sport_values; let i = index"
                     [value]="i"
+                    fullWidth
                     (selectionChange)="getSport($event, i, col)"
                     >{{ col }}</nb-option
                   >
@@ -112,6 +120,7 @@
                   <nb-option
                     *ngFor="let col of alcohol_values; let i = index"
                     [value]="i"
+                    fullWidth
                     (selectionChange)="getAlcohol($event, i, col)"
                     >{{ col }}</nb-option
                   >
@@ -127,6 +136,7 @@
                   <nb-option
                     *ngFor="let col of nicotine_values; let i = index"
                     [value]="i"
+                    fullWidth
                     (selectionChange)="getNicotine($event, i, col)"
                     >{{ col }}</nb-option
                   >
@@ -139,6 +149,7 @@
                   <nb-option
                     *ngFor="let col of require_values; let i = index"
                     [value]="i"
+                    fullWidth
                     (selectionChange)="getRequire($event, i, col)"
                     >{{ col }}</nb-option
                   >
@@ -154,6 +165,7 @@
                   <nb-option
                     *ngFor="let col of sleeptime_values; let i = index"
                     [value]="i"
+                    fullWidth
                     (selectionChange)="getSleeptime($event, i, col)"
                     >{{ col }}</nb-option
                   >
@@ -215,28 +227,38 @@
               </div>
             </td>
           </tr>
+          <tr>
+            <td>
+              <div class="custom-wrapper-select">
+                <nb-select
+                  placeholder="Tình trạng cân nặng"
+                  size="medium"
+                >
+                  <nb-option
+                    *ngFor="let col of obesity_values; let i = index"
+                    [value]="i"
+                    (selectionChange)="getObesity($event, i, col)"
+                    >{{ col }}</nb-option
+                  >
+                </nb-select>
+              </div>
+
+            </td>
+          </tr>
         </table>
       </nb-card-body>
       <nb-card-footer>
         <button
           nbButton
           size="small"
-          (click)="useModelVn()"
+          (click)="add_data()"
           type="submit"
           value="Submit"
           status="primary"
         >
-          Chẩn đoán
+          Thêm mẫu mới
         </button>
       </nb-card-footer>
     </nb-card>
-    <div *ngIf="isshowKQ">
-      <nb-card>
-        <nb-card-header>Kết quả chẩn đoán</nb-card-header>
-        <nb-card-body>
-          Kết quả chẩn đoán cho thấy: {{ prediction }}
-        </nb-card-body>
-      </nb-card>
-    </div>
   </div>
   

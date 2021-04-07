@@ -23,6 +23,7 @@ import { LOADING } from '../create-model/constanst'
 import { NO_ROW_AG_GRID } from '../create-model/constanst'
 
 
+
 @Component({
     selector: "models",
     styleUrls: ["./models.component.scss"],
@@ -32,6 +33,7 @@ export class ModelsComponent implements OnInit {
     private errorName: String;
     @HostBinding('class')
     classes = 'example-items-rows';
+    public reload: boolean;
     public data: any;
     public root_url: string;
     public showDataModels: any;
@@ -57,6 +59,9 @@ export class ModelsComponent implements OnInit {
     public keyUpdate: boolean;
     public loadingTemplate: string;
     public noRowsTemplate: string;
+    public systemModelVN: string;
+    public systemModelMX: string;
+    public loading: boolean;
 
 
     constructor(private dialogService: NbDialogService, private toastrService: NbToastrService) {
@@ -77,6 +82,7 @@ export class ModelsComponent implements OnInit {
 
     async ngOnInit() {
         try {
+            this.reload = false;
             this.errorFlag = false;
             this.userIdLogin = "JclGidZqhN";
             this.root_url = environment.apiUrl;
@@ -87,12 +93,20 @@ export class ModelsComponent implements OnInit {
                     userId: this.userIdLogin,
                 },
             });
-            console.log(resultShow)
+            const system_models = await Axios({
+                method: "GET",
+                url: this.root_url + String("get-system-model"),
+                params: {
+                    userId: this.userIdLogin,
+                },
+            });
+            this.systemModelMX = system_models.data['modelMx']
+            this.systemModelVN = system_models.data['modelVn']
             this.showDataModels = resultShow.data["results"];
             this.isShowModels = true;
             this.columnDefs = COLUMNSDEFS_MANAGE_MODEL
             this.columnDefs[4] = {
-                headerName: "Delete Model",
+                headerName: "Xóa mô hình",
                 cellRenderer: "buttonDeleteModel",
                 cellRendererParams: {
                     onClick: this.onClickDeleteModel.bind(this),
@@ -214,7 +228,7 @@ export class ModelsComponent implements OnInit {
         try {
             const dialogCreateModel = this.dialogService.open(DialogUseModelMxComponent, {
                 context: {
-                    modelId: "4OD3VzZPVw",
+                    modelId: this.systemModelMX,
                     dataName: "DatasetObesity",
                     isshowFromMX: true,
                 },
@@ -228,7 +242,7 @@ export class ModelsComponent implements OnInit {
         try {
             const dialogCreateModel = this.dialogService.open(DialogUseModelMxComponent, {
                 context: {
-                    modelId: "52GUQmj8f1",
+                    modelId: this.systemModelVN,
                     dataName: "DatasetSurveyBalance",
                     isshowFromVIE: true,
                 },
@@ -238,7 +252,59 @@ export class ModelsComponent implements OnInit {
         }
     }
 
-    postRecord(){
-        
+    async updateModelVn(){
+        this.reload = true;
+        setTimeout(() => this.loading = false, 3000);
+        const get_model_system = await Axios({
+            method: "POST",
+            url: this.root_url + String("create-model-system"),
+            params: {
+                userId: this.userIdLogin,
+            },
+        });
+        console.log(get_model_system.data.objectId)
+        if(get_model_system.data.objectId){
+            var notificationSuccess = "Cập nhật mô hình " + String(get_model_system.data.objectId) + " thành công"
+            this.toastrService.show(notificationSuccess, `Thành công cập nhật mô hình mới`, { status: "success", duration :5000});
+            this.reload = false;
+            const system_models = await Axios({
+                method: "GET",
+                url: this.root_url + String("get-system-model"),
+                params: {
+                    userId: this.userIdLogin,
+                },
+            });
+            this.systemModelMX = system_models.data['modelMx']
+            this.systemModelVN = system_models.data['modelVn']
+        }
     }
+
+    async updateModelmX(){
+        this.reload = true;
+        setTimeout(() => this.loading = false, 3000);
+        const get_model_system = await Axios({
+            method: "POST",
+            url: this.root_url + String("create-model-system-mx"),
+            params: {
+                userId: this.userIdLogin,
+            },
+        });
+        console.log(get_model_system.data.objectId)
+        if(get_model_system.data.objectId){
+            var notificationSuccess = "Cập nhật mô hình " + String(get_model_system.data.objectId) + "  thành công"
+            this.toastrService.show(notificationSuccess, `Thành công `, { status: "success",  duration :5000 });
+            this.reload = false;
+            const system_models = await Axios({
+                method: "GET",
+                url: this.root_url + String("get-system-model"),
+                params: {
+                    userId: this.userIdLogin,
+                },
+            });
+            this.systemModelMX = system_models.data['modelMx']
+            this.systemModelVN = system_models.data['modelVn']
+        }
+    }
+
+
 }

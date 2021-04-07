@@ -45,14 +45,14 @@ export class DialogDeleteModelComponent {
         })
 
         if (resultDelete.data['error']) {
-            this.errorName = "DELETE DATASET"
+            this.errorName = "xóa mô hình"
             var notificationDeleteDataset = resultDelete.data['error']
-            this.toastrService.show(notificationDeleteDataset, `ERROR: ${this.errorName}`, { status: "danger" });
+            this.toastrService.show(notificationDeleteDataset, `Lỗi: ${this.errorName}`, { status: "danger" });
         }
         else {
-            this.errorName = "DELETE DATASET"
-            var notificationSuccess = "Delete model " + String(this.nameObjectDelete) + " successfully"
-            this.toastrService.show(notificationSuccess, `SUCCESS: ${this.errorName}`, { status: "success" });
+            this.errorName = "xóa mô hình"
+            var notificationSuccess = "Xóa mô hình " + String(this.nameObjectDelete) + " successfully"
+            this.toastrService.show(notificationSuccess, `Thành công: ${this.errorName}`, { status: "success" });
             var reload = true;
             this.dialogRef.close(reload)
         }

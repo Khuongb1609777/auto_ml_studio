@@ -1,0 +1,37 @@
+.headerTitle {
+    text-align: center;
+    font-size: 2em;
+  }
+  
+  [columnstype] {
+    text-align: center;
+    height: 200px;
+  }
+  
+  [nbStyle] {
+    height: 300px;
+  }
+  
+  [center] {
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .custom-wrapper {
+    display: flex;
+    width: 100%;
+    &-select {
+      padding: 7px;
+      nb-select {
+        width: 220px;
+      }
+    }
+  }
+  
+  [button-default] {
+    padding-top: 5px;
+    vertical-align: middle;
+    text-align: center;
+    align-content: center;
+  }
+  

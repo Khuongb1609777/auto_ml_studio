@@ -47,7 +47,7 @@ export class DialogUseModelMxComponent {
     public CALC: number;
     public FHWO_values: string[];
     public FHWO: number;
-    public NCP_values: number[];
+    public NCP_values: string[];
     public NCP: number[];
     public MTRANS_values: string[];
     public MTRANS: number;
@@ -99,7 +99,7 @@ export class DialogUseModelMxComponent {
         this.TUE_values =  ['dưới 2 giờ','từ 2 - 5 giờ','trên 5 giờ'];
         this.FAVC_values =  ['có','không']; ////có thường ăn nhiều thức ăn giàu calo không
         this.FCVC_values =  ['không','1 lần mỗi 2 bữa','mỗi bữa ăn']; //tiêu thụ rau trong bưũa ăn
-        this.NCP_values =  [1,2,3,4,5,6]; //số bưũa ăn chính
+        this.NCP_values =  ["1","2","3","4","5","6"]; //số bưũa ăn chính
         this.CAEC_values =  ['không','cách 1 - 2 bữa 1 lần','cách 3 - 4 bữa 1 lần','luôn luôn']; // ăn bữa phụ
         this.CALC_values =  ['không','1 - 3lần/tuần','3 - 6 lần/tuần','mỗi ngày']; //uống rượu
         this.SCC_values =  ['có','không'] //theo dõi lượng calo tiêu thụ
@@ -134,16 +134,16 @@ export class DialogUseModelMxComponent {
         this.gender_values =  ['Nữ','Nam'];
         this.CH2O_values =   ['dưới 1 lít',' từ 1 - 2 lít','trên 2 lít'];
         this.TUE_values =  ['dưới 2 giờ','từ 2 - 5 giờ','trên 5 giờ'];
-        this.FAVC_values =  ['có','không']; ////có thường ăn nhiều thức ăn giàu calo không
+        this.FAVC_values =  ['không','có']; ////có thường ăn nhiều thức ăn giàu calo không
         this.FCVC_values =  ['không','1 lần mỗi 2 bữa','mỗi bữa ăn']; //tiêu thụ rau trong bưũa ăn
-        this.NCP_values =  [1,2,3,4,5,6]; //số bưũa ăn chính
+        this.NCP_values =  ["1 bữa/ngày","2 bữa/ngày","3 bữa/ngày","4 bữa/ngày","5 bữa/ngày","6 bữa/ngày"]; //số bưũa ăn chính
         this.CAEC_values =  ['không','cách 1 - 2 bữa 1 lần','cách 3 - 4 bữa 1 lần','luôn luôn']; // ăn bữa phụ
         this.CALC_values =  ['không','1 - 3lần/tuần','3 - 6 lần/tuần','mỗi ngày']; //uống rượu
-        this.SCC_values =  ['có','không'] //theo dõi lượng calo tiêu thụ
+        this.SCC_values =  ['không','có'] //theo dõi lượng calo tiêu thụ
         this.FAF_values =  ['không','1 - 2 ngày 1 lần','2 - 4 ngày 1 lần',' 4 - 5 ngày 1 lần']; //tần suất hoạt động thể chất
         this.MTRANS_values =  ['Ôtô','xe máy','xe đạp','phương tiện công cộng','đi bộ'];
-        this.SMOKE_values =  ['có','không'];
-        this.FHWO_values =  ['có', "không"] // có thành viên trong gia đình bị béo phì không
+        this.SMOKE_values =  ['không','có'];
+        this.FHWO_values =  ['không', "có"] // có thành viên trong gia đình bị béo phì không
 
 
         this.meals_values = ["1","2","3","4","5","6","7"];
@@ -159,8 +159,8 @@ export class DialogUseModelMxComponent {
         this.nicotine_values = ["không","có"];
         this.require_values = ["không","yêu cầu thấp","trung bình","yêu cầu cao","nặng nhọc"];
         this.park_values = ["không","có"];
-        this.sleeptime_values = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"];
-        this.timeuse_values = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"];
+        this.sleeptime_values = ["0 tiếng/ngày","1 tiếng/ngày","2 tiếng/ngày","3 tiếng/ngày","4 tiếng/ngày","5 tiếng/ngày","6 tiếng/ngày","7 tiếng/ngày","8 tiếng/ngày","9 tiếng/ngày","10 tiếng/ngày","11 tiếng/ngày","12 tiếng/ngày","13 tiếng/ngày","14 tiếng/ngày","15 tiếng/ngày","16 tiếng/ngày"];
+        this.timeuse_values = ["0 tiếng/ngày","1 tiếng/ngày","2 tiếng/ngày","3 tiếng/ngày","4 tiếng/ngày","5 tiếng/ngày","6 tiếng/ngày","7 tiếng/ngày","8 tiếng/ngày","9 tiếng/ngày","10 tiếng/ngày","11 tiếng/ngày","12 tiếng/ngày","13 tiếng/ngày","14 tiếng/ngày","15 tiếng/ngày","16 tiếng/ngày"];
         this.depression_values = ["không","có"];
 
 
@@ -239,7 +239,8 @@ export class DialogUseModelMxComponent {
                     url: environment.apiUrl + String("load-model"),
                     params: {
                       record: String(newRecord),
-                      modelId: this.modelId
+                      modelId: this.modelId,
+                      classModel: "SystemModelMx",
                     },
                 })
                 if (predictResult){
@@ -483,23 +484,14 @@ export class DialogUseModelMxComponent {
 
   async useModelVn(){
     try{
-        var newRecord = [this.meals,this.alcohol, this.sleep, this.require, this.park, this.timeuse, this.depression, this.breakfast, this.protein, this.water, this.vegetable, this.exercise, this.alcohol, this.sport, this.fastfood, this.dinner];
-        var newRecordFiltered = newRecord.filter(function (el) {
-            return el != null;
-          });
-        console.log(newRecord)
-        if(newRecordFiltered.length< 16){
-            var messageCreateModel = "ERROR, please provie full information"
-            this.toastrService.show(messageCreateModel, `Error value: provide full features value  `, { status: "danger", duration: 4000 });
-        }
-        else{
-            console.log(newRecordFiltered);
+        var newRecord = [this.meals,this.nicotine, this.sleep, this.require, this.park, this.timeuse, this.depression, this.breakfast, this.protein, this.water, this.vegetable, this.exercise, this.alcohol, this.sport, this.fastfood, this.dinner];
             var predictResult = await Axios({
                 method: "GET",
                 url: environment.apiUrl + String("load-model"),
                 params: {
                   record: String(newRecord),
-                  modelId: this.modelId
+                  modelId: this.modelId,
+                  classModel: "SystemModelVn"
                 },
             })
             if (predictResult){
@@ -507,7 +499,6 @@ export class DialogUseModelMxComponent {
               this.prediction = predictResult.data.dataPredict[0]
               this.isshowKQ = true;
             }
-        }
     }
     catch(err){
         console.log(err)

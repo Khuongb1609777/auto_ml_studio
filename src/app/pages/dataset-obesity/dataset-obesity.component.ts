@@ -159,9 +159,7 @@ export class DatasetObesityComponent implements OnInit {
           className: "DatasetObesityRaw",
         },
       });
-      console.log(getDataset);
       this.dataset = getDataset.data["results"];
-      console.log(this.dataset)
       this.loading = false
       this.isShowData = true;
 
@@ -176,7 +174,6 @@ export class DatasetObesityComponent implements OnInit {
       })
 
       this.dataCharts = dataChartsTemp.data;
-      console.log(this.dataCharts)
       this.genderData = this.dataCharts['chart_gender']
       this.FAVC = this.dataCharts['chart_FAVC']
       this.NCP = this.dataCharts['chart_NCP']
