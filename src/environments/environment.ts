@@ -10,6 +10,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:5000/",
+  apiUrl: "https://flask-server.paas.innoria.com/",
   appId: "d91b47af8bd27e39704139d448340365",
 };
