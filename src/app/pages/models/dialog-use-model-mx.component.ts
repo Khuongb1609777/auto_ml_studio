@@ -97,16 +97,16 @@ export class DialogUseModelMxComponent {
         this.gender_values =  ['Nữ','Nam'];
         this.CH2O_values =   ['dưới 1 lít',' từ 1 - 2 lít','trên 2 lít'];
         this.TUE_values =  ['dưới 2 giờ','từ 2 - 5 giờ','trên 5 giờ'];
-        this.FAVC_values =  ['có','không']; ////có thường ăn nhiều thức ăn giàu calo không
+        this.FAVC_values =  ['Không','có']; ////có thường ăn nhiều thức ăn giàu calo không
         this.FCVC_values =  ['không','1 lần mỗi 2 bữa','mỗi bữa ăn']; //tiêu thụ rau trong bưũa ăn
         this.NCP_values =  ["1","2","3","4","5","6"]; //số bưũa ăn chính
         this.CAEC_values =  ['không','cách 1 - 2 bữa 1 lần','cách 3 - 4 bữa 1 lần','luôn luôn']; // ăn bữa phụ
         this.CALC_values =  ['không','1 - 3lần/tuần','3 - 6 lần/tuần','mỗi ngày']; //uống rượu
-        this.SCC_values =  ['có','không'] //theo dõi lượng calo tiêu thụ
+        this.SCC_values =  ['Không','Có'] //theo dõi lượng calo tiêu thụ
         this.FAF_values =  ['không','1 - 2 ngày 1 lần','2 - 4 ngày 1 lần',' 4 - 5 ngày 1 lần']; //tần suất hoạt động thể chất
         this.MTRANS_values =  ['Ôtô','xe máy','xe đạp','phương tiện công cộng','đi bộ'];
-        this.SMOKE_values =  ['có','không'];
-        this.FHWO_values =  ['có', "không"] // có thành viên trong gia đình bị béo phì không
+        this.SMOKE_values =  ['Không','có'];
+        this.FHWO_values =  ['Không', "có"] // có thành viên trong gia đình bị béo phì không
 
 
 
@@ -120,11 +120,11 @@ export class DialogUseModelMxComponent {
         this.exercise_values = ["không","dưới 1 giờ/tuần","từ 1 - 3 giờ/tuần","trên 3 giờ/tuần"];
         this.sport_values = ["không","dưới 1 giờ/tuần","từ 1 - 3 giờ/tuần","trên 3 giờ/tuần"];
         this.alcohol_values = ["không","có"];
-        this.nicotine_values = ["không","có"];
+        this.nicotine_values = ["Có","không"];
         this.require_values = ["không","yêu cầu thấp","trung bình","yêu cầu cao","nặng nhọc"];
-        this.park_values = ["không","có"];
+        this.park_values = ["Có","không"];
         this.timeuse_values = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"];
-        this.depression_values = ["không","có"];
+        this.depression_values = ["Có","không"];
  
 
     }
