@@ -28,6 +28,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     // title: "DỮ LIỆU SAU TIỀN XỬ LÝ (DATASET PREPROCESSING)",
     icon: "folder-add-outline",
     link: "/pages/datasets-preprocessing",
+    home: true,
   }, 
   // {
   //   title: "DỮ LIỆU ĐỐI CHIẾU",
