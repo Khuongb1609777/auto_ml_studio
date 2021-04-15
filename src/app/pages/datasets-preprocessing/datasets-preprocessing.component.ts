@@ -171,9 +171,9 @@ export class DatasetsPreprocessingComponent implements OnInit {
           className: "DatasetSurveyRaw",
         },
       });
-      console.log(getDataset);
+      // console.log(getDataset);
       this.dataset = getDataset.data["results"];
-      console.log(this.dataset)
+      // console.log(this.dataset)
       this.loading = false
       this.isShowData = true;
 
