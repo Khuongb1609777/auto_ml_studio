@@ -28,7 +28,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     // title: "DỮ LIỆU SAU TIỀN XỬ LÝ (DATASET PREPROCESSING)",
     icon: "folder-add-outline",
     link: "/pages/datasets-preprocessing",
-    home: true,
+
   }, 
   // {
   //   title: "DỮ LIỆU ĐỐI CHIẾU",
@@ -63,6 +63,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: "MÔ HÌNH",
     icon: "book-outline",
     link: "/pages/models",
+    home: true,
   },
   // {
   //   title: "userRegister",
