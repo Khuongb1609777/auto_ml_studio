@@ -156,12 +156,12 @@ export class DialogUseModelMxComponent {
         this.exercise_values = ["không","dưới 1 giờ/tuần","từ 1 - 3 giờ/tuần","trên 3 giờ/tuần"];
         this.sport_values = ["không","dưới 1 giờ/tuần","từ 1 - 3 giờ/tuần","trên 3 giờ/tuần"];
         this.alcohol_values = ["không","có"];
-        this.nicotine_values = ["không","có"];
+        this.nicotine_values = ["Có","không"];
         this.require_values = ["không","yêu cầu thấp","trung bình","yêu cầu cao","nặng nhọc"];
         this.park_values = ["không","có"];
         this.sleeptime_values = ["0 tiếng/ngày","1 tiếng/ngày","2 tiếng/ngày","3 tiếng/ngày","4 tiếng/ngày","5 tiếng/ngày","6 tiếng/ngày","7 tiếng/ngày","8 tiếng/ngày","9 tiếng/ngày","10 tiếng/ngày","11 tiếng/ngày","12 tiếng/ngày","13 tiếng/ngày","14 tiếng/ngày","15 tiếng/ngày","16 tiếng/ngày"];
         this.timeuse_values = ["0 tiếng/ngày","1 tiếng/ngày","2 tiếng/ngày","3 tiếng/ngày","4 tiếng/ngày","5 tiếng/ngày","6 tiếng/ngày","7 tiếng/ngày","8 tiếng/ngày","9 tiếng/ngày","10 tiếng/ngày","11 tiếng/ngày","12 tiếng/ngày","13 tiếng/ngày","14 tiếng/ngày","15 tiếng/ngày","16 tiếng/ngày"];
-        this.depression_values = ["không","có"];
+        this.depression_values = ["Có","không"];
 
 
         this.isshowKQ = false;
