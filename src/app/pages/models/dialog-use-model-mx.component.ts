@@ -233,7 +233,7 @@ export class DialogUseModelMxComponent {
                 this.toastrService.show(messageCreateModel, `Error value: provide full features value  `, { status: "danger", duration: 4000 });
             }
             else{
-                console.log(newRecordFiltered);
+                // console.log(newRecordFiltered);
                 var predictResult = await Axios({
                     method: "GET",
                     url: environment.apiUrl + String("load-model"),
@@ -244,7 +244,7 @@ export class DialogUseModelMxComponent {
                     },
                 })
                 if (predictResult){
-                  console.log(predictResult.data.dataPredict[0])
+                  // console.log(predictResult.data.dataPredict[0])
                   this.prediction = predictResult.data.dataPredict[0]
                   this.isshowKQ = true;
                 }
@@ -261,7 +261,7 @@ export class DialogUseModelMxComponent {
     getGender(event, index, col) {
         try {
           this.gender = index;
-          console.log(this.gender);
+          // console.log(this.gender);
         } catch (err) {
           console.log(err);
         }
@@ -269,7 +269,7 @@ export class DialogUseModelMxComponent {
     getCH2O(event, index, col) {
         try {
           this.CH2O = index;
-          console.log(this.CH2O);
+          // console.log(this.CH2O);
         } catch (err) {
           console.log(err);
         }
@@ -277,7 +277,7 @@ export class DialogUseModelMxComponent {
     getTUE(event, index, col) {
         try {
           this.TUE = index;
-          console.log(this.TUE);
+          // console.log(this.TUE);
         } catch (err) {
           console.log(err);
         }
@@ -285,7 +285,7 @@ export class DialogUseModelMxComponent {
     getFAVC(event, index, col) {
         try {
           this.FAVC = index;
-          console.log(this.FAVC);
+          // console.log(this.FAVC);
         } catch (err) {
           console.log(err);
         }
@@ -293,7 +293,7 @@ export class DialogUseModelMxComponent {
     getFCVC(event, index, col) {
         try {
           this.FCVC = index;
-          console.log(this.FCVC);
+          // console.log(this.FCVC);
         } catch (err) {
           console.log(err);
         }
@@ -301,7 +301,7 @@ export class DialogUseModelMxComponent {
     getNCP(event, index, col) {
         try {
           this.NCP = index;
-          console.log(this.NCP);
+          // console.log(this.NCP);
         } catch (err) {
           console.log(err);
         }
@@ -309,7 +309,7 @@ export class DialogUseModelMxComponent {
     getCAEC(event, index, col) {
         try {
           this.CAEC = index;
-          console.log(this.CAEC);
+          // console.log(this.CAEC);
         } catch (err) {
           console.log(err);
         }
@@ -317,7 +317,7 @@ export class DialogUseModelMxComponent {
     getCALC(event, index, col) {
         try {
           this.CALC = index;
-          console.log(this.CALC);
+          // console.log(this.CALC);
         } catch (err) {
           console.log(err);
         }
@@ -325,7 +325,7 @@ export class DialogUseModelMxComponent {
     getSCC(event, index, col) {
         try {
           this.SCC = index;
-          console.log(this.SCC);
+          // console.log(this.SCC);
         } catch (err) {
           console.log(err);
         }
@@ -333,7 +333,7 @@ export class DialogUseModelMxComponent {
     getFAF(event, index, col) {
         try {
           this.FAF = index;
-          console.log(this.FAF);
+          // console.log(this.FAF);
         } catch (err) {
           console.log(err);
         }
@@ -341,7 +341,7 @@ export class DialogUseModelMxComponent {
     getMTRANS(event, index, col) {
         try {
           this.MTRANS = index;
-          console.log(this.MTRANS);
+          // console.log(this.MTRANS);
         } catch (err) {
           console.log(err);
         }
@@ -349,7 +349,7 @@ export class DialogUseModelMxComponent {
     getSMOKE(event, index, col) {
         try {
           this.SMOKE = index;
-          console.log(this.SMOKE);
+          // console.log(this.SMOKE);
         } catch (err) {
           console.log(err);
         }
@@ -357,7 +357,7 @@ export class DialogUseModelMxComponent {
     getFHWO(event, index, col) {
         try {
           this.FHWO = index;
-          console.log(this.FHWO);
+          // console.log(this.FHWO);
         } catch (err) {
           console.log(err);
         }
@@ -495,7 +495,7 @@ export class DialogUseModelMxComponent {
                 },
             })
             if (predictResult){
-              console.log(predictResult.data.dataPredict[0])
+              // console.log(predictResult.data.dataPredict[0])
               this.prediction = predictResult.data.dataPredict[0]
               this.isshowKQ = true;
             }

@@ -167,7 +167,7 @@ export class DialogNewRecordComponent {
                 this.toastrService.show(messageCreateModel, `Error value: provide full features value  `, { status: "danger", duration: 4000 });
             }
             else{
-                console.log(newRecordFiltered);
+                // console.log(newRecordFiltered);
                 var uploadResult = await Axios({
                     method: "POST",
                     url: environment.apiUrl + String("add-record-obesity"),
@@ -178,7 +178,7 @@ export class DialogNewRecordComponent {
                     },
                 })
                 if (uploadResult){
-                    console.log(uploadResult)
+                    // console.log(uploadResult)
                     this.isshowKQ = true;
                     var errorName = "Create Model"
                     var messageCreateModel = "Thêm mẫu thành công"

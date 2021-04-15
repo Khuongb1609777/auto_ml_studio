@@ -195,7 +195,7 @@ export class DatasetsPreprocessingComponent implements OnInit {
         },
       })
       this.dataCharts = dataChartsTemp.data;
-      console.log(this.dataCharts)
+      // console.log(this.dataCharts)
       this.mealOfThedayData = this.dataCharts['chart_meal_of_theday']
       this.breakfastOfTheweek = this.dataCharts['chart_breakfast_of_theweek']
       this.dinnerOfTheweek = this.dataCharts['chart_dinner_of_theweek']
@@ -216,7 +216,7 @@ export class DatasetsPreprocessingComponent implements OnInit {
   }
   onClickCreateModel(e) {
     try {
-      console.log(e);
+      // console.log(e);
       var reload_spiner = true;
       const dialogCreateModel = this.dialogService.open(CreateModelComponent, {
         context: {
@@ -263,16 +263,16 @@ export class DatasetsPreprocessingComponent implements OnInit {
   }
 
   onSelect(data): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+    // console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
 
   onActivate(data): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
+    // console.log('Activate', JSON.parse(JSON.stringify(data)));
     // console.log('Activate', JSON.parse(JSON.stringify(data['value']['value'])));
   }
 
   onDeactivate(data): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+    // console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
 }

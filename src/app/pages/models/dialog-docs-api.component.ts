@@ -54,7 +54,7 @@ export class DialogDocsAPIComponent {
         } else {
             this.flagSuccess = true;
         }
-        console.log(this.colFeatureName);
+        // console.log(this.colFeatureName);
     }
     copyCurlCsv() {
         try {
@@ -63,7 +63,7 @@ export class DialogDocsAPIComponent {
             const inputColumns = this.colFeature;
             const modelId = this.modelId;
             const curl = `\ncurl --request ${method} '${this.urlApi}' \\\n--header '${header}' \\\n --form 'modelId=${modelId}' \\\n --form 'inputColumns=${inputColumns}'`;
-            console.log(curl)
+            // console.log(curl)
             this._clipboardService.copy(curl);
             const notificationSuccess = "copy to clipboard";
             const success = "COPY"
@@ -86,7 +86,7 @@ export class DialogDocsAPIComponent {
             for (const col of colFeatureNameArr) { data = data + '"' + col + '"' + ':' + '"' + '"' + ',' }
             var data2 = data.substring(0, data.length - 1)
             const curl = `\ncurl --request ${method} '${this.urlApi}' \\\n--header '${header}' \\\n--data-raw '{ \\\n "modelId":"${modelId}", \\\n "data": [\\\n{\\\n  ${data2}\\\n}\\\n]\\\n}'`;
-            console.log(curl);
+            // console.log(curl);
             this._clipboardService.copy(curl);
             const notificationSuccess = "copy to clipboard";
             const success = "COPY"

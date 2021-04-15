@@ -289,7 +289,7 @@ export class ModelsComponent implements OnInit {
                 userId: this.userIdLogin,
             },
         });
-        console.log(get_model_system.data.objectId)
+        // console.log(get_model_system.data.objectId)
         if(get_model_system.data.objectId){
             var notificationSuccess = "Cập nhật mô hình " + String(get_model_system.data.objectId) + "  thành công"
             this.toastrService.show(notificationSuccess, `Thành công `, { status: "success",  duration :5000 });

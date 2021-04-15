@@ -104,7 +104,7 @@ export class CreateModelComponent implements OnInit {
           },
         })
         if (arrColDataTemp.data) {
-          console.log(arrColDataTemp)
+          // console.log(arrColDataTemp)
           this.arrColData = arrColDataTemp.data;
           this.isshowFrom = true;
         }

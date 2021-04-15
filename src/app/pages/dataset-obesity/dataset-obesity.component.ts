@@ -196,7 +196,7 @@ export class DatasetObesityComponent implements OnInit {
   }
   onClickCreateModel(e) {
     try {
-      console.log(e);
+      // console.log(e);
       var reload_spiner = true;
       const dialogCreateModel = this.dialogService.open(CreateModelComponent, {
         context: {
@@ -245,16 +245,16 @@ export class DatasetObesityComponent implements OnInit {
   }
 
   onSelect(data): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+    // console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
 
   onActivate(data): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
+    // console.log('Activate', JSON.parse(JSON.stringify(data)));
     // console.log('Activate', JSON.parse(JSON.stringify(data['value']['value'])));
   }
 
   onDeactivate(data): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+    // console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
 }

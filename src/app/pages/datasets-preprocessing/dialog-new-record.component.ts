@@ -257,7 +257,7 @@ export class DialogNewRecordComponent {
         var newRecordFiltered = newRecord.filter(function (el) {
             return el != null;
           });
-        console.log(newRecord)
+        // console.log(newRecord)
         if(newRecordFiltered.length< 17){
             var messageCreateModel = "ERROR, please provie full information"
             this.toastrService.show(messageCreateModel, `Error value: provide full features value  `, { status: "danger", duration: 4000 });

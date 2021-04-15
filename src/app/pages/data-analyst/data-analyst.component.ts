@@ -93,7 +93,7 @@ export class DataAnalystComponent implements OnInit {
         },
       })
       this.dataCharts = dataChartsTemp.data;
-      console.log(this.dataCharts)
+      // console.log(this.dataCharts)
       this.genderData = this.dataCharts['chart_gender']
       this.jobData = this.dataCharts['chart_job']
       this.mealOfThedayData = this.dataCharts['chart_meal_of_theday']
@@ -133,16 +133,16 @@ export class DataAnalystComponent implements OnInit {
   }
   
   onSelect(data): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+    // console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
 
   onActivate(data): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
+    // console.log('Activate', JSON.parse(JSON.stringify(data)));
     // console.log('Activate', JSON.parse(JSON.stringify(data['value']['value'])));
   }
 
   onDeactivate(data): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+    // console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
 }

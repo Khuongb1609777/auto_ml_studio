@@ -166,7 +166,6 @@ export class FormUploadComponent {
 
   resetStatusButton() {
     this.buttonSubmitStatus = "disable";
-    console.log("tab oke")
   }
 
 }
