@@ -74,7 +74,7 @@ const routes: Routes = [
       {
         path: "",
         // redirectTo: "dashboard",
-        redirectTo: "datasets",
+        redirectTo: "models",
         pathMatch: "full",
       },
       {
