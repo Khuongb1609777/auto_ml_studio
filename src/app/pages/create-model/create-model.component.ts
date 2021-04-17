@@ -221,7 +221,7 @@ export class CreateModelComponent implements OnInit {
             setTimeout(() => this.loading = false, 3000);
             var returnCreate = await axios({
               method: "POST",
-              url: "http://localhost:5000/create-model",
+              url: environment + "create-model",
               params: {
                 dataName: this.dataName,
                 className: this.className,
